@@ -3,6 +3,8 @@ from users import User
 
 app = Flask(__name__)
 
+users = [User()] # THIS SHOULD BE STORED IN THE DATABASE AND NOT BE HERE
+
 @app.route('/')
 def home():
     return redirect(url_for('login'))
@@ -10,9 +12,8 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name = request.form["username"]
-        return render_template('home.html')
-    return render_template('home.html', title="Login")
+        users.append(User(request.form["username"].title())) # SHOULD BE ADDING TO THE DATABASE
+    return render_template('home.html', title="Login", users=users)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
