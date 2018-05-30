@@ -1,7 +1,7 @@
 from flask import request, render_template
 
 from booking import app, users
-from users import User
+from booking.authentication import User
 
 
 @app.route('/login', methods=['GET', 'POST'])
