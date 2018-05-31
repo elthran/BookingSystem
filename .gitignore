@@ -1,2 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
 private_config.py
+.idea/
+__pychache__/

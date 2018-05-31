@@ -30,13 +30,8 @@ db = SQLAlchemy(app)
 def not_found(error):
     return render_template('404.html'), 404
 
-# Import a module / component using its blueprint handler variable (mod_auth)
-from booking.authentication.controllers import authentication
-
-# Register blueprint(s)
-app.register_blueprint(authentication)
-# app.register_blueprint(xyz_module)
-# ..
+import booking.routes.authentication.signin
+import booking.routes.home
 
 # Build the database:
 # This will create the database file using SQLAlchemy
