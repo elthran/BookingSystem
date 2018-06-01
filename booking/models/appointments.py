@@ -2,28 +2,22 @@
 # We will define this inside /app/__init__.py in the next sections.
 from booking.models.bases import Base, db
 
-# Define a User model
 class Appointment(Base):
 
-    # User Name
-    name = db.Column(db.String(128), nullable=False)
+    # The business for which the appointment is for
+    business_id = db.Column(db.SmallInteger, nullable=False)
 
-    # Identification Data: email & password
-    email = db.Column(db.String(128), nullable=False,  unique=True)
-    password = db.Column(db.String(192), nullable=False)
+    # The length of the appointment in minutes
+    length = db.Column(db.SmallInteger, nullable=False)
 
-    # Authorisation Data: role & status
-    role = db.Column(db.SmallInteger, nullable=False)
-    status = db.Column(db.SmallInteger, nullable=False)
+    # start_time
+    # end_time
+    # cost
+    # notes
 
-    # New instance instantiation procedure
-    def __init__(self, name, email, password):
-
-        self.name = name
-        self.email = email
-        self.password = password
-        self.role = 0
-        self.status = 0
+    def __init__(self, business_id, length=60):
+        self.business_id = business_id
+        self.length = length
 
     def __repr__(self):
-        return '<User %r>' % (self.name)
+        return '<Appointment for business %r (ID: %r)>' % (self.business_id, self.id)
