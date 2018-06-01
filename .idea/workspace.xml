@@ -4,13 +4,9 @@
     <list default="true" id="0b98611c-09f1-4d3b-92ec-1f7f50dd5d10" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/booking/__init__.py" afterPath="$PROJECT_DIR$/booking/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/booking/models/__init__.py" afterPath="$PROJECT_DIR$/booking/models/__init__.py" />
       <change beforePath="$PROJECT_DIR$/booking/models/appointments.py" afterPath="$PROJECT_DIR$/booking/models/appointments.py" />
-      <change beforePath="$PROJECT_DIR$/booking/models/bases.py" afterPath="$PROJECT_DIR$/booking/models/bases.py" />
       <change beforePath="$PROJECT_DIR$/booking/models/businesses.py" afterPath="$PROJECT_DIR$/booking/models/businesses.py" />
-      <change beforePath="$PROJECT_DIR$/booking/models/users.py" afterPath="$PROJECT_DIR$/booking/models/users.py" />
       <change beforePath="$PROJECT_DIR$/booking/routes/authentication/signin.py" afterPath="$PROJECT_DIR$/booking/routes/authentication/signin.py" />
-      <change beforePath="$PROJECT_DIR$/booking/templates/404.html" afterPath="$PROJECT_DIR$/booking/templates/404.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,21 +17,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="signin.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="signin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/routes/authentication/signin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+            <state relative-caret-position="525">
+              <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="businesses.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="businesses.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/booking/models/businesses.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="294">
+              <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -44,8 +40,8 @@
       <file leaf-file-name="appointments.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/booking/models/appointments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+            <state relative-caret-position="105">
+              <caret line="5" column="5" lean-forward="false" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -56,6 +52,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="42">
               <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="private_config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/private_config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="9" column="71" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -115,9 +121,9 @@
         <option value="$PROJECT_DIR$/booking/templates/404.html" />
         <option value="$PROJECT_DIR$/booking/models/users.py" />
         <option value="$PROJECT_DIR$/booking/models/businesses.py" />
-        <option value="$PROJECT_DIR$/booking/__init__.py" />
-        <option value="$PROJECT_DIR$/booking/routes/authentication/signin.py" />
         <option value="$PROJECT_DIR$/booking/models/appointments.py" />
+        <option value="$PROJECT_DIR$/booking/routes/authentication/signin.py" />
+        <option value="$PROJECT_DIR$/booking/__init__.py" />
       </list>
     </option>
   </component>
@@ -480,22 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="62" lean-forward="false" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/private_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="71" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/booking/templates/404.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -520,14 +510,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-148">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/FlaskSQLExample/booking/models/appointments.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -544,26 +526,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/models/appointments.py">
+    <entry file="file://$PROJECT_DIR$/private_config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+        <state relative-caret-position="189">
+          <caret line="9" column="71" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/booking/models/businesses.py">
+    <entry file="file://$PROJECT_DIR$/booking/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <caret line="1" column="62" lean-forward="false" selection-start-line="1" selection-start-column="39" selection-end-line="1" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/booking/routes/authentication/signin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="10" column="34" lean-forward="true" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        <state relative-caret-position="525">
+          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/models/appointments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="5" lean-forward="false" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/booking/models/businesses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
           <folding />
         </state>
       </provider>

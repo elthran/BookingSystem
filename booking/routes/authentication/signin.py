@@ -9,16 +9,22 @@ from werkzeug import check_password_hash
 from booking.models.forms.login import LoginForm
 
 # Import module models (i.e. User)
-from booking.models import User, Appointment, Business
+from booking.models import User, Business, Appointment
 
 from booking import app
 
 from booking.models.bases import db
 
-
 # Set the route and accepted methods
 @app.route('/signin/', methods=['GET', 'POST'])
 def signin():
+    current_user = User.query.first()
+    if current_user == None:
+        current_user = User("Jacob", "my@email.com", "123")
+        db.session.add(current_user)
+        db.session.commit()
+        current_user = User.query.first()
+    print(current_user)
     # This deletes database but crashes the game: db.drop_all()
     # To query a user: current_user = User.query.first()
     # To delete all appointments and find out how many were deleted: number = Appointment.query.delete()

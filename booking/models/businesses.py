@@ -12,7 +12,7 @@ class Business(Base):
     employee_ids = db.Column(db.String(128), nullable=False)
 
     # List of all current appointments (checks the appointment table for any which have a foreign key matching your business id
-    appointments = db.relationship('Appointment', backref='business')
+    #appointments = db.relationship('Appointment', backref='business')
 
     def __init__(self, name):
         self.name = name
