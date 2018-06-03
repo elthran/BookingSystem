@@ -10,6 +10,6 @@ from wtforms.validators import Required, Email, EqualTo
 
 # Define the login form (WTForms)
 
-class LoginForm(FlaskForm):
-    email = TextField('Email Address', [Email(), Required(message='Forgot your email address?')])
+class RegisterForm(FlaskForm):
+    email = TextField('Email Address', [Email(), Required(message='Must provide an email address')])
     password = PasswordField('Password', [Required(message='Must provide a password.')])

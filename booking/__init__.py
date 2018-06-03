@@ -22,11 +22,9 @@ def not_found(error):
 
 
 import booking.routes.authentication.signin
+import booking.routes.authentication.register
 import booking.routes.home
-
-
-# Delete the database if there is one
-db.drop_all()
+import booking.routes.index
 
 # Build the database:
 # This will create the database file using SQLAlchemy

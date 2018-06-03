@@ -1,50 +1,29 @@
 # Import flask dependencies
-from flask import request, render_template, \
-    flash, session, redirect, url_for
-
-# Import password / encryption helper tools
-from werkzeug import check_password_hash
-
-# Import module forms
+from flask import request, render_template, flash, session, redirect, url_for
+# Import the app itself
+from booking import app
+# Used to create appointments. Might be moved somewhere else soon.
+from datetime import datetime
+# Import database
+from booking.models.bases import db
+# Import models
+from booking.models import User
+# Import forms
 from booking.models.forms.login import LoginForm
 
-# Import module models (i.e. User)
-from booking.models import User, Business, Appointment
-
-from booking import app
-
-from booking.models.bases import db
 
 # Set the route and accepted methods
 @app.route('/signin/', methods=['GET', 'POST'])
 def signin():
-    current_user = User.query.first()
-    if current_user == None:
-        current_user = User("Jacob", "my@email.com", "123")
-        db.session.add(current_user)
-        db.session.commit()
-        current_user = User.query.first()
-    print(current_user)
-    # This deletes database but crashes the game: db.drop_all()
-    # To query a user: current_user = User.query.first()
-    # To delete all appointments and find out how many were deleted: number = Appointment.query.delete()
-    # To save the database: db.session.commit()
-
     # If sign in form is submitted
     form = LoginForm(request.form)
-
     # Verify the sign in form
     if form.validate_on_submit():
-
         user = User.query.filter_by(email=form.email.data).first()
-
-        if user and check_password_hash(user.password, form.password.data):
-            session['user_id'] = user.id
-
-            flash('Welcome %s' % user.name)
-
-            return redirect(url_for('authentication.home'))
-
+        if user and user.check_password(form.password.data):
+                session['user_id'] = user.id
+                flash('Welcome %s' % user.email)
+                return redirect(url_for('home'))
         flash('Wrong email or password', 'error-message')
 
     return render_template("authentication/signin.html", form=form)
