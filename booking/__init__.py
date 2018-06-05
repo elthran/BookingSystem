@@ -20,11 +20,11 @@ db = SQLAlchemy(app)
 def not_found(error):
     return render_template('404.html'), 404
 
-
-import booking.routes.authentication.signin
+import booking.routes.authentication.main
+import booking.routes.authentication.password
 import booking.routes.authentication.register
+import booking.routes.authentication.signin
 import booking.routes.home
-import booking.routes.index
 
 # Build the database:
 # This will create the database file using SQLAlchemy

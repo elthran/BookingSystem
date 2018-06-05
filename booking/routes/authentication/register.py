@@ -9,10 +9,11 @@ from booking.models.forms.register import RegisterForm
 # Import database
 from booking.models.bases import db
 
-@app.route('/register/', methods=['GET', 'POST'])
-def register():
+@app.route('/register/<int:user_id>', methods=['GET', 'POST'])
+def register(user_id):
     form = RegisterForm(request.form)
-
+    user = User.query.filter_by(id=user_id).first()
+    print(user)
     if form.validate_on_submit():
         user = User(form.email.data, form.password.data, 1)
         db.session.add(user)

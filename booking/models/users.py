@@ -3,14 +3,17 @@ from werkzeug import generate_password_hash, check_password_hash
 
 class User(Base):
     # Identification Data: email & password
+    name = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), nullable=False, unique=True)
     password_hash = db.Column(db.String(192), nullable=False)
     # Business associated with the user
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
 
-    def __init__(self, email, password, business_id):
+    def __init__(self, name, email, password, business, business_id=1):
+        self.name = name
         self.email = email
         self.set_password_hash(password)
+        self.business = business
         self.business_id = business_id
 
     def __repr__(self):

@@ -15,7 +15,7 @@
 
 <div>
   <div>
-    <legend>Create account</legend>
+    <legend>Try JaChang for Free!</legend>
     {% with errors = get_flashed_messages(category_filter=["error"]) %}
     {% if errors %}
     <div>
@@ -41,16 +41,16 @@
     <form method="POST" action="." accept-charset="UTF-8" role="form">
       <!-- LoginForm -->
       {{ form.csrf_token }}
-      {{ render_field(form.email, placeholder="Email Address", autofocus="") }}
-      {{ render_field(form.password, placeholder="Password") }}
-      {{ render_field(form.confirmation, placeholder="Repeat Password") }}
+      {{ render_field(form.name, placeholder="Your Business Name", autofocus="") }}
+      {{ render_field(form.business, placeholder="Your Name") }}
+      {{ render_field(form.email, placeholder="Your Email") }}
       <div>
       <label>
-        <input type="checkbox" name="remember" value="1"> Remember Me
+        <input type="checkbox" name="terms" value="1"> Yes I agree to the terms.
       </label>
-      <a role="button" href="/signin">Already have an account?</a><span class="clearfix"></span>
+      <br><a role="button" href="/signin">Already have an account?</a><span class="clearfix"></span>
       </div>
-      <button type="submit" name="submit">Sign in</button>
+      <button type="submit" name="submit">Get Started Now</button>
     </form>
   </div>
 </div>
