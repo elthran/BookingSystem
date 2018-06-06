@@ -3,7 +3,7 @@ from booking.models.bases import Base, db
 
 class Business(Base):
     # Name of the business
-    name = db.Column(db.String(128), nullable=False, unique=True)
+    name = db.Column(db.String(128), nullable=False)
 
     # List of all admins ids of the business
     admin_ids = db.Column(db.String(128), nullable=False)
@@ -23,4 +23,4 @@ class Business(Base):
         self.employee_ids = ""
 
     def __repr__(self):
-        return '<Business %r (ID: %r). Users: %r and Appointments: %r>' % (self.name, self.id, self.users, self.appointments)
+        return '<Business %r (ID: %r)>' % (self.name, self.id)

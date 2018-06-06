@@ -38,7 +38,7 @@
       </ul>
     </div>
     {% endif %}
-    <form method="POST" action="." accept-charset="UTF-8" role="form">
+    <form method="POST" accept-charset="UTF-8" role="form">
       <!-- LoginForm -->
       {{ form.csrf_token }}
       {{ render_field(form.name, placeholder="Your Business Name", autofocus="") }}
@@ -48,7 +48,7 @@
       <label>
         <input type="checkbox" name="terms" value="1"> Yes I agree to the terms.
       </label>
-      <br><a role="button" href="/signin">Already have an account?</a><span class="clearfix"></span>
+      <br><a role="button" href="/login">Already have an account?</a><span class="clearfix"></span>
       </div>
       <button type="submit" name="submit">Get Started Now</button>
     </form>

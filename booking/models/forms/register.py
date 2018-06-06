@@ -24,13 +24,3 @@ class PasswordForm(FlaskForm):
                               Length(min=4),
                               EqualTo('confirmation', message='Passwords must match.')])
     confirmation = PasswordField('Repeat password')
-
-class RegisterForm(FlaskForm):
-    email = TextField('Email Address',
-                      [Email(message='Not a valid email address.'),
-                       DataRequired(message='You must enter an email address.')])
-    password = PasswordField('Password',
-                             [DataRequired(message='You must enter a password.'),
-                              Length(min=4),
-                              EqualTo('confirmation', message='Passwords must match.')])
-    confirmation = PasswordField('Repeat password')

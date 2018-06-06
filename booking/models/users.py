@@ -8,13 +8,23 @@ class User(Base):
     password_hash = db.Column(db.String(192), nullable=False)
     # Business associated with the user
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
+    # Used for login_manager
+    is_authenticated = db.Column(db.Boolean) # They have filled in all required fields
+    is_active = db.Column(db.Boolean) # Account activated and not currently suspended
+    is_anonymous = db.Column(db.Boolean) # If account is anonymous
 
-    def __init__(self, name, email, password, business, business_id=1):
+
+
+
+    def __init__(self, name, email, password, business_id):
         self.name = name
         self.email = email
         self.set_password_hash(password)
-        self.business = business
         self.business_id = business_id
+        self.is_authenticated = True
+        self.is_active = True
+        self.is_anonymous = False
+
 
     def __repr__(self):
         return '<User %r (%r)>' % (self.email, self.id)
@@ -30,5 +40,9 @@ class User(Base):
 
     # Password verifier. Can send in a plain password and it will compare it to the hashed password.
     def check_password(self, password):
+        print(self.password_hash, generate_password_hash(password))
         return check_password_hash(self.password_hash, password)
+
+    def get_id(self):
+        return self.id
 
