@@ -35,4 +35,4 @@ def register(user_id, business_id):
         print(user)
     for business in businesses:
         print(business)
-    return redirect(url_for('home'))
+    return redirect(url_for('home', chosen_year=2018, chosen_month=6, chosen_day=0))

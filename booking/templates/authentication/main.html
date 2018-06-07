@@ -1,48 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-{% macro render_field(field, placeholder=None) %}
-{% if field.errors %}
-<div>
-{% elif field.flags.error %}
-<div>
-{% else %}
-<div>
-{% endif %}
-    {% set css_class = 'form-control ' + kwargs.pop('class', '') %}
-    {{ field(class=css_class, placeholder=placeholder, **kwargs) }}
-</div>
-{% endmacro %}
-
 <div>
   <div>
+    <div class="testing">HELLO</div>
     <legend>Try JaChang for Free!</legend>
-    {% with errors = get_flashed_messages(category_filter=["error"]) %}
-    {% if errors %}
-    <div>
-    {% for error in errors %}
-    {{ error }}<br>
-    {% endfor %}
-    </div>
-    {% endif %}
-    {% endwith %}
-
-    {% if form.errors %}
-    <div style="color:red;">
-      Form data not sent to Python. Form validation failed:
-      <ul>
-    {% for field, error in form.errors.items() %}
-    {% for e in error %}
-        <li>{{ e }}</li>
-    {% endfor %}
-    {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
     <form method="POST" accept-charset="UTF-8" role="form">
       <!-- LoginForm -->
       {{ form.csrf_token }}
-      {{ render_field(form.name, placeholder="Your Business Name", autofocus="") }}
-      {{ render_field(form.business, placeholder="Your Name") }}
+      {{ render_field(form.name, placeholder="Your Name", autofocus="") }}
+      {{ render_field(form.business, placeholder="Your Business Name") }}
       {{ render_field(form.email, placeholder="Your Email") }}
       <div>
       <label>

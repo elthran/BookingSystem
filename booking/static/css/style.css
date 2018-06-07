@@ -2,3 +2,15 @@
     width: 60px;
     height: 40px;
 }
+
+.flashes {      /* Flash messages */
+    font-size: 25px;
+}
+
+.flash-error {      /* Flash error-messages */
+    color: red;
+}
+
+.flash-notice {      /* Flash notice-messages */
+    color: blue;
+}

@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if current_user.is_authenticated %}
-  Hi {{ current_user.name }}! Your ID is {{ current_user.id }}. You belong to this company: {{ current_user.business.name }}.
+<h1>Hi {{ current_user.name }}! Your ID is {{ current_user.id }}. You belong to this company: {{ current_user.business.name }}.</h1>
 {% endif %}
 <ul>
     {% for business in businesses %}
-    <li>Business Name: {{ business.name }}</li>
+    <li><h3>Business Name: {{ business.name }}</h3></li>
     Users:
     <ul>
         {% for user in business.users %}
@@ -15,5 +15,5 @@
     {% endfor %}
 </ul>
 {{ calendar }}
-To log out, click <a href="/logout">here</a>.
+<br><br><br>To log out, click <a href="/logout">here</a>.
 {% endblock %}
