@@ -22,5 +22,11 @@ class Business(Base):
         self.admin_ids = ""
         self.employee_ids = ""
 
+    def get_client_link(self):
+        return "book_appointment/" + str(self.id)
+
+    def get_employee_link(self):
+        return "register_employee/" + str(self.id)
+
     def __repr__(self):
         return '<Business %r (ID: %r)>' % (self.name, self.id)

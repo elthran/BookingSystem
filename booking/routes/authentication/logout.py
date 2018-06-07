@@ -7,7 +7,7 @@ from booking import app
 # Set the route and accepted methods
 @app.route('/logout/', methods=['GET', 'POST'])
 def logout():
+    print("User logging out")
     logout_user()
     flash('Logout was successful')
-    print("Logged out")
     return redirect(url_for('main'))

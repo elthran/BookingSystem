@@ -14,6 +14,32 @@
     </ul>
     {% endfor %}
 </ul>
-{{ calendar }}
+<br>
+<div>
+<table class="testcalendar">
+    <div style="margin-left:300px;font-weight:bold;font-size:25px;"><h1>JUNE</h1></div>
+    <tr>
+        <th>M</th>
+        <th>T</th>
+        <th>W</th>
+        <th>T</th>
+        <th>F</th>
+        <th>S</th>
+        <th>S</th>
+    </tr>
+    {% for row in testing %}
+            {% for day in row %}
+                <td>{% if day != 0 %}<a href="/home/2018/6/{{ day }}">{{ day }}{% else %}-{% endif %}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+</div>
+    <div class="testing">
+        {% if day == 0 %}No Day Chosen{% else %}DAY CHOSEN IS: {{ day }}{% endif %}
+    </div>
+<div style="clear:both;"></div>
+<br><br><br>To have a client book an appoint, send them this link http://127.0.0.1:5000/{{ current_user.business.get_client_link() }}
+<br><br><br>To have an employee register an account with your business, send them this link http://127.0.0.1:5000/{{ current_user.business.get_employee_link() }}
 <br><br><br>To log out, click <a href="/logout">here</a>.
 {% endblock %}

@@ -1,3 +1,4 @@
+
 .button {
     width: 60px;
     height: 40px;
@@ -13,4 +14,22 @@
 
 .flash-notice {      /* Flash notice-messages */
     color: blue;
+}
+
+.testcalendar {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.testcalendar th {
+    font-weight: bold;
+}
+
+.testcalendar td {
+    width: 25px;
+}
+
+.testing {
+    float: left;
 }

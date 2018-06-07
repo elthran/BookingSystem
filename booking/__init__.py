@@ -4,6 +4,9 @@ from flask import Flask, render_template
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 
+# CSRF Protection
+from flask_wtf.csrf import CsrfProtect
+
 # Define the WSGI application object
 app = Flask(__name__)
 
@@ -13,6 +16,9 @@ app.config.from_object('private_config')
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
+
+# Ensbles CSRF protection
+CsrfProtect(app)
 
 
 # Sample HTTP error handling
@@ -25,6 +31,7 @@ import booking.routes.authentication.password
 import booking.routes.authentication.register
 import booking.routes.authentication.login
 import booking.routes.authentication.logout
+import booking.routes.bookings.book_appointment
 import booking.routes.home
 
 # Build the database:
@@ -42,8 +49,4 @@ login_manager.login_view =  "signin"
 
 @login_manager.user_loader
 def load_user(user_id):
-    user = User.query.filter(User.id==user_id).first()
-    if user:
-        return user
-    else:
-        return None
+    return User.query.filter_by(id=user_id).first()

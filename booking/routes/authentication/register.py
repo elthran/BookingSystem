@@ -29,10 +29,4 @@ def register(user_id, business_id):
         login_user(user)
     else:
         print("A user with that email already exists in the database!!!!", duplicate_user)
-    users = User.query.all()
-    businesses = Business.query.all()
-    for user in users:
-        print(user)
-    for business in businesses:
-        print(business)
     return redirect(url_for('home', chosen_year=2018, chosen_month=6, chosen_day=0))
