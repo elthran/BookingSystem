@@ -1,5 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
 Welcome to the page of {{ business.name }}
-This is where you can book an appointment.
+This is where you can book an appointment. To book an appontment for this day and time, please enter your email address.
+<br>Note: Your appointment will automatically select the first service type and employee until the JS is written.
+<form method="POST" accept-charset="UTF-8" role="form">
+  <!-- LoginForm -->
+  {{ form.csrf_token }}
+  {{ render_field(form.email, placeholder="Your Email Address", autofocus="") }}
+  <input type="checkbox" name="remember" value="1"> Remember Me
+  <br><br><button type="submit">Book appointment</button>
+</form>
+
+<p style="font-weight:bold">List of services offered by this business:</p>
+<ul>
+    {% for service in business.services %}
+        <li>{{ service }}</li>
+    {% else %}
+        <li>No services registered.</li>
+    {% endfor %}
+</ul>
+<p style="font-weight:bold">List of practitioners for this business:</p>
+<ul>
+    {% for employee in business.users %}
+        <li>{{ employee.name }}</li>
+    {% else %}
+        <li>No employees registered.</li>
+    {% endfor %}
+</ul>
+<p style="font-weight:bold">List of appointments already created for this business:</p>
+<ul>
+    {% for appointment in business.appointments %}
+        <li>{{ appointment }} for {{ appointment.client.email }}</li>
+    {% else %}
+        <li>No appointments on file.</li>
+    {% endfor %}
+</ul>
 {% endblock %}

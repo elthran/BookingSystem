@@ -1,6 +1,5 @@
 from booking.models.bases import Base, db
 
-
 class Business(Base):
     # Name of the business
     name = db.Column(db.String(128), nullable=False)
@@ -14,8 +13,14 @@ class Business(Base):
     # List of every appointment
     appointments = db.relationship('Appointment', backref='business')
 
-    # List of every user
+    # List of every admin/employee user account registered to this business
     users = db.relationship('User', backref='business')
+
+    # List of every service offered by this business
+    services = db.relationship('Service', backref='business')
+
+    # List of every client
+    clients = db.relationship('Client', backref='business')
 
     def __init__(self, name):
         self.name = name
