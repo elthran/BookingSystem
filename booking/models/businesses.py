@@ -34,5 +34,11 @@ class Business(Base):
     def get_employee_link(self):
         return request.url_root + "register_employee/" + str(self.id)
 
+    def get_admins(self):
+        return [user for user in self.users if user.is_admin]
+
+    def get_employees(self):
+        return [user for user in self.users if not user.is_admin]
+
     def __repr__(self):
         return '<Business %r (ID: %r)>' % (self.name, self.id)

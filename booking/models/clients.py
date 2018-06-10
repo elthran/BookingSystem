@@ -14,7 +14,7 @@ class Client(Base):
     def __init__(self, email, business_id):
         self.email = email
         self.business_id = business_id
-        self.name = None
+        self.name = "Unknown"
         self.phone = None
         self.contact_method = None
 

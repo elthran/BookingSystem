@@ -24,3 +24,10 @@ class PasswordForm(FlaskForm):
                               Length(min=4),
                               EqualTo('confirmation', message='Passwords must match.')])
     confirmation = PasswordField('Repeat password')
+
+class EmployeeForm(FlaskForm):
+    name = TextField('Name',
+                     [DataRequired(message='You must enter your name.')])
+    email = TextField('Email Address',
+                      [Email(message='Not a valid email address.'),
+                       DataRequired(message='You must enter an email address.')])

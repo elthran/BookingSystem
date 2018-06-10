@@ -27,12 +27,4 @@ This is where you can book an appointment. To book an appontment for this day an
         <li>No employees registered.</li>
     {% endfor %}
 </ul>
-<p style="font-weight:bold">List of appointments already created for this business:</p>
-<ul>
-    {% for appointment in business.appointments %}
-        <li>{{ appointment }} for {{ appointment.client.email }}</li>
-    {% else %}
-        <li>No appointments on file.</li>
-    {% endfor %}
-</ul>
 {% endblock %}
