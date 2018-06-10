@@ -39,7 +39,7 @@
         {% if day == 0 %}No Day Chosen{% else %}DAY CHOSEN IS: {{ day }}{% endif %}
     </div>
 <div style="clear:both;"></div>
-<br><br><br>To have a client book an appoint, send them this link http://127.0.0.1:5000/{{ current_user.business.get_client_link() }}
+<br><br><br>To have a client book an appoint, send them this link {{ current_user.business.get_client_link() }}
 <br><br><br>To have an employee register an account with your business, send them this link http://127.0.0.1:5000/{{ current_user.business.get_employee_link() }}
 <br><br><br>To log out, click <a href="/logout">here</a>.
 {% endblock %}

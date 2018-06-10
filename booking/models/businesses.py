@@ -1,4 +1,5 @@
 from booking.models.bases import Base, db
+from flask import request
 
 class Business(Base):
     # Name of the business
@@ -28,10 +29,10 @@ class Business(Base):
         self.employee_ids = ""
 
     def get_client_link(self):
-        return "book_appointment/" + str(self.id)
+        return request.url_root + "book_appointment/" + str(self.id)
 
     def get_employee_link(self):
-        return "register_employee/" + str(self.id)
+        return request.url_root + "register_employee/" + str(self.id)
 
     def __repr__(self):
         return '<Business %r (ID: %r)>' % (self.name, self.id)
