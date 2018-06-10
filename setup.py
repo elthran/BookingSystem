@@ -5,6 +5,6 @@ setup(
     packages=['booking'],
     include_package_data=True,
     install_requires=[
-        'flask',
+        'flask', 'flask-sqlalchemy', 'flask-wtf', 'flask-login'
     ],
 )
