@@ -1,3 +1,6 @@
+# Magical built-in function relating to sockets?
+import socket
+
 # Import flask and template operators
 from flask import Flask, render_template
 
@@ -5,7 +8,10 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 # CSRF Protection
-from flask_wtf.csrf import CsrfProtect
+from flask_wtf.csrf import CSRFProtect
+
+# Imports settings from the private security file
+import private_config
 
 # Define the WSGI application object
 app = Flask(__name__)
@@ -13,12 +19,16 @@ app = Flask(__name__)
 # Configurations
 app.config.from_object('private_config')
 
+# Check location of code whether server or local
+if 'liveweb' in socket.gethostname():  # Running on server (pythonanywhere)
+    app.config['SQLALCHEMY_DATABASE_URI'] = private_config.SERVER_DATABASE_URI
+
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
 
 # Ensbles CSRF protection
-CsrfProtect(app)
+CSRFProtect(app)
 
 
 # Sample HTTP error handling
@@ -28,7 +38,7 @@ def not_found(error):
 
 import booking.routes.authentication.main
 import booking.routes.authentication.password
-import booking.routes.authentication.register
+import booking.routes.authentication.register_new
 import booking.routes.authentication.login
 import booking.routes.authentication.logout
 import booking.routes.bookings.book_appointment

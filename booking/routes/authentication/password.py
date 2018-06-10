@@ -17,5 +17,5 @@ def create_password(user_id, business_id):
         password = form.password.data
         user.password = password
         db.session.commit()
-        return redirect(url_for('register', user_id=user_id, business_id=business_id))
+        return redirect(url_for('register_new', user_id=user_id, business_id=business_id))
     return render_template("authentication/password.html", form=form)
