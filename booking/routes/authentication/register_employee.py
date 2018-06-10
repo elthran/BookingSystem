@@ -12,8 +12,8 @@ from booking.models.businesses import Business
 # Import database
 from booking.models.bases import db
 
-@app.route('/register/<int:user_id>/<int:business_id>', methods=['GET', 'POST'])
-def register(user_id, business_id):
+@app.route('/register_employee/<int:business_id>', methods=['GET', 'POST'])
+def register_employee(user_id, business_id):
     user = UserShell.query.filter_by(id=user_id).first()
     business = BusinessShell.query.filter_by(id=business_id).first()
     business = Business(business.name)

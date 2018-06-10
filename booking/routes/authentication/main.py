@@ -16,8 +16,10 @@ from booking.models.bases import db
 def main():
     users = User.query.all()
     businesses = Business.query.all()
+    print("Printing all users:")
     for user in users:
         print("Printing user::", user)
+    print("Printing all businesses:")
     for business in businesses:
         print("Printing business::", business)
     form = MainForm(request.form)
