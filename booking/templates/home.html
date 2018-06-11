@@ -14,8 +14,8 @@
     {% endfor %}
 </ul>
 <div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;">
-    <a href="{{ request.url_root }}home/{{ custom_calendar.year_toggle('down') }}/{{ custom_calendar.month_toggle('down') }}/{{ day }}">PREVIOUS</a>
-    <a href="{{ request.url_root }}home/{{ custom_calendar.year_toggle('up') }}/{{ custom_calendar.month_toggle('up') }}/{{ day }}" style="float:right;">NEXT</a>
+    <a href="{{ request.url_root }}home/{{ custom_calendar.year_toggle('down') }}/{{ custom_calendar.month_toggle('down') }}/0">PREVIOUS</a>
+    <a href="{{ request.url_root }}home/{{ custom_calendar.year_toggle('up') }}/{{ custom_calendar.month_toggle('up') }}/0" style="float:right;">NEXT</a>
 <table style="text-align:center;width:400px;height:300px;margin:auto;margin-top:25px;">
     <div style="margin-left:300px;font-weight:bold;font-size:25px;"><h1>{{ custom_calendar.month_name() }}</h1></div>
     <tr>
@@ -29,7 +29,7 @@
     </tr>
     {% for row in calendar_month %}
             {% for day in row %}
-                <td>{% if day != 0 %}<a href="/home/2018/6/{{ day }}">{{ day }}{% else %}-{% endif %}</td>
+                <td>{% if day != 0 %}<a href="/home/{{ year }}/{{ month }}/{{ day }}">{{ day }}{% else %}-{% endif %}</td>
             {% endfor %}
         </tr>
     {% endfor %}
@@ -63,7 +63,7 @@
     <br><br>Registered clients of this business:
     <ul>
     {% for client in current_user.business.clients %}
-        <li style="font-weight:bold;">Name: {{ client.name }} / Email: {{ client.email }}</li>
+        <li style="font-weight:bold;">Name: <a href="/profile/client/{{ current_user.business.id }}/{{ client.id }}/">{{ client.name }}</a> / Email: {{ client.email }}</li>
         {% else %}
         None
     {% endfor %}

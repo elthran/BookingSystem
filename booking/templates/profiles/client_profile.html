@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Welcome <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
+<p style="text-align:center;font-weight:bold;">Client profile:</p>
+<ul>
+    <li>Name: {{ client.name }}</li>
+    <li>Email: {{ client.email }}</li>
+    <li>Phone Number: {{ client.phone }}</li>
+    <li>Contact Method: {{ client.contact_method }}</li>
+    <li>Number of Appointments: {{ client.appointments|length }}</li>
+    <li>List of Appointments: {{ client.appointments }}</li>
+    <li>Client ID: {{ client.id }}</li>
+</ul>
+{% endblock %}
+
+

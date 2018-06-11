@@ -43,6 +43,7 @@ import booking.routes.authentication.register_employee
 import booking.routes.authentication.login
 import booking.routes.authentication.logout
 import booking.routes.bookings.book_appointment
+import booking.routes.profiles.client_profile
 import booking.routes.home
 
 # Build the database:
