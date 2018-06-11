@@ -17,12 +17,12 @@ class User(Base):
 
 
 
-    def __init__(self, name, email, password, business_id):
+    def __init__(self, name, email, password, business_id, is_admin=False):
         self.name = name
         self.email = email
         self.set_password_hash(password)
         self.business_id = business_id
-        self.is_admin = True
+        self.is_admin = is_admin
         self.is_authenticated = True
         self.is_active = True
         self.is_anonymous = False

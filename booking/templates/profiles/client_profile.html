@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Welcome <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
+<h1>Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
 <p style="text-align:center;font-weight:bold;">Client profile:</p>
 <ul>
     <li>Name: {{ client.name }}</li>

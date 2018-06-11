@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
+<p style="text-align:center;font-weight:bold;">Employee profile:</p>
+<ul>
+    <li>Name: {{ employee.name }}</li>
+    <li>Email: {{ employee.email }}</li>
+    <li>Permissions: {% if employee.is_admin %}Admin{% else %}Employee{% endif %}</li>
+    <li>Client ID: {{ employee.id }}</li>
+</ul>
+<br>
+<a href="{{ url_for('business_profile') }}">Return</a> to business
+{% endblock %}

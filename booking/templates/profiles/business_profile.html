@@ -1,18 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Welcome <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
+<h1>Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
 <h1 style="text-align:center;font-size:30px;font-weight:bold;">{{ current_user.business.name }}</h1>
-<ul>
-    {% for business in businesses %}
-    <li><h3>Business Name: {{ business.name }}</h3></li>
+<h3>Business Name: {{ current_user.business.name }}</h3></li>
     Users:
     <ul>
-        {% for user in business.users %}
+        {% for user in current_user.business.users %}
         <li>{{ user }}</li>
         {% endfor %}
     </ul>
-    {% endfor %}
-</ul>
 <div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;">
     <a href={{ custom_calendar.month_toggle('down') }}>PREVIOUS</a>
     <a href={{ custom_calendar.month_toggle('up') }} style="float:right;">NEXT</a>
@@ -38,19 +34,15 @@
 
 <div style="border:dotted;width:300px;height:auto;margin-left:35px;margin-top:35px;float:left;">
     {% if day == 0 %}Choose a day to adjust availability.{% else %}Your availability on <span style="font-weight:bold;">{{ day }}/{{ month }}/{{ year }}</span>, is...{% endif %}
-<br><br>Managers of this business:
+<br><br>Employees of this business:
     <ul>
-    {% for manager in current_user.business.get_admins() %}
-        <li style="font-weight:bold;">{{ manager.name }}</li>
+    {% for employee in current_user.business.get_admins() %}
+        <li style="font-weight:bold;">(Manager) Name: <a href="/profile/employee/{{ current_user.business.id }}/{{ employee.id }}/">{{ employee.name }}</a></li>
+    {% endfor %}
+        {% for employee in current_user.business.get_employees() %}
+        <li style="font-weight:bold;">(Employee) Name: <a href="/profile/employee/{{ current_user.business.id }}/{{ employee.id }}/">{{ employee.name }}</a></li>
     {% endfor %}
     </ul>
-    <br><br>Other employees of this business:
-    <ul>
-    {% for employee in current_user.business.get_employees() %}
-        <li style="font-weight:bold;">{{ manager.name }}</li>
-        {% else %}
-        None
-    {% endfor %}
     </ul>
     <br><br>Registered appointments of this business:
     <ul>

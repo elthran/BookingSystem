@@ -36,7 +36,7 @@ CSRFProtect(app)
 def not_found(error):
     return render_template('404.html'), 404
 
-import booking.routes.authentication.main
+import booking.routes.authentication.home
 import booking.routes.authentication.create_password
 import booking.routes.authentication.register_new
 import booking.routes.authentication.register_employee
@@ -45,6 +45,7 @@ import booking.routes.authentication.logout
 import booking.routes.bookings.book_appointment
 import booking.routes.profiles.client_profile
 import booking.routes.profiles.business_profile
+import booking.routes.profiles.employee_profile
 
 # Build the database:
 # This will create the database file using SQLAlchemy

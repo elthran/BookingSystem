@@ -28,7 +28,7 @@ def main():
             temporary_business = BusinessShell(form.business.data)
             db.session.add(temporary_business)
             db.session.flush()
-            temporary_user = UserShell(form.name.data, form.email.data, temporary_business.id)
+            temporary_user = UserShell(form.name.data, form.email.data, temporary_business.id, True)
             db.session.add(temporary_user)
             db.session.commit()
             return redirect(url_for('create_password', user_id=temporary_user.id, business_id=temporary_business.id))
