@@ -29,4 +29,4 @@ def register_new(user_id, business_id):
         login_user(user)
     else:
         print("A user with that email already exists in the database!!!!", duplicate_user)
-    return redirect(url_for('home', chosen_year=2018, chosen_month=6, chosen_day=0))
+    return redirect(url_for('business_profile', chosen_year=2018, chosen_month=6, chosen_day=0))

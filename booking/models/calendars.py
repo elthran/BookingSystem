@@ -1,4 +1,5 @@
 from calendar import HTMLCalendar
+from flask import url_for
 
 class CustomCalendar(HTMLCalendar):
 
@@ -14,14 +15,17 @@ class CustomCalendar(HTMLCalendar):
     def month_toggle(self, direction):
         if direction == "up":
             if self.month == 12:
-                return 1
+                return url_for('business_profile') + str(self.year+1) + "/" + "1/0"
             else:
-                return self.month+1
+                return url_for('business_profile') + str(self.year) + "/" + str(self.month+1) + "/0"
+            # Should be return url_for('business_profile', year=self.year, month=self.month+1)
+            # ie. I want to pass in the url and the parameters instead of building a string here. But I think
+            # the problem might be that the calendar object itself is shared among users and causing the bug? I'm not sure.
         else:
             if self.month == 1:
-                return 12
+                return url_for('business_profile') + str(self.year - 1) + "/" + "12/0"
             else:
-                return self.month-1
+                return url_for('business_profile') + str(self.year) + "/" + str(self.month - 1) + "/0"
 
     def year_toggle(self, direction):
         if direction == "up":
