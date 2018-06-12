@@ -9,6 +9,7 @@ from booking.models.forms.register import PasswordForm
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/create_password/<int:user_id>/<int:business_id>', methods=['GET', 'POST'])
 def create_password(user_id, business_id):
     form = PasswordForm(request.form)

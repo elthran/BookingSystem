@@ -27,7 +27,7 @@ def main():
         print("Printing business::", business)
     form = MainForm(request.form)
     if form.validate_on_submit():
-        if User.query.filter_by(email=form.email.data).first() == None:
+        if User.query.filter_by(email=form.email.data).first() is None:
             temporary_business = BusinessShell(form.business.data)
             db.session.add(temporary_business)
             db.session.flush()

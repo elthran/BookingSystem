@@ -16,7 +16,7 @@ def register_employee(business_id):
     business = Business.query.filter_by(id=business_id).first()
     form = EmployeeForm(request.form)
     if form.validate_on_submit():
-        if User.query.filter_by(email=form.email.data).first() == None:
+        if User.query.filter_by(email=form.email.data).first() is None:
             temporary_user = UserShell(form.name.data, form.email.data, business_id)
             db.session.add(temporary_user)
             db.session.commit()

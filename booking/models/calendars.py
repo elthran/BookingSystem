@@ -4,6 +4,7 @@ from flask import url_for
 
 class CustomCalendar(HTMLCalendar):
     def __init__(self, year, month, day):
+        super().__init__()
         self.year = year
         self.month = month
         self.day = day

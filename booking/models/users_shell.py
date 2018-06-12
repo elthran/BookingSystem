@@ -1,6 +1,7 @@
 from booking.models.bases import Base, db
 from werkzeug import generate_password_hash
 
+
 class UserShell(Base):
     name = db.Column(db.String(128))
     email = db.Column(db.String(128))

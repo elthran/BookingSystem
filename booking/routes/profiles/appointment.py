@@ -7,6 +7,7 @@ from flask_login import login_required
 # Import models
 from booking.models.appointment import Appointment
 
+
 @login_required
 @app.route('/profile/appointment/<int:business_id>/<int:appointment_id>/')
 def appointment_profile(business_id, appointment_id):

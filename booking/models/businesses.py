@@ -1,6 +1,7 @@
 from booking.models.bases import Base, db
 from flask import request
 
+
 class Business(Base):
     # Name of the business
     name = db.Column(db.String(128), nullable=False)

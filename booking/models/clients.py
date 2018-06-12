@@ -1,8 +1,9 @@
 from booking.models.bases import Base, db
 
+
 class Client(Base):
     email = db.Column(db.String(128), nullable=False, unique=True)
-    name = db.Column(db.String(128)) # First and Last Name
+    name = db.Column(db.String(128))  # First and Last Name
     phone = db.Column(db.String(128), unique=True)
     contact_method = db.Column(db.String(128))
 
@@ -20,4 +21,3 @@ class Client(Base):
 
     def __repr__(self):
         return '<Client %r (%r)>' % (self.email, self.id)
-
