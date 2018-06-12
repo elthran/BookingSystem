@@ -9,6 +9,7 @@ from calendar import monthcalendar
 from datetime import datetime
 from booking.models.calendars import CustomCalendar
 
+
 @app.route('/business_profile/')
 @app.route('/business_profile/<int:year>/<int:month>/<int:day>')
 @login_required

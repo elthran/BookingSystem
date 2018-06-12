@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
 <h1 style="text-align:center;font-size:30px;font-weight:bold;">{{ current_user.business.name }}</h1>
-<h3>Business Name: {{ current_user.business.name }}</h3></li>
+<h3>Business Name: {{ current_user.business.name }}</h3>
     Users:
     <ul>
         {% for user in current_user.business.users %}
@@ -12,8 +12,8 @@
 <div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;">
     <a href={{ custom_calendar.month_toggle('down') }}>PREVIOUS</a>
     <a href={{ custom_calendar.month_toggle('up') }} style="float:right;">NEXT</a>
-<table style="text-align:center;width:400px;height:300px;margin:auto;margin-top:25px;">
     <div style="margin-left:300px;font-weight:bold;font-size:25px;"><h1>{{ custom_calendar.month_name() }}</h1></div>
+<table style="text-align:center;width:400px;height:300px;margin:auto;margin-top:25px;">
     <tr>
         <th style="font-weight:bold;">M</th>
         <th style="font-weight:bold;">T</th>
@@ -24,8 +24,9 @@
         <th style="font-weight:bold;">S</th>
     </tr>
     {% for row in calendar_month %}
+        <tr>
             {% for day in row %}
-                <td>{% if day != 0 %}<a href="/business_profile/{{ year }}/{{ month }}/{{ day }}">{{ day }}{% else %}-{% endif %}</td>
+            <td>{% if day != 0 %}<a href="/business_profile/{{ year }}/{{ month }}/{{ day }}">{{ day }}</a>{% else %}-{% endif %}</td>
             {% endfor %}
         </tr>
     {% endfor %}
@@ -42,7 +43,6 @@
         {% for employee in current_user.business.get_employees() %}
         <li style="font-weight:bold;">(Employee) Name: <a href="/profile/employee/{{ current_user.business.id }}/{{ employee.id }}/">{{ employee.name }}</a></li>
     {% endfor %}
-    </ul>
     </ul>
     <br><br>Registered appointments of this business:
     <ul>

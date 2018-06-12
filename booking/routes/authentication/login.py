@@ -20,7 +20,7 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             flash('Welcome %s' % user.name, 'notice')
-            return redirect(url_for('business_profile', chosen_year=2018, chosen_month=6, chosen_day=0))
+            return redirect(url_for('business_profile', year=2018, month=6, day=0))
         flash('Wrong email or password', 'error')
 
     return render_template("authentication/login.html", form=form)
