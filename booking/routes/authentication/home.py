@@ -2,6 +2,7 @@
 from booking import app
 # Import flask dependencies
 from flask import render_template, request, redirect, url_for, flash
+from flask_login import current_user
 # Import models
 from booking.models.users_shell import UserShell
 from booking.models.businesses_shell import BusinessShell
@@ -14,6 +15,8 @@ from booking.models.bases import db
 
 @app.route('/', methods=['GET', 'POST'])
 def main():
+    if current_user.is_authenticated:
+        return redirect(url_for('business_profile'))
     users = User.query.all()
     businesses = Business.query.all()
     print("Printing all users:")
