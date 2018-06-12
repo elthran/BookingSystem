@@ -12,7 +12,7 @@ from booking.models.forms.booking import BookingInit
 from booking.models.bases import db
 from datetime import datetime
 
-@app.route('/book_appointment/<int:business_id>/', methods=['GET', 'POST'])
+@app.route('/booking/appointment/<int:business_id>/', methods=['GET', 'POST'])
 def book_appointment(business_id):
     business = Business.query.filter_by(id=business_id).first()
     # If sign in form is submitted

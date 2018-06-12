@@ -12,4 +12,4 @@ from booking.models.clients import Client
 def client_profile(business_id, client_id):
     client = Client.query.filter_by(business_id=business_id).filter_by(id=client_id).first()
     print(client)
-    return render_template("profiles/client_profile.html", client=client)
+    return render_template("profiles/client.html", client=client)

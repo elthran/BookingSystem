@@ -29,7 +29,7 @@ class Business(Base):
         self.employee_ids = ""
 
     def get_client_link(self):
-        return request.url_root + "book_appointment/" + str(self.id)
+        return request.url_root + "booking/appointment/" + str(self.id)
 
     def get_employee_link(self):
         return request.url_root + "register_employee/" + str(self.id)
