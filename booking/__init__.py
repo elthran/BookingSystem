@@ -13,11 +13,18 @@ from flask_wtf.csrf import CSRFProtect
 # Imports settings from the private security file
 import private_config
 
+# For allowing users to upload files
+from werkzeug.utils import secure_filename
+UPLOAD_FOLDER = 'booking/static/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
 # Define the WSGI application object
 app = Flask(__name__)
 
 # Configurations
 app.config.from_object('private_config')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # Check location of code whether server or local
 if 'liveweb' in socket.gethostname():  # Running on server (pythonanywhere)
@@ -50,7 +57,7 @@ import booking.routes.profiles.employee
 
 # Build the database:
 # This will create the database file using SQLAlchemy
-# db.drop_all()
+db.drop_all()
 db.create_all()
 
 # This will handle user requests
