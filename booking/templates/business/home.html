@@ -2,14 +2,7 @@
 {% block content %}
 <h1>Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
 <h1 style="text-align:center;font-size:30px;font-weight:bold;">{{ current_user.business.name }}</h1>
-<h3>Business Name: {{ current_user.business.name }}</h3>
-Users:
-<ul>
-    {% for user in current_user.business.users %}
-    <li>{{ user }}</li>
-    {% endfor %}
-</ul>
-<div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;">
+<div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
     <a href="{{ custom_calendar.month_toggle('down') }}">PREVIOUS</a>
     <a href="{{ custom_calendar.month_toggle('up') }}" style="float:right;">NEXT</a>
     <div style="margin-left:300px;font-weight:bold;font-size:25px;"><h1>{{ custom_calendar.month_name() }}</h1></div>
@@ -33,15 +26,13 @@ Users:
     </table>
 </div>
 
-<div style="border:dotted;width:300px;height:auto;margin-left:35px;margin-top:35px;float:left;">
+<div style="border:dotted;width:auto;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
     {% if day == 0 %}Choose a day to adjust availability.{% else %}Your availability on <span style="font-weight:bold;">{{ day }}/{{ month }}/{{ year }}</span>, is...{% endif %}
     <br><br>Employees of this business:
     <ul>
-        {% for employee in current_user.business.get_admins() %}
-        <li style="font-weight:bold;">(Manager) Name: <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">{{ employee.name }}</a></li>
-        {% endfor %}
         {% for employee in current_user.business.get_employees() %}
-        <li style="font-weight:bold;">(Employee) Name: <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">{{ employee.name }}</a></li>
+        <li style="font-weight:bold;">
+            {% if employee.is_admin %}(Owner){% else %}(Employee){% endif %} Name: <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">{{ employee.name }}</a></li>
         {% endfor %}
     </ul>
     <br><br>Registered appointments of this business:
@@ -70,4 +61,13 @@ Users:
 <div style="clear:both;"></div>
 For testing purposes:<br>
 {{ custom_calendar }}
+
+<form method="POST" enctype=multipart/form-data role="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <p><input type=file name=file>
+         <input type=submit value=Upload>
+    </form>
+{% for image in all_uploads %}
+<img src="{{ image }}" />
+{% endfor %}
 {% endblock %}

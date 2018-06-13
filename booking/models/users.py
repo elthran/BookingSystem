@@ -7,18 +7,21 @@ class User(Base):
     name = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), nullable=False, unique=True)
     password_hash = db.Column(db.String(192), nullable=False)
+    phone = db.Column(db.Integer)
     # Business associated with the user
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
-    is_admin = db.Column(db.Boolean)  # Determines if they are an 'owner' of the business
     # Used for login_manager
     is_authenticated = db.Column(db.Boolean)  # They have filled in all required fields
     is_active = db.Column(db.Boolean)  # Account activated and not currently suspended
     is_anonymous = db.Column(db.Boolean)  # If account is anonymous
+    # Permissions
+    is_admin = db.Column(db.Boolean)  # Determines if they are an 'owner' of the business. Grants full permissions
 
     def __init__(self, name, email, password, business_id, is_admin=False):
         self.name = name
         self.email = email
         self.set_password_hash(password)
+        self.phone = 0000000000
         self.business_id = business_id
         self.is_admin = is_admin
         self.is_authenticated = True
