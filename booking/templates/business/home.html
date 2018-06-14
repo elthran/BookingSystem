@@ -61,13 +61,4 @@
 <div style="clear:both;"></div>
 For testing purposes:<br>
 {{ custom_calendar }}
-
-<form method="POST" enctype=multipart/form-data role="form">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-{% for image in all_uploads %}
-<img src="{{ image }}" />
-{% endfor %}
 {% endblock %}

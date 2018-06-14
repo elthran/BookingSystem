@@ -42,7 +42,7 @@
 {% endif %}
 {# <!-- End of flask error code handling --> #}
 <h1 style="text-align:center;">
-    {% if current_user %}Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!
+    {% if current_user and current_user.is_authenticated %}Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!
     {% else %}Currently not logged in.
     {% endif %}
 </h1>

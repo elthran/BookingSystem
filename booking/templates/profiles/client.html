@@ -9,7 +9,15 @@
     <li>Number of Appointments: {{ client.appointments|length }}</li>
     <li>List of Appointments: {{ client.appointments }}</li>
     <li>Client ID: {{ client.id }}</li>
+    {% for upload in client_uploads %}
+    <li>Upload: <img src="{{ upload }}" style="border:dotted;" /></li>
+    {% endfor %}
 </ul>
+<form method="POST" enctype=multipart/form-data role="form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <input type=file name=file>
+    <input type=submit value=Upload>
+</form>
 <br>
 <a href="{{ url_for('business_profile') }}">Return</a> to business
 {% endblock %}
