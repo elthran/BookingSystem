@@ -10,7 +10,7 @@
     <li>List of Appointments: {{ client.appointments }}</li>
     <li>Client ID: {{ client.id }}</li>
     {% for upload in client_uploads %}
-    <li>Upload: <img src="{{ upload }}" style="border:dotted;" /></li>
+    <li>Consent Form: <img src="{{ upload }}" style="border:dotted;" /></li>
     {% endfor %}
 </ul>
 <form method="POST" enctype=multipart/form-data role="form">
