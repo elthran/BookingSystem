@@ -38,7 +38,7 @@
     <br><br>Registered appointments of this business:
     <ul>
         {% for appointment in current_user.business.appointments %}
-        <li style="font-weight:bold;">{{ appointment }}</li>
+        <li style="font-weight:bold;">Appointment: <a href="{{ url_for('appointment_profile', business_id=current_user.business.id, appointment_id=appointment.id) }}">{{ appointment.client.name }} on {{ appointment.date }}</a></li>
         {% else %}
         None
         {% endfor %}

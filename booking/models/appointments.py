@@ -1,4 +1,5 @@
 from booking.models.bases import Base, db
+from datetime import timedelta
 
 
 class Appointment(Base):
@@ -10,15 +11,21 @@ class Appointment(Base):
 
     # The day and time of the appointment
     date = db.Column(db.DateTime, nullable=False)
+    end = db.Column(db.DateTime, nullable=False)
 
     # The length of the appointment in minutes
     length = db.Column(db.SmallInteger, nullable=False)
 
-    def __init__(self, business_id, client_id, length, date):
+    # Name of practitioner, if chosen
+    practitioner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, business_id, client_id, length, date, practitioner_id=None):
         self.business_id = business_id
         self.client_id = client_id
         self.length = length
         self.date = date
+        self.end = date + timedelta(minutes = length)
+        self.practitioner_id = practitioner_id
 
     def __repr__(self):
         return '<Appointment (%r) is %r minutes long on %r/%r/%r at %r:%r>' % (

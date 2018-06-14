@@ -10,6 +10,8 @@ class User(Base):
     phone = db.Column(db.Integer)
     # Business associated with the user
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
+    # Appointments associated with the user
+    appointments = db.relationship('Appointment', backref='user')
     # Used for login_manager
     is_authenticated = db.Column(db.Boolean)  # They have filled in all required fields
     is_active = db.Column(db.Boolean)  # Account activated and not currently suspended
