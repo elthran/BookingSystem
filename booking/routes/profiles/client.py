@@ -6,16 +6,10 @@ from flask import render_template, request, redirect
 from flask_login import login_required
 # Import models
 from booking.models.clients import Client
-from booking import ALLOWED_EXTENSIONS, secure_filename
+from booking.functions.uploads import allowed_file, new_file_name, resize_image
+from booking import secure_filename
 import os
-
-def allowed_file(filename):
-    # Checks that the file being uploaded has a "." in it's name and that everything following the "." is a real extension
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def new_file_name(filename, client):
-    # Turns the filename into a properly named file
-    return str(client.business_id) + "-" + str(client.id) + "-1." + filename.rsplit('.', 1)[1].lower()
+from PIL import Image
 
 @login_required
 @app.route('/profile/client/<int:business_id>/<int:client_id>/', methods=['GET', 'POST'])
@@ -34,10 +28,10 @@ def client_profile(business_id, client_id):
             print('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            new_name = new_file_name(file.filename, client)
-            filename = secure_filename(new_name)
-            print(filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            upload = Image.open(file)   # Opens the uploaded file
+            upload = resize_image(upload)   # Resizes the uploaded file
+            filename = secure_filename(new_file_name(file.filename, client))
+            upload.save(app.config['UPLOAD_FOLDER'] + filename) # Saves the uploaded file
     client_uploads = []
     for filename in os.listdir('booking/static/uploads'):
         if filename[0] == str(client.business_id) and filename[2] == str(client.id):

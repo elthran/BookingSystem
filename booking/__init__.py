@@ -15,7 +15,7 @@ import private_config
 
 # For allowing users to upload files
 from werkzeug.utils import secure_filename
-UPLOAD_FOLDER = 'booking/static/uploads'
+UPLOAD_FOLDER = 'booking/static/uploads/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 # Define the WSGI application object
