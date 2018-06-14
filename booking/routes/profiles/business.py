@@ -5,7 +5,7 @@ from flask import render_template
 # Import session management
 from flask_login import login_required
 # Import models
-from booking.models.appointment import Appointment
+from booking.models.appointments import Appointment
 
 
 @login_required

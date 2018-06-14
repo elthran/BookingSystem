@@ -13,10 +13,8 @@ from flask_wtf.csrf import CSRFProtect
 # Imports settings from the private security file
 import private_config
 
-# For allowing users to upload files
-from werkzeug.utils import secure_filename
 UPLOAD_FOLDER = 'booking/static/uploads/'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 # Define the WSGI application object
 app = Flask(__name__)
@@ -41,6 +39,7 @@ CSRFProtect(app)
 # Sample HTTP error handling
 @app.errorhandler(404)
 def not_found(error):
+    print("Error:", error)
     return render_template('404.html'), 404
 
 
@@ -58,7 +57,7 @@ import booking.routes.business.home
 
 # Build the database:
 # This will create the database file using SQLAlchemy
-# db.drop_all()
+db.drop_all()
 db.create_all()
 
 # This will handle user requests

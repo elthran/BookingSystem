@@ -1,7 +1,7 @@
 # Import the app itself
 from booking import app
 # Import flask dependencies
-from flask import render_template, request, redirect, url_for
+from flask import redirect, url_for
 # Import session handling
 from flask_login import login_user
 # Import models

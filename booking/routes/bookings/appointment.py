@@ -2,8 +2,6 @@
 from booking import app
 # Import flask dependencies
 from flask import render_template, request, flash
-# Import session management
-from flask_login import login_required
 # Import models
 from booking.models import Business, Client, Appointment
 # Import forms

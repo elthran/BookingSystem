@@ -7,7 +7,7 @@ from flask_login import login_required
 # Import models
 from booking.models.clients import Client
 from booking.functions.uploads import allowed_file, new_file_name, resize_image
-from booking import secure_filename
+from werkzeug.utils import secure_filename
 import os
 from PIL import Image
 
@@ -30,7 +30,7 @@ def client_profile(business_id, client_id):
         if file and allowed_file(file.filename):
             upload = Image.open(file)   # Opens the uploaded file
             upload = resize_image(upload)   # Resizes the uploaded file
-            filename = secure_filename(new_file_name(file.filename, client))
+            filename = secure_filename(new_file_name(client))
             upload.save(app.config['UPLOAD_FOLDER'] + filename) # Saves the uploaded file
     client_uploads = []
     for filename in os.listdir('booking/static/uploads'):

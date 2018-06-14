@@ -1,5 +1,4 @@
 from booking.models.bases import Base, db
-from werkzeug import generate_password_hash
 
 
 class UserShell(Base):

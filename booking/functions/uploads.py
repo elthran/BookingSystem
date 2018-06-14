@@ -1,12 +1,11 @@
 from booking import ALLOWED_EXTENSIONS
-from PIL import Image
 
 
 def allowed_file(filename):
     # Checks that the file being uploaded has a "." in it's name and that everything following the "." is a real extension
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def new_file_name(filename, client):
+def new_file_name(client):
     # Turns the filename into a properly named file
     return str(client.business_id) + "-" + str(client.id) + "-1.png"
 
