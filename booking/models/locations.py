@@ -15,9 +15,9 @@ class Location(Base):
     timezone = db.Column(db.String(128))
     postalcode = db.Column(db.String(128))
 
-    def __init__(self, business_id):
+    def __init__(self, hours_id, business_id):
         self.business_id = business_id
-        self.hours_id = None
+        self.hours_id = hours_id
         self.address = None
         self.town = None
         self.province = None
@@ -26,4 +26,4 @@ class Location(Base):
         self.postalcode = None
 
     def __repr__(self):
-        return '<Location %r (%r)>' % (self.email, self.id)
+        return '<Location (%r)>' % (self.id)
