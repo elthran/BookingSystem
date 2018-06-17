@@ -17,24 +17,13 @@ class Business(Base):
     services = db.relationship('Service', backref='business')
     # List of every client
     clients = db.relationship('Client', backref='business')
-    # Your business information
-    address = db.Column(db.String(128))
-    town = db.Column(db.String(128))
-    province = db.Column(db.String(128))
-    country =  db.Column(db.String(128))
-    timezone =  db.Column(db.String(128))
-    postalcode =  db.Column(db.String(128))
+    # List of every location
+    locations = db.relationship('Location', backref='business')
 
     def __init__(self, name):
         self.name = name
         self.admin_ids = ""
         self.employee_ids = ""
-        self.address = None
-        self.town = None
-        self.province = None
-        self.country = None
-        self.timezone = None
-        self.postalcode = None
 
     def get_client_link(self):
         return request.url_root + "booking/appointment/" + str(self.id)

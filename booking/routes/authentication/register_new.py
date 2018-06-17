@@ -12,20 +12,20 @@ from booking.models.businesses import Business
 # Import database
 from booking.models.bases import db
 
-@app.route('/register/<int:user_id>/<int:business_id>', methods=['GET', 'POST'])
-def register_new(user_id, business_id):
-    user = UserShell.query.filter_by(id=user_id).first()
-    business = BusinessShell.query.filter_by(id=business_id).first()
-    business = Business(business.name)
+@app.route('/register/<int:user_shell_id>/<int:business_shell_id>', methods=['GET', 'POST'])
+def register_new(user_shell_id, business_shell_id):
+    user_shell = UserShell.query.filter_by(id=user_shell_id).first()
+    business_shell = BusinessShell.query.filter_by(id=business_shell_id).first()
+    business = Business(business_shell.name)
     db.session.add(business)
     db.session.commit()
-    business = Business.query.filter_by(name=business.name).first()
-    duplicate_user = User.query.filter_by(email=user.email).first()
+    business = Business.query.filter_by(id=business.id).first()
+    duplicate_user = User.query.filter_by(email=user_shell.email).first()
     if duplicate_user is None:
-        user = User(user.name, user.email, user.password, business.id, user.is_admin)
+        user = User(user_shell.name, user_shell.email, user_shell.password, business.id, user_shell.is_admin)
         db.session.add(user)
         db.session.commit()
-        user = User.query.filter_by(email=user.email).first()
+        user = User.query.filter_by(id=user.id).first()
         login_user(user)
     else:
         print("A user with that email already exists in the database!!!!", duplicate_user)

@@ -16,6 +16,9 @@ class Appointment(Base):
     # The length of the appointment in minutes
     length = db.Column(db.SmallInteger, nullable=False)
 
+    # If the user has paid yet or not
+    paid = db.Column(db.Boolean)
+
     # Name of practitioner, if chosen
     practitioner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
@@ -26,6 +29,7 @@ class Appointment(Base):
         self.date = date
         self.end = date + timedelta(minutes = length)
         self.practitioner_id = practitioner_id
+        self.paid = False
 
     def __repr__(self):
         return '<Appointment (%r) is %r minutes long on %r/%r/%r at %r:%r>' % (
