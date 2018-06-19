@@ -6,7 +6,7 @@ class Business(Base):
     # Name of the business
     name = db.Column(db.String(128), nullable=False)
     # List of all admins ids of the business
-    admin_ids = db.Column(db.String(128), nullable=False)
+    owner_ids = db.Column(db.String(128), nullable=False)
     # List of all non-admins ids of the business
     employee_ids = db.Column(db.String(128), nullable=False)
     # List of every appointment
@@ -22,7 +22,7 @@ class Business(Base):
 
     def __init__(self, name):
         self.name = name
-        self.admin_ids = ""
+        self.owner_ids = ""
         self.employee_ids = ""
 
     def get_client_link(self):
@@ -33,7 +33,7 @@ class Business(Base):
 
     def get_employees(self):
         # Automatically sorts them so that admins are displayed first
-        return [user for user in self.users if user.is_admin] + [user for user in self.users if not user.is_admin]
+        return [user for user in self.users if user.is_owner] + [user for user in self.users if not user.is_owner]
 
     def __repr__(self):
         return '<Business %r (ID: %r)>' % (self.name, self.id)

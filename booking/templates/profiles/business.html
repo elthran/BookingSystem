@@ -4,7 +4,7 @@
 <ul>
     <li>Name: {{ employee.name }}</li>
     <li>Email: {{ employee.email }}</li>
-    <li>Permissions: {% if employee.is_admin %}Admin{% else %}Employee{% endif %}</li>
+    <li>Permissions: {% if employee.is_owner %}Admin{% else %}Employee{% endif %}</li>
     <li>Client ID: {{ employee.id }}</li>
 </ul>
 <br>

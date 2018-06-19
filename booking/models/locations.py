@@ -7,6 +7,8 @@ class Location(Base):
     hours_id = db.Column(db.Integer, db.ForeignKey('hours.id'), nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
 
+    name = db.Column(db.String(128))
+
     # Your location information
     address = db.Column(db.String(128))
     town = db.Column(db.String(128))
@@ -15,9 +17,10 @@ class Location(Base):
     timezone = db.Column(db.String(128))
     postalcode = db.Column(db.String(128))
 
-    def __init__(self, hours_id, business_id):
+    def __init__(self, hours_id, business_id, name="Burnaby"):
         self.business_id = business_id
         self.hours_id = hours_id
+        self.name = name
         self.address = None
         self.town = None
         self.province = None

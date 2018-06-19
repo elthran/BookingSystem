@@ -7,14 +7,14 @@ class UserShell(Base):
     password = db.Column(db.String(192))
     # Business associated with the user
     business_id = db.Column(db.Integer)
-    is_admin = db.Column(db.Boolean)
+    is_owner = db.Column(db.Boolean)
 
-    def __init__(self, name, email, business_id, is_admin=False):
+    def __init__(self, name, email, business_id, is_owner=False):
         self.name = name
         self.email = email
         self.password = None
         self.business_id = business_id
-        self.is_admin = is_admin
+        self.is_owner = is_owner
 
     def check_if_exists(self):
         # Put this function here or in the route?

@@ -13,6 +13,16 @@ from booking.models.forms.register import MainForm
 # Import database
 from booking.models.bases import db
 
+"""
+app.route('setup_account)
+def setup_account():
+    account = Account(form.data.business_name, form.data.email, form.data.name)
+    business = Business(account, form.data.business_name)
+    session.add(account)
+    session.commit()
+    return url_for("page you see after you log in")
+"""
+
 @app.route('/', methods=['GET', 'POST'])
 def main():
     if current_user.is_authenticated:

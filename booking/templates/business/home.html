@@ -28,14 +28,14 @@
 
 <div style="border:dotted;width:auto;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
     {% if day == 0 %}Choose a day to adjust availability.{% else %}Your availability on <span style="font-weight:bold;">{{ day }}/{{ month }}/{{ year }}</span>, is...{% endif %}
-    <br><br>Employees of this business:
+    <br><br>Employees of this location:
     <ul>
         {% for employee in current_user.business.get_employees() %}
         <li style="font-weight:bold;">
-            {% if employee.is_admin %}(Owner){% else %}(Employee){% endif %} Name: <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">{{ employee.name }}</a></li>
+            {% if employee.is_owner %}(Owner){% else %}(Employee){% endif %} Name: <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">{{ employee.name }}</a></li>
         {% endfor %}
     </ul>
-    <br><br>Registered appointments of this business:
+    <br><br>Registered appointments of this location:
     <ul>
         {% for appointment in current_user.business.appointments %}
         <li style="font-weight:bold;">Appointment: <a href="{{ url_for('appointment_profile', business_id=current_user.business.id, appointment_id=appointment.id) }}">{{ appointment.client.name }} on {{ appointment.date }}</a></li>
@@ -54,10 +54,18 @@
     <br><br>Locations:
     <ul>
         {% for location in current_user.business.locations %}
-        <li style="font-weight:bold;">Location: {{ location }}</li>
+        {% if location.id == location_id %}
+            <li style="font-weight:bold;">
+        {% else %}
+            <li>
+        {% endif %}
+        <a href="{{ url_for('business_profile', location_id=location.id) }}">{{ location.name }}</a></li>
         {% else %}
         None
         {% endfor %}
+        {% if current_user.is_owner %}
+        <button>Edit Locations</button>
+        {% endif %}
     </ul>
 </div>
 

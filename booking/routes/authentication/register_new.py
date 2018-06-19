@@ -35,7 +35,7 @@ def register_new(user_shell_id, business_shell_id):
     db.session.commit()
     duplicate_user = User.query.filter_by(email=user_shell.email).first()
     if duplicate_user is None:
-        user = User(user_shell.name, user_shell.email, user_shell.password, business.id, user_shell.is_admin)
+        user = User(user_shell.name, user_shell.email, user_shell.password, business.id, user_shell.is_owner)
         db.session.add(user)
         db.session.commit()
         user = User.query.filter_by(id=user.id).first()

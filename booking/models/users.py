@@ -17,15 +17,17 @@ class User(Base):
     is_active = db.Column(db.Boolean)  # Account activated and not currently suspended
     is_anonymous = db.Column(db.Boolean)  # If account is anonymous
     # Permissions
-    is_admin = db.Column(db.Boolean)  # Determines if they are an 'owner' of the business. Grants full permissions
+    is_owner = db.Column(db.Boolean)  # Determines if they are an 'owner' of the business. Grants full permissions
+    is_manager = db.Column(db.Boolean)  # Determines if they have full control over a location
 
-    def __init__(self, name, email, password, business_id, is_admin=False):
+    def __init__(self, name, email, password, business_id, is_owner):
         self.name = name
         self.email = email
         self.set_password_hash(password)
         self.phone = 0000000000
         self.business_id = business_id
-        self.is_admin = is_admin
+        self.is_owner = is_owner
+        self.is_manager = False
         self.is_authenticated = True
         self.is_active = True
         self.is_anonymous = False
