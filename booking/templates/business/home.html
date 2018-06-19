@@ -77,4 +77,7 @@
 <div style="clear:both;"></div>
 For testing purposes:<br>
 {{ custom_calendar }}
+{% if not current_user.is_verified %}
+<a href="{{ current_user.get_verification_link() }}">Verify</a> account
+{% endif %}
 {% endblock %}

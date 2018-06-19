@@ -46,8 +46,10 @@ def not_found(error):
 import booking.routes.authentication.home
 import booking.routes.authentication.login
 import booking.routes.authentication.logout
+
 import booking.routes.registration.business
 import booking.routes.registration.user
+import booking.routes.registration.verification
 
 import booking.routes.bookings.appointment
 
