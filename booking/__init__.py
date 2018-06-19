@@ -61,7 +61,7 @@ import booking.routes.business.home
 
 # Build the database:
 # This will create the database file using SQLAlchemy
-db.drop_all()
+# db.drop_all()  # no longer needed, try `python3 run.py -d`
 db.create_all()
 
 # This will handle user requests

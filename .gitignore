@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 __pycache__/
-private_config.py
 .idea/
 booking.egg-info
+private_*
