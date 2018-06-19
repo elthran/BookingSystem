@@ -1,6 +1,0 @@
-booking/__init__.py
-booking.egg-info/PKG-INFO
-booking.egg-info/SOURCES.txt
-booking.egg-info/dependency_links.txt
-booking.egg-info/requires.txt
-booking.egg-info/top_level.txt
