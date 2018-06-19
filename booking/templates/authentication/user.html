@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if owner %}
+Create a new account to manage your business!
+{% else %}
+Create an account to join the business you were invited to!
+{% endif %}
+<form method="POST" action="." accept-charset="UTF-8" role="form">
+  <!-- LoginForm -->
+  {{ form.csrf_token }}
+  {{ render_field(form.name, placeholder="Your Name", autofocus="") }}
+  {{ render_field(form.email, placeholder="Email Address", autofocus="") }}
+  {{ render_field(form.password, placeholder="Your password", autofocus="") }}
+  {{ render_field(form.confirmation, placeholder="Confrm password", autofocus="") }}
+  <br><br><button type="submit" name="submit">Submit</button>
+</form>
+{% endblock %}

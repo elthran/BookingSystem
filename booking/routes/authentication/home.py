@@ -4,12 +4,8 @@ from booking import app
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import current_user
 # Import models
-from booking.models.users_shell import UserShell
-from booking.models.businesses_shell import BusinessShell
 from booking.models.users import User
 from booking.models.businesses import Business
-# Import forms
-from booking.models.forms.register import MainForm
 # Import database
 from booking.models.bases import db
 
@@ -24,7 +20,11 @@ def setup_account():
 """
 
 @app.route('/', methods=['GET', 'POST'])
-def main():
+def home():
+    if Business.query.all() == []:
+        business1 = Business("Temp")
+        db.session.add(business1)
+        db.session.commit()
     if current_user.is_authenticated:
         return redirect(url_for('business_profile'))
     users = User.query.all()
@@ -35,15 +35,5 @@ def main():
     print("Printing all businesses:")
     for business in businesses:
         print("Printing business::", business)
-    form = MainForm(request.form)
-    if form.validate_on_submit():
-        if User.query.filter_by(email=form.email.data).first() is None:
-            temporary_business = BusinessShell(form.business.data)
-            db.session.add(temporary_business)
-            db.session.flush()
-            temporary_user = UserShell(form.name.data, form.email.data, temporary_business.id, True)
-            db.session.add(temporary_user)
-            db.session.commit()
-            return redirect(url_for('create_password', user_id=temporary_user.id, business_id=temporary_business.id))
-        flash("Email already exists in database", "error")
-    return render_template("authentication/main.html", form=form)
+    return render_template("authentication/home.html")
+

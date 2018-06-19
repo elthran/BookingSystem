@@ -1,10 +1,12 @@
 from booking.models.bases import Base, db
-from flask import request
+from flask import request, url_for
 
 
 class Business(Base):
     # Name of the business
     name = db.Column(db.String(128), nullable=False)
+    # Referral code
+    referral = db.Column(db.String(128), unique=True)
     # List of all admins ids of the business
     owner_ids = db.Column(db.String(128), nullable=False)
     # List of all non-admins ids of the business
@@ -24,12 +26,20 @@ class Business(Base):
         self.name = name
         self.owner_ids = ""
         self.employee_ids = ""
+        self.set_referral_id()
+
+    # Custom property setter
+    def set_referral_id(self):
+        self.referral = "ABCD" + self.name # I will make this create a unique and random referral string later using a function
+
+    def check_referral(self, referral):
+        return True
 
     def get_client_link(self):
         return request.url_root + "booking/appointment/" + str(self.id)
 
     def get_employee_link(self):
-        return request.url_root + "register_employee/" + str(self.id)
+        return url_for('register_user', business_id=self.id, business_referral=self.referral)
 
     def get_employees(self):
         # Automatically sorts them so that admins are displayed first

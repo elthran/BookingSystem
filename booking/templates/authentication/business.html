@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+Here you can set up your new business!<br><br>
+<form method="POST" action="." accept-charset="UTF-8" role="form">
+  <!-- LoginForm -->
+  {{ form.csrf_token }}
+  {{ render_field(form.name, placeholder="Your Business' Name", autofocus="") }}
+  <br><br><button type="submit" name="submit">Submit</button>
+</form>
+{% endblock %}

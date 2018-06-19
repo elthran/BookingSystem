@@ -10,4 +10,4 @@ def logout():
     print("User logging out")
     logout_user()
     flash('Logout was successful')
-    return redirect(url_for('main'))
+    return redirect(url_for('home'))

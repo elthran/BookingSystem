@@ -8,7 +8,8 @@ from wtforms import StringField  # BooleanField
 from wtforms.validators import DataRequired, Email
 
 
-# Define the login form (WTForms)
+# Define the create new appointment form (WTForms)
+
 class BookingInit(FlaskForm):
     email = StringField('Email Address',
                       [Email(message='Not a valid email address.'),

@@ -1,24 +1,41 @@
 # Import the app itself
 from booking import app
 # Import flask dependencies
-from flask import redirect, url_for
+from flask import redirect, url_for, render_template, request, flash
 # Import session handling
 from flask_login import login_user
 # Import models
-from booking.models.users_shell import UserShell
-from booking.models.businesses_shell import BusinessShell
-from booking.models.users import User
+from booking.models.forms.user import UserForm
 from booking.models.businesses import Business
-from booking.models.locations import Location
-from booking.models.hours import Hours
-
+from booking.models.users import User
 # Import database
 from booking.models.bases import db
 
+@app.route('/register/user/', methods=['GET', 'POST'])
+@app.route('/register/user/<int:business_id>/<string:business_referral>/', methods=['GET', 'POST'])
+def register_user(business_id=1, business_referral=""):
+    if business_id == 1:
+        owner = True
+    else:
+        owner = False
+    form = UserForm(request.form)
+    if form.validate_on_submit():
+        if User.query.filter_by(email=form.email.data).first() is None:
+            user = User(form.name.data, form.email.data, form.password.data, business_id, owner)
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            print(user.id, user.business.id)
+            if owner:
+                return redirect(url_for('register_business'))
+            else:
+                return redirect(url_for('business_profile'))
+        else:
+            flash("User already exists with that email.", "error")
+    return render_template("authentication/user.html", form=form, owner=owner)
 
-@app.route('/register/<int:user_shell_id>/<int:business_shell_id>', methods=['GET', 'POST'])
-def register_new(user_shell_id, business_shell_id):
-    # I need a default hour set so that new locations have an hour object to pass in. And it seems useful anyway
+
+
     if Hours.query.first() is None:
         default_hours = Hours()
         db.session.add(default_hours)
