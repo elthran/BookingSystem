@@ -6,6 +6,7 @@ from flask_login import current_user
 # Import models
 from booking.models.users import User
 from booking.models.businesses import Business
+from booking.models.hours import Hours
 # Import database
 from booking.models.bases import db
 
@@ -24,6 +25,10 @@ def home():
     if Business.query.all() == []:
         business1 = Business("Temp")
         db.session.add(business1)
+        db.session.commit()
+    if Hours.query.all() == []:
+        hours1 = Hours()
+        db.session.add(hours1)
         db.session.commit()
     if current_user.is_authenticated:
         return redirect(url_for('business_profile'))

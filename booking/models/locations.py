@@ -17,12 +17,12 @@ class Location(Base):
     timezone = db.Column(db.String(128))
     postalcode = db.Column(db.String(128))
 
-    def __init__(self, hours_id, business_id, name="Burnaby"):
+    def __init__(self, hours_id, business_id, name="Burnaby", address=None, town=None):
         self.business_id = business_id
         self.hours_id = hours_id
         self.name = name
-        self.address = None
-        self.town = None
+        self.address = address
+        self.town = town
         self.province = None
         self.country = None
         self.timezone = None

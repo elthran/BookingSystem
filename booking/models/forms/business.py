@@ -13,3 +13,6 @@ from wtforms.validators import DataRequired, Email
 class BusinessForm(FlaskForm):
     name = StringField('Name',
                        [DataRequired(message='You must enter your name.')])
+    location = StringField('Location')
+    address = StringField('Address')
+    town = StringField('Town')

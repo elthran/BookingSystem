@@ -32,7 +32,7 @@ def register_user(business_id=1, business_referral=""):
                 return redirect(url_for('business_profile'))
         else:
             flash("User already exists with that email.", "error")
-    return render_template("authentication/user.html", form=form, owner=owner)
+    return render_template("registration/user.html", form=form, owner=owner)
 
 
 

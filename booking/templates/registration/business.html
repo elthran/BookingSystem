@@ -5,6 +5,9 @@ Here you can set up your new business!<br><br>
   <!-- LoginForm -->
   {{ form.csrf_token }}
   {{ render_field(form.name, placeholder="Your Business' Name", autofocus="") }}
+  {{ render_field(form.location, placeholder="Your location") }}
+  {{ render_field(form.address, placeholder="Your address") }}
+  {{ render_field(form.town, placeholder="Your city") }}
   <br><br><button type="submit" name="submit">Submit</button>
 </form>
 {% endblock %}

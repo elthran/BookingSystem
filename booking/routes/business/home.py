@@ -12,7 +12,7 @@ from booking.models.calendars import CustomCalendar
 
 
 @app.route('/business/home/', methods=['GET', 'POST'])
-@app.route('/business/home/<string:location_id>/<int:year>/<int:month>/<int:day>', methods=['GET', 'POST'])
+@app.route('/business/home/<int:location_id>/<int:year>/<int:month>/<int:day>', methods=['GET', 'POST'])
 @login_required
 def business_profile(location_id=1, year=datetime.now().year, month=datetime.now().month, day=0):
     # location = Location.query.filter_by(business_id=current_user.business.id).filter_by(id=location_id).first()
