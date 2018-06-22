@@ -18,3 +18,8 @@ class ClientForm(FlaskForm):
                        [DataRequired(message='You must enter an email address.')])
     phone = StringField('Phone')
 
+class EditClientForm(FlaskForm):
+    email = StringField('Email Address',
+                        [Email(message='Not a valid email address.')])
+    name = StringField('Name')
+    phone = StringField('Phone')

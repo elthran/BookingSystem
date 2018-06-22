@@ -1,10 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
 {% if not current_user.is_verified %}
-<br>Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify your account
+<h1>*Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify your account*</h1>
 {% endif %}
-<h1 style="text-align:center;font-size:30px;font-weight:bold;">{{ current_user.business.name }}</h1>
 <div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
     <a href="{{ custom_calendar.month_toggle('down', location_id) }}">PREVIOUS</a>
     <a href="{{ custom_calendar.month_toggle('up', location_id) }}" style="float:right;">NEXT</a>

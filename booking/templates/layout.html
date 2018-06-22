@@ -8,6 +8,12 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
+{% if current_user and current_user.is_authenticated %}
+    <h1 style="font-weight:bold;font-size:35px;">
+        <span>{{ current_user.business.name }}</span>
+        <span style="float:right;">{{ current_user.name }}</span>
+    </h1><br><br>
+{% endif %}
 {# <!-- Below is flask error code handling --> #}
 {% macro render_field(field, placeholder=None) %}
 <div>
@@ -41,19 +47,13 @@
 </div>
 {% endif %}
 {# <!-- End of flask error code handling --> #}
-<h1 style="text-align:center;">
-    {% if current_user and current_user.is_authenticated %}Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!
-    {% else %}Currently not logged in.
-    {% endif %}
-</h1>
-<br><br>
 
 {% block content %}
 {% endblock %}
 
 <div style="clear:both;"></div>
 {% if current_user.is_authenticated %}
-<br><br><a href="{{ url_for('business_profile') }}">Business Homepage</a>
+<br><a href="{{ url_for('business_profile') }}">Business Homepage</a>
 {% endif %}
 <br><br><a href="{{ url_for('logout') }}">Logout</a>
 </body>

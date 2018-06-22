@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-{% if current_user.is_authenticated and current_user.is_owner %}
-<a href="{{ url_for('client_edit', client_id=client.id) }}">Edit client</a>
-{% endif %}
+<p style="text-align:center;font-weight:bold;">Client profile:</p>
+<form method="POST" action="." accept-charset="UTF-8" role="form">
 <ul>
-    <li>Name: {{ client.name }}</li>
-    <li>Email: {{ client.email }}</li>
-    <li>Phone Number: {{ client.phone }}</li>
+    {{ form.csrf_token }}
+    <li>Name: {{ render_field(form.name, value=client.name, placeholder="Client Name", autofocus="") }}</li>
+    <li>Email: {{ render_field(form.email, value=client.email, placeholder="Email Address") }}</li>
+    <li>Phone Number: {{ render_field(form.phone, value=client.phone, placeholder="Phone Number") }}</li>
     <li>Contact Method: {{ client.contact_method }}</li>
     <li>Number of Appointments: {{ client.appointments|length }}</li>
     <li>List of Appointments: {{ client.appointments }}</li>
@@ -15,6 +15,8 @@
     <li>Consent Form: <img src="{{ upload }}" style="border:dotted;" /></li>
     {% endfor %}
 </ul>
+    <br><br><button type="submit" name="submit">Update Client Information</button>
+</form>
 <form method="POST" enctype=multipart/form-data role="form">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <input type=file name=file>

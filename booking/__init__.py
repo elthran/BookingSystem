@@ -61,6 +61,8 @@ import booking.routes.profiles.appointment
 import booking.routes.business.home
 
 import booking.routes.client.home
+import booking.routes.client.edit
+
 
 # Build the database:
 # This will create the database file using SQLAlchemy

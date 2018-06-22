@@ -9,4 +9,6 @@ Add a new client to your business
   {{ render_field(form.phone, placeholder="Phone Number") }}
   <br><br><button type="submit" name="submit">Submit</button>
 </form>
+<br>
+<a href="{{ url_for('client_list') }}">Return</a> to client list.
 {% endblock %}
