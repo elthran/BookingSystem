@@ -25,10 +25,9 @@ def book_appointment(business_id):
             print("Client with that email address already exists", client)
             flash('Client with that email address already exists', 'notice')
         else:
-            client = Client(form.email.data, business_id)
-            db.session.add(Client(form.email.data, business_id))
+            client = Client(form.email.data, business_id, form.name.data, form.phone.data)
+            db.session.add(client)
             db.session.commit()
-            client = Client.query.filter_by(business_id=business_id).filter_by(email=form.email.data).first()
             print("New client being created", client)
             flash('New client being created', 'notice')
         appointment = Appointment(business_id, client.id, 30, date)

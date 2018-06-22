@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+Add a new client to your business
+<form method="POST" action="." accept-charset="UTF-8" role="form">
+  <!-- LoginForm -->
+  {{ form.csrf_token }}
+  {{ render_field(form.name, placeholder="Client Name", autofocus="") }}
+  {{ render_field(form.email, placeholder="Email Address") }}
+  {{ render_field(form.phone, placeholder="Phone Number") }}
+  <br><br><button type="submit" name="submit">Submit</button>
+</form>
+{% endblock %}

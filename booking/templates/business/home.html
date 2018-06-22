@@ -46,14 +46,7 @@
         None
         {% endfor %}
     </ul>
-    <br><br>Registered clients of this business:
-    <ul>
-        {% for client in current_user.business.clients %}
-        <li style="font-weight:bold;">Name: <a href="{{ url_for('client_profile', business_id=current_user.business.id, client_id=client.id) }}">{{ client.name }}</a> / Email: {{ client.email }}</li>
-        {% else %}
-        None
-        {% endfor %}
-    </ul>
+    <a href="{{ url_for('client_list', business_id=current_user.business.id) }}">Client List</a>
     <br><br>Locations:
     <ul>
         {% for location in current_user.business.locations %}
@@ -76,8 +69,7 @@
 <div style="clear:both;"></div>
 <br><br><br>To have a client book an appoint, send them link <a href="{{ current_user.business.get_client_link() }}">this</a> link.
 <br><br><br>To have an employee register an account with your business, send them <a href="{{ current_user.business.get_employee_link() }}">this</a> link.
-<br><br><a href="{{ url_for('logout') }}">Logout</a>
 <div style="clear:both;"></div>
-For testing purposes:<br>
+<br>For testing purposes:<br>
 {{ custom_calendar }}
 {% endblock %}

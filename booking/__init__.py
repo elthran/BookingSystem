@@ -49,6 +49,7 @@ import booking.routes.authentication.logout
 
 import booking.routes.registration.business
 import booking.routes.registration.user
+import booking.routes.registration.client
 import booking.routes.registration.verification
 
 import booking.routes.bookings.appointment
@@ -58,6 +59,8 @@ import booking.routes.profiles.employee
 import booking.routes.profiles.appointment
 
 import booking.routes.business.home
+
+import booking.routes.client.home
 
 # Build the database:
 # This will create the database file using SQLAlchemy

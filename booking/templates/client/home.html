@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Currently logged in as <span style="font-weight:bold;">{{ current_user.name }}</span> (ID: {{ current_user.id }})!</h1>
+<h1 style="text-align:center;font-size:30px;font-weight:bold;">{{ current_user.business.name }}</h1>
+
+<a href="{{ url_for('register_client') }}"><button>Add new client</button></a>
+
+<div style="border:dotted;width:auto;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
+    <ul>
+        {% for client in current_user.business.clients %}
+        <li style="font-weight:bold;">
+            <a href="{{ url_for('client_profile', business_id=current_user.business.id, client_id=client.id) }}">{{ client.name }}</a>
+        </li>
+        <li>
+            {{ client.phone }}
+        </li>
+        <li>
+            {{ client.email }}
+        </li>
+        {% else %}
+        None
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

@@ -14,3 +14,6 @@ class BookingInit(FlaskForm):
     email = StringField('Email Address',
                       [Email(message='Not a valid email address.'),
                        DataRequired(message='You must enter an email address.')])
+    name = StringField('Name',
+                      [DataRequired(message='You must enter an email address.')])
+    phone = StringField('Phone')
