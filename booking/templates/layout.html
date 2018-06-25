@@ -51,9 +51,5 @@
 {% block content %}
 {% endblock %}
 
-<div style="clear:both;"></div>
-{% if current_user.is_authenticated %}
-<br><br><a href="{{ url_for('logout') }}">Logout</a>
-{% endif %}
 </body>
 </html>

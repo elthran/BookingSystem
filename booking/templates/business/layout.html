@@ -14,6 +14,7 @@
         <li><a href="{{ url_for('business_activity', location_id=location_id) }}">Activity</a></li>
         <li><a href="{{ url_for('business_booking', location_id=location_id) }}">Book New Appointment</a></li>
         <li><a href="{{ url_for('business_payment') }}">Request Payment</a></li>
+        <li><a href="{{ url_for('business_service') }}">Services</a></li>
     </ul>
     <br>
     <ul style="border:solid;border-color:blue;">
@@ -30,5 +31,10 @@
 
 {% block content2 %}
 {% endblock %}
+
+{% if current_user.is_authenticated %}
+<div style="clear:both;"></div>
+<br><br><a href="{{ url_for('logout') }}">Logout</a>
+{% endif %}
 
 {% endblock %}

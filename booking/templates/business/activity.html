@@ -1,6 +1,14 @@
 {% extends "business/layout.html" %}
 {% block content2 %}
 
-Under construction
+Here is your activity, starting with the most recent:<br><br>
+<ul>
+{% for appointment in current_user.business.appointments[::-1] %}
+    <li>{{ appointment }}</li>
+    <br>
+{% else %}
+No activity
+    <li>{% endfor %}</li>
+</ul>
 
 {% endblock %}

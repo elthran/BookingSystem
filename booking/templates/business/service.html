@@ -1,0 +1,17 @@
+{% extends "business/layout.html" %}
+{% block content2 %}
+<a href="{{ url_for('add_service') }}" style="float:left;"><button>Add new service</button></a>
+
+<div style="border:dotted;width:auto;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
+    <ul>
+        {% for service in current_user.business.services %}
+        <li style="font-weight:bold;">
+            <a href="">{{ service }}</a>
+        </li>
+        {% else %}
+        No services created for this business
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

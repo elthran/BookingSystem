@@ -35,14 +35,6 @@
             {% if employee.is_owner %}(Owner){% else %}(Employee){% endif %} Name: <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">{{ employee.name }}</a></li>
         {% endfor %}
     </ul>
-    <br><br>Registered appointments of this location:
-    <ul>
-        {% for appointment in current_user.business.appointments %}
-        <li style="font-weight:bold;">Appointment: <a href="{{ url_for('appointment_profile', business_id=current_user.business.id, appointment_id=appointment.id) }}">{{ appointment.client.name }} on {{ appointment.date }}</a></li>
-        {% else %}
-        None
-        {% endfor %}
-    </ul>
     <br><br>Locations:
     <ul>
         {% for location in current_user.business.locations %}

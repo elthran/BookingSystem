@@ -18,7 +18,7 @@ def book_appointment(business_id):
     form = BookingInit(request.form)
     # Verify the sign in form
     if form.validate_on_submit():
-        date = datetime(2018, 6, 25)
+        date = datetime.now()
         client = Client.query.filter_by(business_id=business_id).filter_by(email=form.email.data).first()
         print(client)
         if client:
