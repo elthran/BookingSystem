@@ -1,7 +1,7 @@
 {% extends "business/layout.html" %}
 {% block content2 %}
 
-<div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
+<div style="border:dotted;width:600px;overflow:auto;float:left;padding:15px;">
     <a href="{{ custom_calendar.month_toggle('down', location_id) }}">PREVIOUS MONTH</a>
     <a href="{{ custom_calendar.return_to_today(location_id) }}" style="margin-left:120px;">GO TO TODAY</a>
     <a href="{{ custom_calendar.month_toggle('up', location_id) }}" style="float:right;">NEXT MONTH</a>
@@ -66,6 +66,8 @@
 <br><br><br>To have a client book an appoint, send them link <a href="{{ current_user.business.get_client_link() }}">this</a> link.
 <br><br><br>To have an employee register an account with your business, send them <a href="{{ current_user.business.get_employee_link() }}">this</a> link.
 <div style="clear:both;"></div>
+{# <!--
 <br>For testing purposes:<br>
 {{ custom_calendar }}
+--> #}
 {% endblock %}

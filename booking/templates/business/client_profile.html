@@ -1,5 +1,5 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "business/layout.html" %}
+{% block content2 %}
 {% if current_user.is_authenticated and current_user.is_owner %}
 <a href="{{ url_for('client_edit', client_id=client.id) }}">Edit client</a>
 {% endif %}
@@ -21,7 +21,7 @@
     <input type=submit value=Upload>
 </form>
 <br>
-<a href="{{ url_for('client_list') }}">Return</a> to client list.
+<a href="{{ url_for('clients') }}">Return</a> to client list.
 {% endblock %}
 
 

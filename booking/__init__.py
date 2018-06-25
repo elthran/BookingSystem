@@ -54,14 +54,18 @@ import booking.routes.registration.verification
 
 import booking.routes.bookings.appointment
 
-import booking.routes.profiles.client
+import booking.routes.business.client_profile
 import booking.routes.profiles.employee
 import booking.routes.profiles.appointment
 
-import booking.routes.business.calendar
 import booking.routes.business.activity
+import booking.routes.business.booking
+import booking.routes.business.calendar
+import booking.routes.business.client_profile
+import booking.routes.business.clients
+import booking.routes.business.payment
 
-import booking.routes.client.home
+import booking.routes.business.clients
 import booking.routes.client.edit
 
 

@@ -22,7 +22,7 @@ def register_client(business_id=1, business_referral=""):
             client = Client(form.email.data, business_id, form.name.data, form.phone.data)
             db.session.add(client)
             db.session.commit()
-            return redirect(url_for('client_list'))
+            return redirect(url_for('clients'))
         else:
             flash("Client already exists with that email.", "error")
     return render_template("registration/client.html", form=form)

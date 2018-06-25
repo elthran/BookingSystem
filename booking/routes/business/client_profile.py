@@ -12,7 +12,7 @@ import os
 from PIL import Image
 
 @login_required
-@app.route('/profile/client/<int:business_id>/<int:client_id>/', methods=['GET', 'POST'])
+@app.route('/business/client/<int:business_id>/<int:client_id>/', methods=['GET', 'POST'])
 def client_profile(business_id, client_id):
     client = Client.query.filter_by(business_id=business_id).filter_by(id=client_id).first()
     # Statement below is to allow users to upload files and attach to the client profile
@@ -39,4 +39,4 @@ def client_profile(business_id, client_id):
     for filename in os.listdir('booking/static/uploads'):
         if filename[0] == str(client.business_id) and filename[2] == str(client.id):
             client_uploads.append(os.path.join('/static/uploads', filename))
-    return render_template("profiles/client.html", client=client, client_uploads=client_uploads)
+    return render_template("business/client_profile.html", client=client, client_uploads=client_uploads)

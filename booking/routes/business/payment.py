@@ -8,7 +8,7 @@ from booking.models.businesses import Business
 from booking.models.locations import Location
 
 
-@app.route('/business/activity/<int:location_id>/')
+@app.route('/business/payment/')
 @login_required
-def business_activity(location_id):
-    return render_template("business/activity.html")
+def business_payment():
+    return render_template("business/payment.html")
