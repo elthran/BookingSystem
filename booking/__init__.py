@@ -58,7 +58,8 @@ import booking.routes.profiles.client
 import booking.routes.profiles.employee
 import booking.routes.profiles.appointment
 
-import booking.routes.business.home
+import booking.routes.business.calendar
+import booking.routes.business.activity
 
 import booking.routes.client.home
 import booking.routes.client.edit

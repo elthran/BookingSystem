@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if not current_user.is_verified %}
+<h1>*Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify your account*</h1>
+{% endif %}
+
+<div style="border:dotted;width:200px;height:auto;margin-top:35px;float:left;">
+    <ul>
+        <li><a href="{{ url_for('business_calendar') }}">Calendar</a></li>
+        <li><a href="{{ url_for('client_list', business_id=current_user.business.id) }}">Clients</a></li>
+        <li><a href="{{ url_for('business_activity', business_id=current_user.business.id) }}">Activity</a></li>
+        <li><a href="{{ url_for('business_calendar') }}">Book New Appointment</a></li>
+        <li><a href="{{ url_for('business_calendar') }}">Request Payment</a></li>
+    </ul>
+    <br>
+    <ul>
+        <li style="font-weight:bold;">Today's Appointments:</li>
+        <br>
+        {% for appointment in current_user.business.get_todays_appointments() %}
+        <li style="font-weight:bold;">{{ appointment.date.time() }}</li>
+        <li style="margin-left:15px;">{{ appointment.client.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% block content2 %}
+{% endblock %}
+
+{% endblock %}

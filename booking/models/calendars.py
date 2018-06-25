@@ -1,5 +1,6 @@
 from calendar import HTMLCalendar
 from flask import url_for
+from datetime import datetime
 
 
 class CustomCalendar(HTMLCalendar):
@@ -16,26 +17,14 @@ class CustomCalendar(HTMLCalendar):
     def month_toggle(self, direction, location):
         if direction == "up":
             if self.month == 12:
-                return url_for('business_profile', location_id=location, year=self.year+1, month=1, day=0)
+                return url_for('business_calendar', location_id=location, year=self.year+1, month=1, day=0)
             else:
-                return url_for('business_profile', location_id=location, year=self.year, month=self.month+1, day=0)
-            # Should be return url_for('business_profile', year=self.year, month=self.month+1)
-            # ie. I want to pass in the url and the parameters instead of building a string here. But I think
-            # the problem might be that the calendar object itself is shared among users and causing the bug? I'm not sure.
+                return url_for('business_calendar', location_id=location, year=self.year, month=self.month+1, day=0)
         else:
             if self.month == 1:
-                return url_for('business_profile', location_id=location, year=self.year-1, month=12, day=0)
+                return url_for('business_calendar', location_id=location, year=self.year-1, month=12, day=0)
             else:
-                return url_for('business_profile', location_id=location, year=self.year, month=self.month-1, day=0)
+                return url_for('business_calendar', location_id=location, year=self.year, month=self.month-1, day=0)
 
-    def year_toggle(self, direction):
-        if direction == "up":
-            if self.month == 12:
-                return self.year+1
-            else:
-                return self.year
-        else:
-            if self.month == 1:
-                return self.year-1
-            else:
-                return self.year
+    def return_to_today(self, location):
+        return url_for('business_calendar', location_id=location, year=datetime.now().year, month=datetime.now().month, day=datetime.now().day)

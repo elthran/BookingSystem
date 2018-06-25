@@ -15,4 +15,4 @@ def verification(user_id=0, verification_link=""):
     db.session.commit()
     flash("Account verified!")
     print("Account verified!")
-    return redirect(url_for('business_profile'))
+    return redirect(url_for('business_calendar'))

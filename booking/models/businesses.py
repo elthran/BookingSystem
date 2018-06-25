@@ -1,5 +1,6 @@
 from booking.models.bases import Base, db
 from flask import request, url_for
+from datetime import datetime
 
 
 class Business(Base):
@@ -44,6 +45,13 @@ class Business(Base):
     def get_employees(self):
         # Automatically sorts them so that admins are displayed first
         return [user for user in self.users if user.is_owner] + [user for user in self.users if not user.is_owner]
+
+    def get_todays_appointments(self):
+        """
+        Checks the date of each appointment (ignoring the time) and checks if it's today's date. Might bug out if the user is in a different timezone?
+        @klondikemarlen please check if this is timezone compatible
+        """
+        return [appointment for appointment in self.appointments if appointment.date.date() == datetime.now().date()]
 
     def __repr__(self):
         return '<Business %r (ID: %r)>' % (self.name, self.id)

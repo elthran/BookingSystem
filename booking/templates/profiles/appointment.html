@@ -9,5 +9,5 @@
     <li>Practitioner: {% if appointment.practitioner_id %}{{ appointment.practitioner_id.name }}{% else %}None{% endif %}</li>
 </ul>
 <br>
-<a href="{{ url_for('business_profile') }}">Return</a> to business
+<a href="{{ url_for('business_calendar') }}">Return</a> to business
 {% endblock %}

@@ -1,11 +1,10 @@
-{% extends "layout.html" %}
-{% block content %}
-{% if not current_user.is_verified %}
-<h1>*Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify your account*</h1>
-{% endif %}
+{% extends "business/layout.html" %}
+{% block content2 %}
+
 <div style="border:dotted;width:600px;overflow:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
-    <a href="{{ custom_calendar.month_toggle('down', location_id) }}">PREVIOUS</a>
-    <a href="{{ custom_calendar.month_toggle('up', location_id) }}" style="float:right;">NEXT</a>
+    <a href="{{ custom_calendar.month_toggle('down', location_id) }}">PREVIOUS MONTH</a>
+    <a href="{{ custom_calendar.return_to_today(location_id) }}" style="margin-left:120px;">GO TO TODAY</a>
+    <a href="{{ custom_calendar.month_toggle('up', location_id) }}" style="float:right;">NEXT MONTH</a>
     <div style="margin-left:300px;font-weight:bold;font-size:25px;"><h1>{{ custom_calendar.month_name() }}</h1></div>
     <table style="text-align:center;width:400px;height:300px;margin:auto;margin-top:25px;">
         <tr>
@@ -20,14 +19,14 @@
         {% for row in calendar_month %}
         <tr>
             {% for day in row %}
-            <td>{% if day != 0 %}<a href="{{ url_for('business_profile', location_id=location_id, year=year, month=month, day=day) }}">{{ day }}</a>{% else %}-{% endif %}</td>
+            <td>{% if day != 0 %}<a href="{{ url_for('business_calendar', location_id=location_id, year=year, month=month, day=day) }}">{{ day }}</a>{% else %}-{% endif %}</td>
             {% endfor %}
         </tr>
         {% endfor %}
     </table>
 </div>
 
-<div style="border:dotted;width:auto;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
+<div style="border:dotted;width:300px;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
     {% if day == 0 %}Choose a day to adjust availability.{% else %}Your availability on <span style="font-weight:bold;">{{ day }}/{{ month }}/{{ year }}</span>, is...{% endif %}
     <br><br>Employees of this location:
     <ul>
@@ -44,7 +43,6 @@
         None
         {% endfor %}
     </ul>
-    <a href="{{ url_for('client_list', business_id=current_user.business.id) }}">Client List</a>
     <br><br>Locations:
     <ul>
         {% for location in current_user.business.locations %}
@@ -53,7 +51,7 @@
         {% else %}
             <li>
         {% endif %}
-        <a href="{{ url_for('business_profile', location_id=location.id, year=2018, month=6, day=20) }}">{{ location.name }}</a></li>
+        <a href="{{ url_for('business_calendar', location_id=location.id, year=2018, month=6, day=20) }}">{{ location.name }}</a></li>
         {% else %}
         None
         {% endfor %}

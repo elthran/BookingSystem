@@ -26,5 +26,5 @@ def register_business():
         db.session.commit()
         current_user.business_id = business.id
         db.session.commit()
-        return redirect(url_for('business_profile'))
+        return redirect(url_for('business_calendar'))
     return render_template("registration/business.html", form=form)

@@ -31,7 +31,7 @@ def home():
         db.session.add(hours1)
         db.session.commit()
     if current_user.is_authenticated:
-        return redirect(url_for('business_profile'))
+        return redirect(url_for('business_calendar'))
     users = User.query.all()
     businesses = Business.query.all()
     print("Printing all users:")

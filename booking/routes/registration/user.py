@@ -29,7 +29,7 @@ def register_user(business_id=1, business_referral=""):
             if owner:
                 return redirect(url_for('register_business'))
             else:
-                return redirect(url_for('business_profile'))
+                return redirect(url_for('business_calendar'))
         else:
             flash("User already exists with that email.", "error")
     return render_template("registration/user.html", form=form, owner=owner)
@@ -59,4 +59,4 @@ def register_user(business_id=1, business_referral=""):
         login_user(user)
     else:
         print("A user with that email already exists in the database!!!!", duplicate_user)
-    return redirect(url_for('business_profile', year=2018, month=6, day=0))
+    return redirect(url_for('business_calendar', year=2018, month=6, day=0))
