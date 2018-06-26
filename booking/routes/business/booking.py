@@ -17,7 +17,7 @@ from datetime import datetime
 @app.route('/business/booking/<int:location_id>/', methods=['GET', 'POST'])
 @login_required
 def business_booking(location_id):
-    form = ManualBooking(request.form)
+    form = ManualBooking(current_user.business.id, request.form)
     if form.validate_on_submit():
         form.display_services(current_user.business.id)
         date = datetime.now()

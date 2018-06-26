@@ -1,4 +1,5 @@
 # Import Form and RecaptchaField (optional)
+import flask_wtf.form
 from flask_wtf import FlaskForm  # , RecaptchaField
 
 # Import Form elements such as TextField and BooleanField (optional)
@@ -21,6 +22,7 @@ class CustomerBooking(FlaskForm):
                       [DataRequired(message='You must enter an email address.')])
     phone = StringField('Phone')
 
+
 class ManualBooking(FlaskForm):
     name = StringField('Name',
                       [DataRequired(message='You must enter an email address.')])
@@ -30,7 +32,12 @@ class ManualBooking(FlaskForm):
                          DataRequired(message='You must enter an email address.')])
     service = SelectField('Service')
 
+    def __init__(self, business_id, formdata=flask_wtf.form._Auto, **kwargs):
+        super().__init__(formdata=formdata, **kwargs)
+        business = Business.query.get(business_id)
+        self.service.choices = [(thing.id, thing.name) for thing in business.services]
+
     def display_services(request, id):
-        business = Business.query.filter_by(id=id)
+        business = Business.query.get(id)
         form = ManualBooking(request.POST, obj=business)
         form.service.choices = [(thing.id, thing.name) for thing in business.services]
