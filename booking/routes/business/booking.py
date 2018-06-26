@@ -26,23 +26,26 @@ def business_booking(location_id):
         date = datetime.now()
         # The following if tree is ugly. Please fix
         # @klndikemarlen
-        if form.email.data:
-            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(email=form.email.data).first()
-            if client:
-                flash("Client found matching that email address", "notice")
-        if form.phone.data and client == None:
-            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(phone=form.phone.data).first()
-            if client:
-                flash("Client found matching that phone number", "notice")
-        if form.name.data and client == None:
-            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(name=form.name.data).first()
-            if client:
-                flash("Client found matching that name", "notice")
-        if client == None:
-            flash("No client found. Creating new client", "notice")
-            client = Client(form.email.data, current_user.business.id, form.name.data, form.phone.data)
-            db.session.add(client)
-            db.session.commit()
+        if form.anonymous.data:
+            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(id=1).first()
+        else:
+            if form.email.data:
+                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(email=form.email.data).first()
+                if client:
+                    flash("Client found matching that email address", "notice")
+            if form.phone.data and client == None:
+                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(phone=form.phone.data).first()
+                if client:
+                    flash("Client found matching that phone number", "notice")
+            if form.name.data and client == None:
+                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(name=form.name.data).first()
+                if client:
+                    flash("Client found matching that name", "notice")
+            if client == None:
+                flash("No client found. Creating new client", "notice")
+                client = Client(form.email.data, current_user.business.id, form.name.data, form.phone.data)
+                db.session.add(client)
+                db.session.commit()
         appointment = Appointment(current_user.business.id, client.id, form.service.data, date)
         db.session.add(appointment)
         db.session.commit()

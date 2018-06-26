@@ -6,7 +6,7 @@
     <ul>
         {% for service in current_user.business.services %}
         <li style="font-weight:bold;">
-            <a href="">{{ service }}</a>
+            <a href="">{{ service }}</a> <button><a href="{{ url_for('edit_service', id=service.id) }}">Edit</a></button>
         </li>
         {% else %}
         No services created for this business

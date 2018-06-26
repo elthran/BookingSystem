@@ -12,10 +12,10 @@ from booking.models.bases import db
 
 
 
-@app.route('/client/edit/', methods=['GET', 'POST'])
-@app.route('/client/edit/<int:client_id>/', methods=['GET', 'POST'])
+@app.route('/business/edit_client/', methods=['GET', 'POST'])
+@app.route('/business/edit_client/<int:client_id>/', methods=['GET', 'POST'])
 @login_required
-def client_edit(client_id):
+def edit_client(client_id):
     client = Client.query.filter_by(business_id=current_user.business.id).filter_by(id=client_id).first()
     form = EditClientForm(request.form)
     if form.validate_on_submit():
@@ -24,4 +24,4 @@ def client_edit(client_id):
         client.phone = form.phone.data
         db.session.commit()
         return redirect(url_for('client_profile', business_id=current_user.business.id, client_id=client.id))
-    return render_template("client/edit.html", client=client, form=form)
+    return render_template("business/edit_client.html", client=client, form=form)

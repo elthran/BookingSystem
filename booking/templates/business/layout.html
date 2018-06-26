@@ -4,10 +4,11 @@
 {% set location_id = 1 %}
 
 {% if not current_user.is_verified %}
-<h1>*Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify your account*</h1>
+<h1>*Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify
+    your account*</h1>
 {% endif %}
 
-<div style="border:dotted;width:200px;height:auto;margin-top:35px;float:left;margin-right:50px;">
+<div style="border:dotted;width:300px;height:auto;margin-top:35px;float:left;margin-right:50px;">
     <ul>
         <li><a href="{{ url_for('business_calendar') }}">Calendar</a></li>
         <li><a href="{{ url_for('clients', business_id=current_user.business.id) }}">Clients</a></li>
@@ -18,13 +19,25 @@
     </ul>
     <br>
     <ul style="border:solid;border-color:blue;">
-        <li style="font-weight:bold;">Today's Appointments:</li>
+        <li style="font-weight:bold;">
+            Today's Appointments:
+        </li>
         <br>
         {% for appointment in current_user.business.get_todays_appointments() %}
         <li style="font-weight:bold;">{{ appointment.date.time() }}-{{ appointment.get_end_time() }}</li>
-        <li style="margin-left:15px;">{{ appointment.client.name }}{{ appointment.service }}</li>
+        <li style="margin-left:15px;">
+            {{ appointment.service }}
+            {% if appointment.client.id != 1 %}
+            for
+            <a href="{{ url_for('edit_client', client_id=appointment.client.id) }}">
+                {{ appointment.client.name }}
+            </a>
+            {% endif %}
+        </li>
         {% else %}
-        <li style="font-weight:bold;">No appointments scheduled for today</li>
+        <li style="font-weight:bold;">
+            No appointments scheduled for today
+        </li>
         {% endfor %}
     </ul>
 </div>

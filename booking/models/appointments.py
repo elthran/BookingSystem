@@ -33,7 +33,6 @@ class Appointment(Base):
         return (self.date + timedelta(minutes = self.service.length)).time()
 
     def __repr__(self):
-        return '<Appointment (%r) is %r minutes long on %r/%r/%r at %r:%r>' % (
-            self.id, self.length,
-            self.date.year, self.date.month, self.date.day,
+        return '<Appointment (%r) is on %r/%r/%r at %r:%r>' % (
+            self.id, self.date.year, self.date.month, self.date.day,
             self.date.hour, self.date.minute)

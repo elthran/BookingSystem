@@ -6,6 +6,7 @@ Manually book an appointment
 <form method="POST" accept-charset="UTF-8" role="form">
     <!-- LoginForm -->
     {{ form.csrf_token }}
+    Don't create a client for this appointment: {{ render_field(form.anonymous) }}
     {{ render_field(form.name, placeholder="Client Name", autofocus="") }}
     {{ render_field(form.email, placeholder="Client Email Address") }}
     {{ render_field(form.phone, placeholder="Client Phone Number") }}

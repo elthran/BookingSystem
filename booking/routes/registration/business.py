@@ -8,6 +8,7 @@ from flask_login import login_user, current_user
 from booking.models.forms.business import BusinessForm
 from booking.models.businesses import Business
 from booking.models.locations import Location
+from booking.models.clients import Client
 # Import database
 from booking.models.bases import db
 
@@ -23,6 +24,9 @@ def register_business():
             form.location.data = business.name
         location = Location(1, business.id, form.location.data, form.address.data, form.town.data)
         db.session.add(location)
+        db.session.commit()
+        client = Client("anonymous@hidden.com", business.id, "Anonymous")
+        db.session.add(client)
         db.session.commit()
         current_user.business_id = business.id
         db.session.commit()
