@@ -19,6 +19,7 @@ from datetime import datetime
 def business_booking(location_id):
     form = ManualBooking(request.form)
     if form.validate_on_submit():
+        form.display_services(current_user.business.id)
         date = datetime.now()
         # The following if tree is ugly. Please fix
         # @klndikemarlen
