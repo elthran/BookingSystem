@@ -21,23 +21,14 @@ class CustomerBooking(FlaskForm):
     name = StringField('Name',
                       [DataRequired(message='You must enter an email address.')])
     phone = StringField('Phone')
+    service = SelectField('Services', coerce=int)
 
 
 class ManualBooking(FlaskForm):
     name = StringField('Name',
-                      [DataRequired(message='You must enter an email address.')])
+                      [DataRequired(message='You must enter a name.')])
     phone = StringField('Phone')
     email = StringField('Email Address',
                         [Email(message='Not a valid email address.'),
                          DataRequired(message='You must enter an email address.')])
-    service = SelectField('Service')
-
-    def __init__(self, business_id, formdata=flask_wtf.form._Auto, **kwargs):
-        super().__init__(formdata=formdata, **kwargs)
-        business = Business.query.get(business_id)
-        self.service.choices = [(thing.id, thing.name) for thing in business.services]
-
-    def display_services(request, id):
-        business = Business.query.get(id)
-        form = ManualBooking(request.POST, obj=business)
-        form.service.choices = [(thing.id, thing.name) for thing in business.services]
+    service = SelectField('Service', coerce=int)

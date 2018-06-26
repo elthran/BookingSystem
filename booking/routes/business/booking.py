@@ -17,9 +17,9 @@ from datetime import datetime
 @app.route('/business/booking/<int:location_id>/', methods=['GET', 'POST'])
 @login_required
 def business_booking(location_id):
-    form = ManualBooking(current_user.business.id, request.form)
+    form = ManualBooking(request.form)
+    form.service.choices = [(service.id, service.name) for service in current_user.business.services]
     if form.validate_on_submit():
-        form.display_services(current_user.business.id)
         date = datetime.now()
         # The following if tree is ugly. Please fix
         # @klndikemarlen

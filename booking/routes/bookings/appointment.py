@@ -16,6 +16,7 @@ def book_appointment(business_id):
     business = Business.query.filter_by(id=business_id).first()
     # If sign in form is submitted
     form = CustomerBooking(request.form)
+    form.service.choices = [(service.id, service.name) for service in business.services]
     # Verify the sign in form
     if form.validate_on_submit():
         date = datetime.now()
