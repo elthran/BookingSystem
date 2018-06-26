@@ -1,6 +1,15 @@
 {% extends "business/layout.html" %}
 {% block content2 %}
 
-Under construction
+Manually book an appointment
+<br><br>
+<form method="POST" accept-charset="UTF-8" role="form">
+    <!-- LoginForm -->
+    {{ form.csrf_token }}
+    {{ render_field(form.name, placeholder="Client Name", autofocus="") }}
+    {{ render_field(form.email, placeholder="Client Email Address") }}
+    {{ render_field(form.phone, placeholder="Client Phone Number") }}
+    <br><br><button type="submit">Book appointment</button>
+</form>
 
 {% endblock %}

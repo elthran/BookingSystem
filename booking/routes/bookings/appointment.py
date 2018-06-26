@@ -5,7 +5,7 @@ from flask import render_template, request, flash
 # Import models
 from booking.models import Business, Client, Appointment
 # Import forms
-from booking.models.forms.booking import BookingInit
+from booking.models.forms.booking import CustomerBooking
 # Import database
 from booking.models.bases import db
 from datetime import datetime
@@ -15,7 +15,7 @@ from datetime import datetime
 def book_appointment(business_id):
     business = Business.query.filter_by(id=business_id).first()
     # If sign in form is submitted
-    form = BookingInit(request.form)
+    form = CustomerBooking(request.form)
     # Verify the sign in form
     if form.validate_on_submit():
         date = datetime.now()

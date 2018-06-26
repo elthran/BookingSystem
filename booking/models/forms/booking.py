@@ -10,10 +10,18 @@ from wtforms.validators import DataRequired, Email
 
 # Define the create new appointment form (WTForms)
 
-class BookingInit(FlaskForm):
+class CustomerBooking(FlaskForm):
     email = StringField('Email Address',
                       [Email(message='Not a valid email address.'),
                        DataRequired(message='You must enter an email address.')])
     name = StringField('Name',
                       [DataRequired(message='You must enter an email address.')])
     phone = StringField('Phone')
+
+class ManualBooking(FlaskForm):
+    name = StringField('Name',
+                      [DataRequired(message='You must enter an email address.')])
+    phone = StringField('Phone')
+    email = StringField('Email Address',
+                        [Email(message='Not a valid email address.'),
+                         DataRequired(message='You must enter an email address.')])
