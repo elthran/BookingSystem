@@ -59,7 +59,7 @@ class User(Base):
         return str(self.id) + "-" + self.name
 
     def get_verification_link(self):
-        return url_for('verification', user_id=self.id, verification_link=self.generate_verification_link())
+        return url_for('verification', id=self.id, verification_link=self.generate_verification_link())
 
     def check_verification_link(self, link):
         if link == (str(self.id) + "-" + self.name):
