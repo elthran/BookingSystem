@@ -24,6 +24,9 @@ class Service(Base):
         self.location_id = 1
         self.locations = False
 
+    def get_description(self):
+        return "%r for %r minutes - $%r" % (self.name, self.length, self.cost)
+
     def __repr__(self):
         return '%r for $%r and a length of %r min)' % (self.name, self.cost, self.length)
 

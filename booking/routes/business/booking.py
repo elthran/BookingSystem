@@ -17,8 +17,11 @@ from datetime import datetime
 @app.route('/business/booking/<int:location_id>/', methods=['GET', 'POST'])
 @login_required
 def business_booking(location_id):
+    if len(current_user.business.services) == 0:
+        flash("You must create a service before you can book a client.", "error")
+        return redirect(url_for('add_service'))
     form = ManualBooking(request.form)
-    form.service.choices = [(service.id, service.name) for service in current_user.business.services]
+    form.service.choices = [(service.id, service.get_description()) for service in current_user.business.services]
     if form.validate_on_submit():
         date = datetime.now()
         # The following if tree is ugly. Please fix

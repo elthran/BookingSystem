@@ -8,9 +8,6 @@ from wtforms import StringField, SelectField
 # Import Form validators
 from wtforms.validators import DataRequired, Email
 
-# Import models
-from booking.models.businesses import Business
-
 
 # Define the create new appointment form (WTForms)
 
