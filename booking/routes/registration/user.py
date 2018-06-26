@@ -33,30 +33,3 @@ def register_user(business_id=1, business_referral=""):
         else:
             flash("User already exists with that email.", "error")
     return render_template("registration/user.html", form=form, owner=owner)
-
-
-
-    if Hours.query.first() is None:
-        default_hours = Hours()
-        db.session.add(default_hours)
-        db.session.commit()
-    user_shell = UserShell.query.filter_by(id=user_shell_id).first()
-    business_shell = BusinessShell.query.filter_by(id=business_shell_id).first()
-    business = Business(business_shell.name)
-    db.session.add(business)
-    db.session.commit()
-    business = Business.query.filter_by(id=business.id).first()
-    # Need to create a location object for the business. It uses the default hours.
-    first_location = Location(1, business.id)
-    db.session.add(first_location)
-    db.session.commit()
-    duplicate_user = User.query.filter_by(email=user_shell.email).first()
-    if duplicate_user is None:
-        user = User(user_shell.name, user_shell.email, user_shell.password, business.id, user_shell.is_owner)
-        db.session.add(user)
-        db.session.commit()
-        user = User.query.filter_by(id=user.id).first()
-        login_user(user)
-    else:
-        print("A user with that email already exists in the database!!!!", duplicate_user)
-    return redirect(url_for('business_calendar', year=2018, month=6, day=0))

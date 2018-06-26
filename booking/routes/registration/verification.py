@@ -8,9 +8,9 @@ from booking.models import User
 from booking.models.bases import db
 
 @app.route('/verify/user/')
-@app.route('/verify/user/<int:user_id>/<string:verification_link>/')
+@app.route('/verify/user/<int:id>/<string:verification_link>/')
 def verification(user_id=0, verification_link=""):
-    user = User.query.filter_by(id=user_id).first()
+    user = User.query.get(id)
     user.is_verified = True
     db.session.commit()
     flash("Account verified!")

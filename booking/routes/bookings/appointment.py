@@ -11,27 +11,27 @@ from booking.models.bases import db
 from datetime import datetime
 
 
-@app.route('/booking/appointment/<int:business_id>/', methods=['GET', 'POST'])
-def book_appointment(business_id):
-    business = Business.query.filter_by(id=business_id).first()
+@app.route('/booking/appointment/<int:id>/', methods=['GET', 'POST'])
+def book_appointment(id):
+    business = Business.query.get(id)
     # If sign in form is submitted
     form = CustomerBooking(request.form)
     form.service.choices = [(service.id, service.name) for service in business.services]
     # Verify the sign in form
     if form.validate_on_submit():
         date = datetime.now()
-        client = Client.query.filter_by(business_id=business_id).filter_by(email=form.email.data).first()
+        client = Client.query.filter_by(business_id=id).filter_by(email=form.email.data).first()
         print(client)
         if client:
             print("Client with that email address already exists", client)
             flash('Client with that email address already exists', 'notice')
         else:
-            client = Client(form.email.data, business_id, form.name.data, form.phone.data)
+            client = Client(form.email.data, id, form.name.data, form.phone.data)
             db.session.add(client)
             db.session.commit()
             print("New client being created", client)
             flash('New client being created', 'notice')
-        appointment = Appointment(business_id, client.id, form.service.data, date)
+        appointment = Appointment(id, client.id, form.service.data, date)
         db.session.add(appointment)
         db.session.commit()
         print(appointment)

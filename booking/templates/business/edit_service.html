@@ -1,14 +1,14 @@
 {% extends "business/layout.html" %}
 {% block content2 %}
-Add a new service to your business
+Editing {{ service.name }}
 <form method="POST" action="." accept-charset="UTF-8" role="form">
   <!-- LoginForm -->
   {{ form.csrf_token }}
-  {{ render_field(form.name, placeholder="Service Name", autofocus="") }}
-  {{ render_field(form.availability, placeholder="Availability (currently broken)") }}
-  {{ render_field(form.cost, placeholder="Cost in dollars") }}
-  {{ render_field(form.length, placeholder="Length in minutes") }}
-  Deposit Required: {{ render_field(form.deposit, placeholder="Deposit Required") }}
+  Name: {{ render_field(form.name, placeholder="Service Name", value=service.name, autofocus="") }}
+  Availability: {{ render_field(form.availability, placeholder="Availability (currently broken)", value=service.availability) }}
+  Cost: {{ render_field(form.cost, placeholder="Cost in dollars", value=service.cost) }}
+  Length: {{ render_field(form.length, placeholder="Length in minutes", value=service.length) }}
+  Deposit Required: {{ render_field(form.deposit, placeholder="Deposit Required", value=service.deposit) }}
   {% if current_user.is_owner %}
   Available at all locations (if not chosen, it will only be available at your {{ location.name }} location:
   *Note: This option is only available if you are the owner of the business*

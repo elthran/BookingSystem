@@ -20,4 +20,4 @@ def edit_service(id):
         db.session.add(service)
         db.session.commit()
         return redirect(url_for('business_service'))
-    return render_template("business/add_service.html", form=form, location=location)
+    return render_template("business/edit_service.html", form=form, location=location, service=Service.query.filter_by(business_id=current_user.business.id).filter_by(id=id).first())

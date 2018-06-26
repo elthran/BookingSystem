@@ -26,8 +26,9 @@ def business_booking(location_id):
         date = datetime.now()
         # The following if tree is ugly. Please fix
         # @klndikemarlen
+        client = None
         if form.anonymous.data:
-            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(id=1).first()
+            client = Client.query.filter_by(business_id=current_user.business.id).get(1)
         else:
             if form.email.data:
                 client = Client.query.filter_by(business_id=current_user.business.id).filter_by(email=form.email.data).first()

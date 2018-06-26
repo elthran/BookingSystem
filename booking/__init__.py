@@ -86,5 +86,5 @@ login_manager.login_view = "login"
 
 
 @login_manager.user_loader
-def load_user(user_id):
-    return User.query.filter_by(id=user_id).first()
+def load_user(id):
+    return User.query.get(id)
