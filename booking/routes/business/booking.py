@@ -43,7 +43,7 @@ def business_booking(location_id):
             client = Client(form.email.data, current_user.business.id, form.name.data, form.phone.data)
             db.session.add(client)
             db.session.commit()
-        appointment = Appointment(current_user.business.id, client.id, 30, date)
+        appointment = Appointment(current_user.business.id, client.id, form.service.data, date)
         db.session.add(appointment)
         db.session.commit()
         if client:

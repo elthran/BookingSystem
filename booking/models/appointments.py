@@ -11,10 +11,9 @@ class Appointment(Base):
 
     # The day and time of the appointment
     date = db.Column(db.DateTime, nullable=False)
-    end = db.Column(db.DateTime, nullable=False)
 
     # The length of the appointment in minutes
-    length = db.Column(db.SmallInteger, nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey('service.id'))
 
     # If the user has paid yet or not
     paid = db.Column(db.Boolean)
@@ -22,14 +21,16 @@ class Appointment(Base):
     # Name of practitioner, if chosen
     practitioner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self, business_id, client_id, length, date, practitioner_id=None):
+    def __init__(self, business_id, client_id, service_id, date, practitioner_id=None):
         self.business_id = business_id
         self.client_id = client_id
-        self.length = length
+        self.service_id = service_id
         self.date = date
-        self.end = date + timedelta(minutes = length)
         self.practitioner_id = practitioner_id
         self.paid = False
+
+    def get_end_time(self):
+        return (self.date + timedelta(minutes = self.service.length)).time()
 
     def __repr__(self):
         return '<Appointment (%r) is %r minutes long on %r/%r/%r at %r:%r>' % (

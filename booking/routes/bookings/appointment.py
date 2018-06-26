@@ -31,7 +31,7 @@ def book_appointment(business_id):
             db.session.commit()
             print("New client being created", client)
             flash('New client being created', 'notice')
-        appointment = Appointment(business_id, client.id, 30, date)
+        appointment = Appointment(business_id, client.id, form.service.data, date)
         db.session.add(appointment)
         db.session.commit()
         print(appointment)

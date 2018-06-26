@@ -10,6 +10,7 @@ class Service(Base):
     deposit = db.Column(db.Boolean) # If a deposit is needed to book this
     location_id = db.Column(db.Integer) # Which location this is available at
     locations = db.Column(db.Boolean) # If this is true, it's available at every location at your business
+    appointments = db.relationship('Appointment', backref='service')
 
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
     # Needs to connect to all locations this service is offered at

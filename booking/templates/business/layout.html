@@ -21,8 +21,8 @@
         <li style="font-weight:bold;">Today's Appointments:</li>
         <br>
         {% for appointment in current_user.business.get_todays_appointments() %}
-        <li style="font-weight:bold;">{{ appointment.date.time() }}</li>
-        <li style="margin-left:15px;">{{ appointment.client.name }}</li>
+        <li style="font-weight:bold;">{{ appointment.date.time() }}-{{ appointment.get_end_time() }}</li>
+        <li style="margin-left:15px;">{{ appointment.client.name }}{{ appointment.service }}</li>
         {% else %}
         <li style="font-weight:bold;">No appointments scheduled for today</li>
         {% endfor %}
