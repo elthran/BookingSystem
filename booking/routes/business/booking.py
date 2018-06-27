@@ -28,7 +28,7 @@ def business_booking(location_id):
         # @klndikemarlen
         client = None
         if form.anonymous.data:
-            client = Client.query.filter_by(business_id=current_user.business.id).get(1)
+            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(email="anonymous@hidden.com").first()
         else:
             if form.email.data:
                 client = Client.query.filter_by(business_id=current_user.business.id).filter_by(email=form.email.data).first()

@@ -13,10 +13,10 @@ from booking.models.bases import db
 
 
 @app.route('/business/edit_client/', methods=['GET', 'POST'])
-@app.route('/business/edit_client/<int:id>/', methods=['GET', 'POST'])
+@app.route('/business/edit_client/<int:client_id>/', methods=['GET', 'POST'])
 @login_required
-def edit_client(id):
-    client = Client.query.filter_by(business_id=current_user.business.id).filter_by(id=id).first()
+def edit_client(client_id):
+    client = Client.query.get(client_id)
     form = EditClientForm(request.form)
     if form.validate_on_submit():
         client.name = form.name.data

@@ -1,7 +1,7 @@
 {% extends "business/layout.html" %}
 {% block content2 %}
 {% if current_user.is_authenticated and current_user.is_owner %}
-<a href="{{ url_for('edit_client', id=client.id) }}">Edit client</a>
+<a class="edit-button" href="{{ url_for('edit_client', client_id=client.id) }}">Edit Client</a>
 {% endif %}
 <ul>
     <li>Name: {{ client.name }}</li>
@@ -9,7 +9,12 @@
     <li>Phone Number: {{ client.phone }}</li>
     <li>Contact Method: {{ client.contact_method }}</li>
     <li>Number of Appointments: {{ client.appointments|length }}</li>
-    <li>List of Appointments: {{ client.appointments }}</li>
+    <li>List of Appointments:
+        <ul>
+            {% for appointment in client.appointments %}
+            <li>{{ appointment }} - {{ appointment.service }}</li>
+            {% endfor %}
+        </ul>
     <li>Client ID: {{ client.id }}</li>
     {% for upload in client_uploads %}
     <li>Consent Form: <img src="{{ upload }}" style="border:dotted;" /></li>

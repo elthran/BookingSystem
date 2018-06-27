@@ -43,13 +43,14 @@
         {% else %}
             <li>
         {% endif %}
-        <a href="{{ url_for('business_calendar', location_id=location.id, year=2018, month=6, day=20) }}">{{ location.name }}</a></li>
+        <a href="{{ url_for('business_calendar', location_id=location.id, year=2018, month=6, day=20) }}">{{ location.name }}</a>
+        {% if current_user.is_owner %}
+        <a class="edit-button" href="{{ url_for('edit_location', location_id=location.id) }}">Edit</a>
+        {% endif %}
+    </li>
         {% else %}
         None
         {% endfor %}
-        {% if current_user.is_owner %}
-        <button>Edit Locations</button>
-        {% endif %}
     </ul>
 </div>
 

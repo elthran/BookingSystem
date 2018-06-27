@@ -14,4 +14,12 @@ Manually book an appointment
     <br><br><button type="submit">Book appointment</button>
 </form>
 
+<script type="text/javascript">
+    document.getElementById('anonymous').onchange = function() {
+        document.getElementById('name').disabled = !!this.checked;
+        document.getElementById('email').disabled = !!this.checked;
+        document.getElementById('phone').disabled = !!this.checked;
+    };
+</script>
+
 {% endblock %}

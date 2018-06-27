@@ -8,7 +8,7 @@
     your account*</h1>
 {% endif %}
 
-<div style="border:dotted;width:300px;height:auto;margin-top:35px;float:left;margin-right:50px;">
+<div style="border:dotted;width:300px;min-height:300px;margin-top:35px;float:left;margin-right:50px;">
     <ul>
         <li><a href="{{ url_for('business_calendar') }}">Calendar</a></li>
         <li><a href="{{ url_for('clients', business_id=current_user.business.id) }}">Clients</a></li>
@@ -27,7 +27,7 @@
         <li style="font-weight:bold;">{{ appointment.date.time() }}-{{ appointment.get_end_time() }}</li>
         <li style="margin-left:15px;">
             {{ appointment.service }}
-            {% if appointment.client.id != 1 %}
+            {% if appointment.client.email != "anonymous@hidden.com" %}
             for
             <a href="{{ url_for('edit_client', client_id=appointment.client.id) }}">
                 {{ appointment.client.name }}

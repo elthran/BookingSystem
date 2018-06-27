@@ -14,3 +14,29 @@
 .flash-notice {      /* Flash notice-messages */
     color: blue;
 }
+
+.edit-button {
+    background-color: lightgray; /* Green */
+    border: none;
+    color: black;
+    padding: 2px 5px;
+    text-align: center;
+    text-decoration: none;
+    border: solid;
+    border-color: gray;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.submit-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    border: solid;
+    border-color: black;
+    display: inline-block;
+    font-size: 16px;
+}

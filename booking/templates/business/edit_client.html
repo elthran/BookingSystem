@@ -8,8 +8,6 @@
     <li>Email: {{ render_field(form.email, value=client.email, placeholder="Email Address") }}</li>
     <li>Phone Number: {{ render_field(form.phone, value=client.phone, placeholder="Phone Number") }}</li>
     <li>Contact Method: {{ client.contact_method }}</li>
-    <li>Number of Appointments: {{ client.appointments|length }}</li>
-    <li>List of Appointments: {{ client.appointments }}</li>
     <li>Client ID: {{ client.id }}</li>
     {% for upload in client_uploads %}
     <li>Consent Form: <img src="{{ upload }}" style="border:dotted;" /></li>

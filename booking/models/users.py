@@ -11,6 +11,8 @@ class User(Base):
     phone = db.Column(db.Integer)
     # Business associated with the user
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
+    # Location default for user
+    location_id = db.Column(db.Integer)
     # Appointments associated with the user
     appointments = db.relationship('Appointment', backref='user')
     # Used for login_manager
@@ -35,6 +37,7 @@ class User(Base):
         self.is_active = True
         self.is_anonymous = False
         self.is_verified = False
+        self.location_id = 1
 
     def __repr__(self):
         return '<User %r (%r)>' % (self.email, self.id)

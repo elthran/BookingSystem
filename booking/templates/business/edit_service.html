@@ -10,11 +10,10 @@ Editing {{ service.name }}
   Length: {{ render_field(form.length, placeholder="Length in minutes", value=service.length) }}
   Deposit Required: {{ render_field(form.deposit, placeholder="Deposit Required", value=service.deposit) }}
   {% if current_user.is_owner %}
-  Available at all locations (if not chosen, it will only be available at your {{ location.name }} location:
-  *Note: This option is only available if you are the owner of the business*
+  Available at all locations (if not chosen, it will only be available at your {{ location.name }} location):
   {{ render_field(form.locations, placeholder="Locations") }}
   {% endif %}
-  <br><br><button type="submit" name="submit">Submit</button>
+  <br><button type="submit" name="submit" >Submit</button>
 </form>
 <br>
 <a href="{{ url_for('business_service') }}">Return</a> to services list.

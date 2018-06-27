@@ -46,6 +46,9 @@ class Business(Base):
         # Automatically sorts them so that admins are displayed first
         return [user for user in self.users if user.is_owner] + [user for user in self.users if not user.is_owner]
 
+    def get_clients(self):
+        return [client for client in self.clients if client.email != "anonymous@hidden.com"]
+
     def get_todays_appointments(self):
         """
         Checks the date of each appointment (ignoring the time) and checks if it's today's date. Might bug out if the user is in a different timezone?
