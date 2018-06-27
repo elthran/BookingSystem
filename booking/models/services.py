@@ -1,5 +1,6 @@
 from booking.models.bases import Base, db
 from datetime import datetime
+from booking.models.formats import format_as_currency
 
 
 class Service(Base):
@@ -26,8 +27,10 @@ class Service(Base):
         self.locations = False
 
     def get_description(self):
-        return "%r for %r minutes - $%r" % (self.name, self.length, self.cost)
+        cost = format_as_currency(self.cost)
+        return "%{} for %{} minutes - ${}".format(self.name, self.length, cost)
 
     def __repr__(self):
-        return '%r for $%r and a length of %r min' % (self.name, self.cost, self.length)
+        cost = format_as_currency(self.cost)
+        return '{} for ${} and a length of {} min'.format(self.name, cost, self.length)
 

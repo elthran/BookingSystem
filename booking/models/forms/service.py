@@ -8,6 +8,7 @@ from wtforms import StringField, BooleanField, DecimalField, IntegerField
 from wtforms.validators import DataRequired
 
 from booking.models.forms.validators import check_currency_format
+from booking.models.forms.widgets import CurrencyInput
 
 
 # Define the create new user form (WTForms)
@@ -16,7 +17,7 @@ class ServiceForm(FlaskForm):
                        [DataRequired(message='You must enter a name.')])
     availability = StringField('Availability',
                        [DataRequired(message='You must enter an availability')])
-    cost = DecimalField('Cost', validators=[DataRequired(message='You must enter a cost as a decimal.'), check_currency_format])
+    cost = DecimalField('Cost', widget=CurrencyInput(), validators=[DataRequired(message='You must enter a cost as a decimal.'), check_currency_format])
     length = IntegerField('Length',
                        [DataRequired(message='You must enter a length as an integer.')])
     deposit = BooleanField('Deposit')
