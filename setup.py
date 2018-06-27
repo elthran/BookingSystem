@@ -5,6 +5,13 @@ setup(
     packages=['booking'],
     include_package_data=True,
     install_requires=[
-        'flask', 'flask-sqlalchemy', 'flask-wtf', 'flask-login', 'werkzeug', 'wtforms', 'Pillow'
+        'flask',
+        'flask-sqlalchemy',
+        'flask-wtf',
+        'flask-login',
+        'werkzeug',
+        'wtforms',
+        'Pillow',
+        'pandas', 'fuzzywuzzy'
     ],
 )
