@@ -28,3 +28,15 @@ class EditClientForm(FlaskForm):
 
 class ClientSearchForm(FlaskForm):
     keywords = StringField("Search Terms")
+
+    def get_as_data_dict(self):
+        kw = self.keywords.data.split()
+        # print("keywords:", kw)
+        data = {"name": [], "email": [], "phone": []}
+        # Should do some kind of sensible sorting at some point.
+        for k in kw:
+            data['name'].append(k)
+            data['email'].append(k)
+            data['phone'].append(k)
+        # print("keyword matrix:", data)
+        return data
