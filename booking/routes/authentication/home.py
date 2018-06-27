@@ -7,6 +7,7 @@ from flask_login import current_user
 from booking.models.users import User
 from booking.models.businesses import Business
 from booking.models.hours import Hours
+from booking.models.availabilities import Availability
 # Import database
 from booking.models.bases import db
 

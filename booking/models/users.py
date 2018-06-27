@@ -15,6 +15,8 @@ class User(Base):
     location_id = db.Column(db.Integer)
     # Appointments associated with the user
     appointments = db.relationship('Appointment', backref='user')
+    # Availabilities that the employee has
+    availabilities = db.relationship('Availability', backref='user')
     # Used for login_manager
     is_authenticated = db.Column(db.Boolean)  # They have filled in all required fields
     is_active = db.Column(db.Boolean)  # Account activated and not currently suspended
@@ -68,3 +70,6 @@ class User(Base):
         if link == (str(self.id) + "-" + self.name):
             return True
         return False
+
+    def get_availability_by_day(self, day):
+        return [availability for availability in self.availabilities if availability.day == day]

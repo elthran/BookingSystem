@@ -1,0 +1,14 @@
+{% extends "business/layout.html" %}
+{% block content2 %}
+
+Set your business' availability
+<form method="POST" action="." accept-charset="UTF-8" role="form">
+  <!-- LoginForm -->
+  {{ form.csrf_token }}
+  Monday from {{ render_field(form.monday_start, autofocus="") }} to {{ render_field(form.monday_end) }}
+  Tuesday from {{ render_field(form.tuesday_start) }} to {{ render_field(form.tuesday_end) }}
+<br><button type="submit" name="submit">Submit</button>
+</form>
+<br>
+<a href="{{ url_for('business_service') }}">Return</a> to services list.
+{% endblock %}
