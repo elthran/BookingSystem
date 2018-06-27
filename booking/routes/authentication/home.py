@@ -23,8 +23,11 @@ def setup_account():
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if Business.query.all() == []:
-        business1 = Business("Temp")
+        business1 = Business("Temporary")
         db.session.add(business1)
+        db.session.commit()
+        user = User("Mr. Brunner", "admin@admin.com", "admin", business1.id, True)
+        db.session.add(user)
         db.session.commit()
     if Hours.query.all() == []:
         hours1 = Hours()
