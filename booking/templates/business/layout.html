@@ -16,6 +16,7 @@
         <li><a href="{{ url_for('business_booking', location_id=location_id) }}">Book New Appointment</a></li>
         <li><a href="{{ url_for('business_payment') }}">Request Payment</a></li>
         <li><a href="{{ url_for('business_service') }}">Services</a></li>
+        <li><a href="{{ url_for('edit_store_hours') }}">Edit Store Hours</a></li>
     </ul>
     <br>
     <ul style="border:solid;border-color:blue;">
@@ -39,6 +40,15 @@
             No appointments scheduled for today
         </li>
         {% endfor %}
+        <br>
+        <li style="font-weight:bold;">Your store's current opening hours:</li>
+        <ul>
+        {% for hour in current_user.location.hours %}
+        <li>
+            {{ hour.display(loop.index, hour.closed) }}
+        </li>
+        {% endfor %}
+        </ul>
     </ul>
 </div>
 
