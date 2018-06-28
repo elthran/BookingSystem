@@ -12,6 +12,8 @@ setup(
         'werkzeug',
         'wtforms',
         'Pillow',
-        'pandas', 'fuzzywuzzy'
+        'pandas',
+        'fuzzywuzzy',
+        'python-Levenshtein',
     ],
 )
