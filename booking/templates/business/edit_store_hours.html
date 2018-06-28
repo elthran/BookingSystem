@@ -5,7 +5,9 @@ Set your business' availability
 <form method="POST" action="." accept-charset="UTF-8" role="form">
   <!-- LoginForm -->
   {{ form.csrf_token }}
+  Closed Monday: {{ render_field(form.monday_closed) }}
   Monday from {{ render_field(form.monday_start, autofocus="") }} to {{ render_field(form.monday_end) }}
+  Closed Tuesday: {{ render_field(form.tuesday_closed) }}
   Tuesday from {{ render_field(form.tuesday_start) }} to {{ render_field(form.tuesday_end) }}
 <br><button type="submit" name="submit">Submit</button>
 </form>

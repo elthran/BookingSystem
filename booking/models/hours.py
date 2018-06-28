@@ -12,11 +12,14 @@ class Hour(Base):
     start = db.Column(db.Integer)  # What hour your availability starts
     length = db.Column(db.Integer)  # How many minutes you are available for
 
-    def __init__(self, location_id, day, start_time, length):
+    closed = db.Column(db.Boolean) # If your store is closed that day
+
+    def __init__(self, location_id, day, start_time, length, closed=False):
         self.location_id = location_id
         self.day = day
         self.start = start_time
         self.length = length
+        self.closed = closed
 
     @property
     def end(self):

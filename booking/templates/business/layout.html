@@ -44,7 +44,11 @@
         <li style="font-weight:bold;">Your store's current opening hours:</li>
         <ul>
         {% for hour in current_user.location.hours %}
-        <li>{{ hour.display(loop.index) }}</li>
+        <li>
+            {% if hour.closed %}Closed
+            {% else %}{{ hour.display(loop.index) }}
+            {% endif %}
+        </li>
         {% endfor %}
         </ul>
     </ul>

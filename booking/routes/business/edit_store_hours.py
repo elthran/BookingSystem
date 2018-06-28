@@ -14,8 +14,10 @@ from booking.models.bases import db
 @app.route('/business/edit_store_hours/', methods=['GET', 'POST'])
 def edit_store_hours():
     location = Location.query.get(current_user.location_id)
-    print(location.hours)
     if location.hours:
+        """
+        This returns the first in the list for each day because there could be multiple times in one day. This obviously needs to be improved.
+        """
         monday_start = location.get_hours_by_day(1)[0].start
         monday_end = location.get_hours_by_day(1)[0].end
         tuesday_start = location.get_hours_by_day(2)[0].start
@@ -33,7 +35,9 @@ def edit_store_hours():
     form.tuesday_start.choices = [(i, str(i) + ":00") for i in range(1, 13)]
     form.tuesday_end.choices = [(i, str(i) + ":00") for i in range(1, 13)]
     if form.validate_on_submit():
+        monday_closed = form.monday_closed.data
         monday_length = form.monday_end.data - form.monday_start.data
+        tuesday_closed = form.tuesday_closed.data
         tuesday_length = form.tuesday_end.data - form.tuesday_start.data
         if monday_length <= 0 or tuesday_length <= 0:
             flash("Can't add a negative time", "error")
@@ -42,10 +46,10 @@ def edit_store_hours():
         for hour in hours:
             db.session.delete(hour)
         print(location.hours)
-        hour = Hour(location.id, 1, form.monday_start.data, monday_length)
+        hour = Hour(location.id, 1, form.monday_start.data, monday_length, monday_closed)
         db.session.add(hour)
         db.session.commit()
-        hour = Hour(location.id, 2, form.tuesday_start.data, tuesday_length)
+        hour = Hour(location.id, 2, form.tuesday_start.data, tuesday_length, tuesday_closed)
         db.session.add(hour)
         db.session.commit()
         flash("Hours updated", "notice")
