@@ -6,11 +6,31 @@ Set your business' availability
   <!-- LoginForm -->
   {{ form.csrf_token }}
   Closed Monday: {{ render_field(form.monday_closed) }}
-  Monday from {{ render_field(form.monday_start, autofocus="") }} to {{ render_field(form.monday_end) }}
+  {% if monday_closed %}
+    Monday from {{ render_field(form.monday_start, autofocus="", disabled=True) }} to {{ render_field(form.monday_end, disabled=True) }}
+  {% else %}
+    Monday from {{ render_field(form.monday_start, autofocus="") }} to {{ render_field(form.monday_end) }}
+  {% endif %}
   Closed Tuesday: {{ render_field(form.tuesday_closed) }}
-  Tuesday from {{ render_field(form.tuesday_start) }} to {{ render_field(form.tuesday_end) }}
+  {% if tuesday_closed %}
+    Monday from {{ render_field(form.tuesday_start, autofocus="", disabled=True) }} to {{ render_field(form.tuesday_end, disabled=True) }}
+  {% else %}
+    Monday from {{ render_field(form.tuesday_start, autofocus="") }} to {{ render_field(form.tuesday_end) }}
+  {% endif %}
 <br><button type="submit" name="submit">Submit</button>
 </form>
 <br>
 <a href="{{ url_for('business_service') }}">Return</a> to services list.
+
+<script type="text/javascript">
+    document.getElementById('monday_closed').onchange = function() {
+        document.getElementById('monday_start').disabled = !!this.checked;
+        document.getElementById('monday_end').disabled = !!this.checked;
+    };
+    document.getElementById('tuesday_closed').onchange = function() {
+        document.getElementById('tuesday_start').disabled = !!this.checked;
+        document.getElementById('tuesday_end').disabled = !!this.checked;
+    };
+</script>
+
 {% endblock %}

@@ -45,9 +45,7 @@
         <ul>
         {% for hour in current_user.location.hours %}
         <li>
-            {% if hour.closed %}Closed
-            {% else %}{{ hour.display(loop.index) }}
-            {% endif %}
+            {{ hour.display(loop.index, hour.closed) }}
         </li>
         {% endfor %}
         </ul>

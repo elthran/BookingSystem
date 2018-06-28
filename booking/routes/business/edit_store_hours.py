@@ -18,18 +18,25 @@ def edit_store_hours():
         """
         This returns the first in the list for each day because there could be multiple times in one day. This obviously needs to be improved.
         """
-        monday_start = location.get_hours_by_day(1)[0].start
-        monday_end = location.get_hours_by_day(1)[0].end
-        tuesday_start = location.get_hours_by_day(2)[0].start
-        tuesday_end = location.get_hours_by_day(2)[0].end
+        for hour in location.hours:
+            if hour.day == 1:
+                monday_closed = hour.closed
+                monday_start = hour.start
+                monday_end = hour.end
+            elif hour.day == 2:
+                tuesday_closed = hour.closed
+                tuesday_start = hour.start
+                tuesday_end = hour.end
     else:
         monday_start = 1
         monday_end = 12
+        monday_closed = False
         tuesday_start = 1
         tuesday_end = 12
+        tuesday_closed = False
     form = AvailabilityForm(request.form,
-                            monday_start=monday_start, monday_end=monday_end,
-                            tuesday_start=tuesday_start, tuesday_end=tuesday_end)
+                            monday_closed=monday_closed, monday_start=monday_start, monday_end=monday_end,
+                            tuesday_closed=tuesday_closed, tuesday_start=tuesday_start, tuesday_end=tuesday_end)
     form.monday_start.choices = [(i, str(i)+":00") for i in range(1,13)]
     form.monday_end.choices = [(i, str(i)+":00") for i in range(1,13)]
     form.tuesday_start.choices = [(i, str(i) + ":00") for i in range(1, 13)]
@@ -54,4 +61,5 @@ def edit_store_hours():
         db.session.commit()
         flash("Hours updated", "notice")
         return redirect(url_for('edit_store_hours'))
-    return render_template("business/edit_store_hours.html", form=form)
+    return render_template("business/edit_store_hours.html", form=form,
+                           monday_closed=monday_closed, tuesday_closed=tuesday_closed)
