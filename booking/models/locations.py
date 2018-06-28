@@ -31,5 +31,8 @@ class Location(Base):
         self.timezone = None
         self.postalcode = None
 
+    def get_hours_by_day(self, day):
+        return [hour for hour in self.hours if hour.day == day]
+
     def __repr__(self):
         return '<Location (%r)>' % (self.id)

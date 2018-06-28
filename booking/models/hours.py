@@ -22,5 +22,9 @@ class Hour(Base):
     def end(self):
         return self.start + self.length
 
+    def display(self, day):
+        days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        return '%r %r:00-%r:00' % (days[day], self.start, self.end)
+
     def __repr__(self):
-        return '<Business Hours: %r:00-%r:00 (%r)>' % (self.monday_open, self.monday_close, self.id)
+        return '%r:00-%r:00' % (self.start, self.end)

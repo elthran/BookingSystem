@@ -1,6 +1,7 @@
 from booking.models.bases import Base, db
 from werkzeug import generate_password_hash, check_password_hash
 from flask import url_for
+from booking.models.locations import Location
 
 
 class User(Base):
@@ -73,3 +74,8 @@ class User(Base):
 
     def get_availability_by_day(self, day):
         return [availability for availability in self.availabilities if availability.day == day]
+
+    @property
+    def location(self):
+        return Location.query.get(self.location_id)
+    # I want a @property location that returns the location object of the user?

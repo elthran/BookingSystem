@@ -6,17 +6,20 @@ from flask import redirect, url_for, render_template, request, flash
 from flask_login import current_user
 # Import models
 from booking.models.forms.availability import AvailabilityForm
-from booking.models.availabilities import Availability
+from booking.models.hours import Hour
+from booking.models.locations import Location
 # Import database
 from booking.models.bases import db
 
 @app.route('/business/edit_store_hours/', methods=['GET', 'POST'])
 def edit_store_hours():
-    if current_user.availabilities:
-        monday_start = current_user.get_availability_by_day(1)[0].start
-        monday_end = current_user.get_availability_by_day(1)[0].end
-        tuesday_start = current_user.get_availability_by_day(2)[0].start
-        tuesday_end = current_user.get_availability_by_day(2)[0].end
+    location = Location.query.get(current_user.location_id)
+    print(location.hours)
+    if location.hours:
+        monday_start = location.get_hours_by_day(1)[0].start
+        monday_end = location.get_hours_by_day(1)[0].end
+        tuesday_start = location.get_hours_by_day(2)[0].start
+        tuesday_end = location.get_hours_by_day(2)[0].end
     else:
         monday_start = 1
         monday_end = 12
@@ -34,20 +37,17 @@ def edit_store_hours():
         tuesday_length = form.tuesday_end.data - form.tuesday_start.data
         if monday_length <= 0 or tuesday_length <= 0:
             flash("Can't add a negative time", "error")
-            return redirect(url_for('edit_availability'))
-        availabilities = Availability.query.filter_by(user_id=current_user.id).all()
-        for availability in availabilities:
-            db.session.delete(availability)
-        print(current_user.location_id)
-        availability = Availability(1, current_user.id, 1, form.monday_start.data, monday_length)
-        print("o")
-        db.session.add(availability)
-        print(availability)
+            return redirect(url_for('edit_store_hours'))
+        hours = Hour.query.filter_by(location_id=location.id).all()
+        for hour in hours:
+            db.session.delete(hour)
+        print(location.hours)
+        hour = Hour(location.id, 1, form.monday_start.data, monday_length)
+        db.session.add(hour)
         db.session.commit()
-        print("oko")
-        availability = Availability(1, current_user.id, 2, form.tuesday_start.data, tuesday_length)
-        db.session.add(availability)
+        hour = Hour(location.id, 2, form.tuesday_start.data, tuesday_length)
+        db.session.add(hour)
         db.session.commit()
-        flash("Availability added", "notice")
+        flash("Hours updated", "notice")
         return redirect(url_for('edit_store_hours'))
     return render_template("business/edit_store_hours.html", form=form)
