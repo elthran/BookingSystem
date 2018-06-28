@@ -10,8 +10,8 @@ from booking.models.availabilities import Availability
 # Import database
 from booking.models.bases import db
 
-@app.route('/business/edit_availability/', methods=['GET', 'POST'])
-def edit_availability():
+@app.route('/business/edit_store_hours/', methods=['GET', 'POST'])
+def edit_store_hours():
     if current_user.availabilities:
         monday_start = current_user.get_availability_by_day(1)[0].start
         monday_end = current_user.get_availability_by_day(1)[0].end
@@ -49,5 +49,5 @@ def edit_availability():
         db.session.add(availability)
         db.session.commit()
         flash("Availability added", "notice")
-        return redirect(url_for('edit_availability'))
-    return render_template("business/edit_availability.html", form=form)
+        return redirect(url_for('edit_store_hours'))
+    return render_template("business/edit_store_hours.html", form=form)
