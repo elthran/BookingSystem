@@ -13,7 +13,7 @@ class User(Base):
     # Business associated with the user
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
     # Location default for user
-    location_id = db.Column(db.Integer)
+    location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     # Appointments associated with the user
     appointments = db.relationship('Appointment', backref='user')
     # Availabilities that the employee has

@@ -5,7 +5,7 @@ from flask import redirect, url_for, render_template, request, flash
 # Import session handling
 from flask_login import current_user
 # Import models
-from booking.models.forms.availability import AvailabilityForm
+from booking.models.forms.hour import HourForm
 from booking.models.hours import Hour
 from booking.models.locations import Location
 # Import database
@@ -34,7 +34,7 @@ def edit_store_hours():
         tuesday_start = 1
         tuesday_end = 12
         tuesday_closed = False
-    form = AvailabilityForm(request.form,
+    form = HourForm(request.form,
                             monday_closed=monday_closed, monday_start=monday_start, monday_end=monday_end,
                             tuesday_closed=tuesday_closed, tuesday_start=tuesday_start, tuesday_end=tuesday_end)
     form.monday_start.choices = [(i, str(i)+":00") for i in range(1,13)]

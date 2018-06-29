@@ -1,0 +1,24 @@
+{% extends "business/layout.html" %}
+{% block content2 %}
+
+{% for user in current_user.location.users %}
+{{ user.name }}
+<ul>
+  Available at:
+  {% for availability in user.availabilities %}
+  <li>{{ availability }} <a href="{{ url_for('delete_employee_availability', availability_id=availability.id) }}">(delete)</a></li>
+  {% else %}
+  No availability set
+  {% endfor %}
+</ul>
+<br>
+<form method="POST" action="." accept-charset="UTF-8" role="form">
+  <!-- LoginForm -->
+  {{ form.csrf_token }}
+  Day: {{ render_field(form.day) }}
+  Time {{ render_field(form.start, autofocus="") }} to {{ render_field(form.end) }}
+<br><button type="submit" name="submit">Submit</button>
+</form>
+{% endfor %}
+
+{% endblock %}

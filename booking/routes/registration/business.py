@@ -22,7 +22,7 @@ def register_business():
         db.session.commit()
         if form.location.data == None:
             form.location.data = business.name
-        location = Location(1, business.id, form.location.data, form.address.data, form.town.data)
+        location = Location(business.id, form.location.data, form.address.data, form.town.data)
         db.session.add(location)
         db.session.commit()
         client = Client("anonymous@hidden.com", business.id, "Anonymous")

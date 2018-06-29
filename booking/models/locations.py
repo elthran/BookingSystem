@@ -6,6 +6,8 @@ class Location(Base):
 
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
 
+    users = db.relationship('User', backref='location')
+
     # Availabilities that the location has. This is tied to an employee
     availabilities = db.relationship('Availability', backref='location')
     # The opening hours of the location
