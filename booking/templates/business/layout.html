@@ -3,7 +3,7 @@
 
 {% set location_id = 1 %}
 
-{% if not current_user.is_verified %}
+{% if not current_user.is_anonymous and not current_user.is_verified %}
 <h1>*Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify
     your account*</h1>
 {% endif %}

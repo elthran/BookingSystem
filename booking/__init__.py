@@ -63,7 +63,6 @@ import booking.routes.business.calendar
 import booking.routes.business.client_profile
 import booking.routes.business.clients
 import booking.routes.business.delete_employee_availability
-import booking.routes.business.edit_availability
 import booking.routes.business.edit_employee_availability
 import booking.routes.business.edit_store_hours
 import booking.routes.business.edit_location

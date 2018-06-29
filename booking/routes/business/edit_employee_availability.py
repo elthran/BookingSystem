@@ -10,19 +10,27 @@ from booking.models.availabilities import Availability
 # Import database
 from booking.models.bases import db
 
+from datetime import time
+
 @app.route('/business/edit_employee_availability/', methods=['GET', 'POST'])
 def edit_employee_availability():
     form = AvailabilityForm(request.form)
     days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    if current_user.availabilities:
+        print(current_user.availabilities)
+        hour = current_user.sorted_availabilities()[-1].end.hour
+    else:
+        hour = 0
+    hours = [i for i in range(hour,24)]
     form.day.choices = [(i, days[i]) for i in range(1, 8)]
-    form.start.choices = [(i, str(i)+":00") for i in range(1,13)]
-    form.end.choices = [(i, str(i)+":00") for i in range(1,13)]
+    form.start.choices = [(i, str(i)+":00") for i in hours]
+    form.end.choices = [(i, str(i)+":00") for i in hours[1:]]
     if form.validate_on_submit():
-        length = form.end.data - form.start.data
+        length = (form.end.data - form.start.data) * 60 # Finds how many minutes it is open for
         if length <= 0:
             flash("Can't add a negative time", "error")
             return redirect(url_for('edit_employee_availability'))
-        availability = Availability(current_user.location.id, current_user.id, form.day.data, form.start.data, length)
+        availability = Availability(current_user.location.id, current_user.id, form.day.data, form.start.data, 0, length)
         db.session.add(availability)
         db.session.commit()
         flash("Availability updated", "notice")

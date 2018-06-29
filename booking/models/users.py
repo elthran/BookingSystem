@@ -78,4 +78,11 @@ class User(Base):
     @property
     def location(self):
         return Location.query.get(self.location_id)
-    # I want a @property location that returns the location object of the user?
+
+    def sorted_availabilities(self):
+        """
+        Returns availabilities sorted first by day, then by start time
+        """
+        return sorted(self.availabilities, key=lambda x: (x.day, x.start))
+
+

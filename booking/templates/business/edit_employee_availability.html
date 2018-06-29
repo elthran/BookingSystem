@@ -5,11 +5,13 @@
 {{ user.name }}
 <ul>
   Available at:
-  {% for availability in user.availabilities %}
+  {% for availability in user.sorted_availabilities() %}
   <li>{{ availability }} <a href="{{ url_for('delete_employee_availability', availability_id=availability.id) }}">(delete)</a></li>
+  testing {{ availability.time }}
   {% else %}
   No availability set
   {% endfor %}
+  <li><a href="{{ url_for('delete_employee_availability', availability_id=0) }}">(delete ALL availabilities for {{ user.name }})</a></li>
 </ul>
 <br>
 <form method="POST" action="." accept-charset="UTF-8" role="form">

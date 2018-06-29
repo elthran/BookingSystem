@@ -1,5 +1,5 @@
 from booking.models.bases import Base, db
-
+from datetime import time
 
 class Availability(Base):
     """
@@ -9,20 +9,26 @@ class Availability(Base):
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     day = db.Column(db.Integer) # Which day of the week
-    start = db.Column(db.Integer) # What hour your availability starts
+    start = db.Column(db.Time, nullable=False) # What time your availability starts
     length = db.Column(db.Integer) # How many minutes you are available for
 
-    def __init__(self, location_id, user_id, day, start_time, length):
+    def __init__(self, location_id, user_id, day, hour, minute, length):
         self.location_id = location_id
         self.user_id = user_id
         self.day = day
-        self.start = start_time
+        self.start = time(hour,minute,0)
         self.length = length
 
     @property
     def end(self):
-        return self.start + self.length
+        """
+        Returns a new time using the starting time but increasing the minutes by the session length
+        """
+        hours = self.length // 60
+        minutes = self.length % 60
+        return time(self.start.hour + hours, self.start.minute + minutes)
 
     def __repr__(self):
         days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-        return '<(%r) %r:00-%r:00>' % (days[self.day], self.start, self.start + self.length)
+        print(self.start, self.end)
+        return '(%r) %r-%r' % (days[self.day], self.start.strftime("%H:%M %Z"), self.end.strftime("%H:%M %Z"))

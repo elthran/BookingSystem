@@ -12,8 +12,12 @@ from booking.models.bases import db
 
 @app.route('/business/delete_employee_availability/<int:availability_id>', methods=['GET', 'POST'])
 def delete_employee_availability(availability_id):
-    availability = Availability.query.get(availability_id)
-    db.session.delete(availability)
-    db.session.commit()
+    if availability_id == 0:
+        # delte all availabilities for this user
+        pass
+    else:
+        availability = Availability.query.get(availability_id)
+        db.session.delete(availability)
+        db.session.commit()
     flash("Availability deleted", "notice")
     return redirect(url_for('edit_employee_availability'))
