@@ -79,10 +79,14 @@ class User(Base):
     def location(self):
         return Location.query.get(self.location_id)
 
-    def sorted_availabilities(self):
+    def sorted_availabilities(self, day=None):
         """
-        Returns availabilities sorted first by day, then by start time
+        Returns availabilities sorted first by day, then by start time. You can pass in one specific day to check.
         """
-        return sorted(self.availabilities, key=lambda x: (x.day, x.start))
+        if day is not None:
+            availabilities = [availability for availability in self.availabilities if availability.day == day]
+        else:
+            availabilities = self.availabilities
+        return sorted(availabilities, key=lambda x: (x.day, x.start))
 
 

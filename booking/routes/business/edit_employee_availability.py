@@ -16,9 +16,8 @@ from datetime import time
 def edit_employee_availability():
     form = AvailabilityForm(request.form)
     days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    if current_user.availabilities:
-        print(current_user.availabilities)
-        hour = current_user.sorted_availabilities()[-1].end.hour
+    if current_user.sorted_availabilities(1):
+        hour = current_user.sorted_availabilities(1)[-1].end.hour
     else:
         hour = 0
     hours = [i for i in range(hour,24)]
