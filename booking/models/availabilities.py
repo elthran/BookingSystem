@@ -30,5 +30,4 @@ class Availability(Base):
 
     def __repr__(self):
         days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-        print(self.start, self.end)
         return '(%r) %r-%r' % (days[self.day], self.start.strftime("%H:%M %Z"), self.end.strftime("%H:%M %Z"))

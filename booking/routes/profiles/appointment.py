@@ -12,5 +12,4 @@ from booking.models.appointments import Appointment
 @app.route('/profile/appointment/<int:business_id>/<int:appointment_id>/')
 def appointment_profile(business_id, appointment_id):
     appointment = Appointment.query.filter_by(business_id=business_id).get(appointment_id)
-    print(appointment)
     return render_template("profiles/appointment.html", appointment=appointment)

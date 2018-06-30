@@ -25,7 +25,6 @@ def register_user(business_id=1, business_referral=""):
             db.session.add(user)
             db.session.commit()
             login_user(user)
-            print(user.id, user.business.id)
             if owner:
                 return redirect(url_for('register_business'))
             else:

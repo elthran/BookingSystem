@@ -19,14 +19,12 @@ def client_profile(business_id, client_id):
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            print('No file part')
             flash("No file chosen.", "error")
             return redirect(request.url)
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            print('No selected file')
             flash("Browser can't find file.", "error")
             return redirect(request.url)
         if file and allowed_file(file.filename):

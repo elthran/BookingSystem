@@ -52,7 +52,6 @@ def edit_store_hours():
         hours = Hour.query.filter_by(location_id=location.id).all()
         for hour in hours:
             db.session.delete(hour)
-        print(location.hours)
         hour = Hour(location.id, 1, form.monday_start.data, monday_length, monday_closed)
         db.session.add(hour)
         db.session.commit()

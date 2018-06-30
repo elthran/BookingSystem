@@ -15,10 +15,8 @@ from booking.models.bases import db
 def edit_service(service_id):
     form = ServiceForm(request.form)
     service = Service.query.get(service_id)
-    print(service)
     location = Location.query.filter_by(business_id=current_user.business.id).filter_by(id=1).first()
     if form.validate_on_submit():
-        print("hello")
         service.name = form.name.data
         service.cost = form.cost.data
         service.length = form.length.data

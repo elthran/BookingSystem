@@ -23,14 +23,19 @@
 </form>
 {% endfor %}
 
-{# <!--
+
 <script type="text/javascript">
-    document.getElementById('anonymous').onchange = function() {
-        document.getElementById('name').disabled = !!this.checked;
-        document.getElementById('email').disabled = !!this.checked;
-        document.getElementById('phone').disabled = !!this.checked;
-    };
+  document.getElementById("day").addEventListener("change", changeDay, { passive: true });
+
+  function changeDay() {
+      var day = document.getElementById("day").value;
+      console.log("Day: " + day);
+      var start = document.getElementById('start');
+      console.log(start.options);
+      var option = document.createElement("option");
+      option.text = "hjgj";
+      start.options.add(option);
+  };
 </script>
---> #}
 
 {% endblock %}

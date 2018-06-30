@@ -14,5 +14,4 @@ def verification(id, verification_link):
     user.is_verified = True
     db.session.commit()
     flash("Account verified!")
-    print("Account verified!")
     return redirect(url_for('business_calendar'))
