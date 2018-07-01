@@ -9,37 +9,16 @@ from booking.models.forms.availability import AvailabilityForm
 from booking.models.availabilities import Availability
 # Import database
 from booking.models.bases import db
-from datetime import time
-
-def start_by_day(availabilities):
-    """
-    Make sure to pass in user.sorted_availabilities(day)
-    """
-    if not availabilities:
-        return 0
-    for availability in availabilities:
-        count = 0
-        while True:
-            new = time(availability.start.hour + count, 0)
-            print(new)
-            count += 1
-            if new >= availability.end:
-                break
-    return 2
 
 @app.route('/business/edit_employee_availability/', methods=['GET', 'POST'])
 def edit_employee_availability():
     form = AvailabilityForm(request.form)
     days = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    start_by_day(current_user.sorted_availabilities(1))
-    if current_user.sorted_availabilities(1):
-        hour = current_user.sorted_availabilities(1)[-1].end.hour
-    else:
-        hour = 0
-    hours = [i for i in range(hour,24)]
     form.day.choices = [(i, days[i]) for i in range(1, 8)]
-    form.start.choices = [(i, str(i)+":00") for i in hours]
-    form.end.choices = [(i, str(i)+":00") for i in hours[1:]]
+    form.start.choices = current_user.available_hours_by_day(1, "open")
+    form.end.choices = current_user.available_hours_by_day(1, "close")
+    # End of chunk
+
     if form.validate_on_submit():
         length = (form.end.data - form.start.data) * 60 # Finds how many minutes it is open for
         if length <= 0:

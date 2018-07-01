@@ -2,6 +2,7 @@ from booking.models.bases import Base, db
 from werkzeug import generate_password_hash, check_password_hash
 from flask import url_for
 from booking.models.locations import Location
+from datetime import time
 
 
 class User(Base):
@@ -88,5 +89,52 @@ class User(Base):
         else:
             availabilities = self.availabilities
         return sorted(availabilities, key=lambda x: (x.day, x.start))
+
+    def verify_time_value(self, hour, minute):
+        """
+        This function lets you pass in hours greater than 23 and minutes 60 or above.
+        """
+        new_hour = (hour % 24) + (minute // 60)
+        new_minute = (minute % 60)
+        return new_hour, new_minute
+
+    def working_hours_by_day(self, day):
+        """
+        This creates a list of all hours that a user is working on any given day.
+        """
+        availabilities = self.sorted_availabilities(day)
+        options = []
+        if not availabilities:
+            return 0
+        for availability in availabilities:
+            count = 0
+            while True:
+                new = time(availability.start.hour + count, 0)
+                options.append((new.hour, new.__str__()))
+                count += 1
+                if new >= availability.end:
+                    break
+        return options
+
+    def available_hours_by_day(self, day, condition):
+        """
+        This creates a list of hours that a user DOESN'T work in a day.
+        That way you can run this function in JSON to have the menus update when you choose a day,
+        and let you choose hours that you are available.
+        """
+        if condition == "close":
+            pass
+        all_hours = [i for i in range (28)]
+        busy_hours = [i[0] for i in self.working_hours_by_day(day)]
+        available_hours = [i for i in all_hours if i not in busy_hours]
+        options = []
+        for i in available_hours:
+            if condition == "open":
+                hour, minute = self.verify_time_value(i, 0)
+            else:
+                hour,minute = self.verify_time_value(i + 1,0)
+            hour = time(hour, minute).hour
+            options.append((i,hour))
+        return options
 
 
