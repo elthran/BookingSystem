@@ -101,6 +101,8 @@ class User(Base):
     def working_hours_by_day(self, day):
         """
         This creates a list of all hours that a user is working on any given day.
+        Currently this function isnt used anywhere, but it will be used to generate the visuals.
+        Feel free to run this function and it'll tell you all hours that the user is busy.
         """
         availabilities = self.sorted_availabilities(day)
         options = []
@@ -134,7 +136,7 @@ class User(Base):
             else:
                 hour,minute = self.verify_time_value(i + 1,0)
             hour = time(hour, minute).hour
-            options.append((i,hour))
+            options.append((i,str(hour)+":00"))
         return options
 
 
