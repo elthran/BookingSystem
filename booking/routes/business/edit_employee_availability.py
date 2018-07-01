@@ -20,6 +20,7 @@ def edit_employee_availability():
     # End of chunk
 
     if form.validate_on_submit():
+        print(form.end.data, form.start.data)
         length = (form.end.data - form.start.data) * 60 # Finds how many minutes it is open for
         if length <= 0:
             flash("Can't add a negative time", "error")

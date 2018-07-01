@@ -13,8 +13,10 @@ from booking.models.bases import db
 @app.route('/business/delete_employee_availability/<int:availability_id>', methods=['GET', 'POST'])
 def delete_employee_availability(availability_id):
     if availability_id == 0:
-        # delte all availabilities for this user
-        pass
+        availabilities = Availability.query.filter_by(user_id=current_user.id).all()
+        for availability in availabilities:
+            db.session.delete(availability)
+            db.session.commit()
     else:
         availability = Availability.query.get(availability_id)
         db.session.delete(availability)

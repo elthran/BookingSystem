@@ -127,6 +127,9 @@ class User(Base):
         if condition == "close":
             pass
         all_hours = [i for i in range (28)]
+        if self.availabilities == []:
+            # Need to return this first or it will crash when it cant iterate through an empty list
+            return [(i,str(i)+":00") for i in range(23)]
         busy_hours = [i[0] for i in self.working_hours_by_day(day)]
         available_hours = [i for i in all_hours if i not in busy_hours]
         options = []
@@ -136,7 +139,7 @@ class User(Base):
             else:
                 hour,minute = self.verify_time_value(i + 1,0)
             hour = time(hour, minute).hour
-            options.append((i,str(hour)+":00"))
+            options.append((hour,str(hour)+":00"))
         return options
 
 
