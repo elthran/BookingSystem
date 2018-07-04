@@ -1,7 +1,8 @@
 # Import the app itself
 from booking import app
-from flask import render_template, flash, jsonify
+from flask import render_template, flash, jsonify, request
 from flask_json import as_json
+from flask_wtf import FlaskForm
 from random import randint
 
 
@@ -11,7 +12,7 @@ def json():
 
 
 # @as_json
-@app.route('/handle_ajax_request', methods=["GET"])
+@app.route('/handle_ajax_request', methods=["GET", "POST"])
 def background_process_test():
     number = randint(0, 10)
     message = "Python generated this random number for you: %r" % number
