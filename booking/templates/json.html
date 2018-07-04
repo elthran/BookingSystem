@@ -1,27 +1,50 @@
 {% extends "business/layout.html" %}
 {% block content2 %}
-//button
+<!--button-->
 <div class='container'>
     <h3>Test</h3>
         <form>
-            <a href=# id=test><button class='btn btn-default'>Test</button></a>
-            <span id="json_test">Test Zone</span>
+            <button id=input>Test</button>
+            <span id="output">Test Zone</span>
         </form>
 
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
-        $(function() {
-          $('a#test').bind('click', function() {
-            $.getJSON('/background_process_test',
-                function(data) {
-                console.log(data)
-              //do nothing
-            });
-            return false;
-          });
-        });
+<!--
+var output;
+var input;
+output = document.getElementById("output");
+input = document.getElementById("input");
+input.addEventListener("click", getJSON);
+
+function getJSON (event) {
+    "use strict";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        // console.log(xhttp);
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            if (xhttp.getResponseHeader("Content-Type") === "application/json") {
+                var response = JSON.parse(xhttp.responseText);
+                output.innerHTML = response.data;
+                console.log(response);
+            } else {
+                console.log("Did not return valid JSON data from python");
+                console.log(xhttp.responseText);
+            }
+        }
+    };
+    xhttp.open("GET", "/handle_ajax_request", true);
+    xhttp.send();
+
+    // For normal event suppression.
+    event.preventDefault();
+    // Extra event suppression
+    event.stopPropagation();
+    // For form submit suppression
+    return false;
+}
+-->
 </script>
 
 {% endblock %}
