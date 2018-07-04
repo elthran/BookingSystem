@@ -10,6 +10,9 @@ from flask_sqlalchemy import SQLAlchemy
 # CSRF Protection
 from flask_wtf.csrf import CSRFProtect
 
+# Import JSON
+from flask_json import FlaskJSON
+
 # Imports settings from the private security file
 import private_config
 
@@ -33,7 +36,11 @@ if 'liveweb' in socket.gethostname():  # Running on server (pythonanywhere)
 db = SQLAlchemy(app)
 
 # Ensbles CSRF protection
-CSRFProtect(app)
+csrf = CSRFProtect(app)
+csrf.init_app(app)
+
+# Enables JSON
+json = FlaskJSON(app)
 
 
 # Sample HTTP error handling
@@ -72,6 +79,8 @@ import booking.routes.business.payment
 import booking.routes.business.service
 
 import booking.routes.business.edit_client
+
+import booking.routes.business.json_tests
 
 
 # Build the database:
