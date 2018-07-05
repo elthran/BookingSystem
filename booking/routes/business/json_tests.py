@@ -11,11 +11,15 @@ def json():
     return render_template('json.html')
 
 
-@app.route('/handle_ajax_request', methods=["GET", "POST"])
+@app.route('/handle_ajax_request', methods=["POST"])
 @as_json
 def background_process_test():
+    # You don't need to parse the request.
+    if request.is_json:
+        data = request.get_json()
+        print("Sent data:", repr(data))
     number = randint(0, 10)
     message = "Python generated this random number for you: %r" % number
     print(message)
+    # can replace with return flask.jsonify() or a bunch of other options.
     return dict(data=number)
-    # return jsonify(data=number)
