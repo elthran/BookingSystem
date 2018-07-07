@@ -56,5 +56,25 @@ class Business(Base):
         """
         return [appointment for appointment in self.appointments if appointment.date.date() == datetime.now().date()]
 
+    def get_appointments_by_day(self, year, month, day):
+        """
+        You can choose a date and it returns all apointments for the business on that date
+        This function is really messy
+        """
+        def correct_size(thing):
+            if len(str(thing)) >= 2:
+                return str(thing)
+            else:
+                return "0" + str(thing)
+        date_check = correct_size(year) + "-" + correct_size(month) + "-" + correct_size(day)
+
+        """
+        I think it should probably look like this and be shorter, simpler.
+        better_date = datetime.date(year, month, day)
+        return [appointment for appointment in self.appointments if appointment.date.date() == better_date.date()]
+        """
+
+        return [appointment for appointment in self.appointments if str(appointment.date.date()) == date_check]
+
     def __repr__(self):
         return '<Business %r (ID: %r)>' % (self.name, self.id)
