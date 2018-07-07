@@ -54,4 +54,5 @@ def business_booking(location_id):
             flash("Appointment has been booked!", "notice")
         return redirect(url_for('business_booking', location_id=location_id))
     # Not sure why my flash messages double appear here
+    print(current_user.business.clients)
     return render_template("business/booking.html", form=form)

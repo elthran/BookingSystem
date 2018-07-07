@@ -1,13 +1,13 @@
 # Import the app itself
 from booking import app
 # Import flask dependencies
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, redirect, url_for
 from flask_login import current_user
 # Import models
 from booking.models.users import User
 from booking.models.businesses import Business
 from booking.models.locations import Location
-from booking.models.availabilities import Availability
+from booking.models.clients import Client
 # Import database
 from booking.models.bases import db
 
@@ -32,6 +32,9 @@ def home():
         db.session.commit()
         user = User("Mr. Brunner", "admin@admin.com", "admin", business.id, True)
         db.session.add(user)
+        db.session.commit()
+        client = Client("anonymous@hidden.com", business.id, "Anonymous")
+        db.session.add(client)
         db.session.commit()
     if current_user.is_authenticated:
         return redirect(url_for('business_calendar'))
