@@ -29,6 +29,8 @@ def register_business():
         db.session.add(client)
         db.session.commit()
         current_user.business_id = business.id
+        location_id = Location.query.filter_by(business_id=business.id).first().id
+        current_user.location_id = location_id
         db.session.commit()
         return redirect(url_for('business_calendar'))
     return render_template("registration/business.html", form=form)
