@@ -23,10 +23,9 @@
 </form>
 {% endfor %}
 
-
+<script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 <script type="text/javascript">
   document.getElementById("day").addEventListener("change", changeDay, { passive: true });
-
   function changeDay() {
       var day = document.getElementById("day").value;
       console.log("Day: " + day);
@@ -36,6 +35,25 @@
       option.text = "hjgj";
       start.options.add(option);
   };
+
+
+  document.getElementById("start").addEventListener("change", get_data);
+  function get_data(event) {
+    var open_time = document.getElementById("start").value;
+    console.log("Opens at ", open_time);
+    var openData = {};
+    openData["open"] = open_time;
+    console.log(openData);
+    getJSONViaPOST("/business/edit_employee_availability/opening", "{{ csrf_token() }}", updateClosingTime, openData);
+  }
+
+  function updateClosingTime(response) {
+  var time = document.getElementById("end");
+  console.log(response);
+  console.log(response.closing_time);
+  time.value = response.closing_time;
+  }
+
 </script>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 # Import the app itself
 from booking import app
 # Import flask dependencies
-from flask import redirect, url_for, render_template, request, flash
+from flask import redirect, url_for, render_template, request, flash, jsonify
 # Import session handling
 from flask_login import current_user
 # Import models
@@ -31,3 +31,13 @@ def edit_employee_availability():
         flash("Availability updated", "notice")
         return redirect(url_for('edit_employee_availability'))
     return render_template("business/edit_employee_availability.html", form=form)
+
+@app.route('/business/edit_employee_availability/opening', methods=['POST'])
+def edit_employee_availability_open():
+    if request.is_json:
+        data = request.get_json()
+        print("Sent data:", repr(data))
+        closing_time = int(data["open"]) + 1
+        print(closing_time)
+        return jsonify(closing_time=closing_time)
+    return 404

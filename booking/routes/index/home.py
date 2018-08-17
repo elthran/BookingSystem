@@ -46,5 +46,5 @@ def home():
     print("Printing all businesses:")
     for business in businesses:
         print("Printing business::", business)
-    return render_template("authentication/home.html")
+    return render_template("index/home.html")
 

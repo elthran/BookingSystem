@@ -16,9 +16,9 @@ var someData = {};
 output = document.getElementById("output");
 local_button = document.getElementById("input");
 // you could build the function right into this section
-local_button.addEventListener("click", function () {
-    getJSONViaPOST("/handle_ajax_request", "{{ csrf_token() }}", localCallback);
-});
+// local_button.addEventListener("click", function () {
+//    getJSONViaPOST("/handle_ajax_request", "{{ csrf_token() }}", localCallback);
+// });
 local_button.addEventListener("click", localSend);
 
 // must accept an event as first and only parameter. Doesn't really need to

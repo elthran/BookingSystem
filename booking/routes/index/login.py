@@ -23,4 +23,4 @@ def login():
             return redirect(url_for('business_calendar', year=2018, month=6, day=0))
         flash('Wrong email or password', 'error')
 
-    return render_template("authentication/login.html", form=form)
+    return render_template("index/login.html", form=form)

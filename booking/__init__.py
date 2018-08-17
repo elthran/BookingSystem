@@ -50,9 +50,12 @@ def not_found(error):
     return render_template('404.html'), 404
 
 
-import booking.routes.authentication.home
-import booking.routes.authentication.login
-import booking.routes.authentication.logout
+import booking.routes.index.home
+import booking.routes.index.login
+import booking.routes.index.logout
+import booking.routes.index.features
+import booking.routes.index.about
+import booking.routes.index.contact
 
 import booking.routes.registration.business
 import booking.routes.registration.user

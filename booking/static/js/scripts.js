@@ -9,6 +9,12 @@
 //
 // Minimal usage looks like:
 //     getJSONFromPython("/handle_ajax_request", "{{ csrf_token() }}");
+
+// url is the app route that python runs
+// CSRFToken is always the same. Just passes in the token.
+// Callback is the JS function which handles the returned Python data (which is a JSON object, similar to a dictionary
+// DataToSend is the data being sent to Python as a dictionary
+// event is only needed if you want to pass a form in and suppress event bubbling
 function getJSONViaPOST (url, CSRFToken, callback, dataToSend, event) {
     "use strict";
 
