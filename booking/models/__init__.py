@@ -5,4 +5,4 @@ from .clients import Client
 from .services import Service
 from .locations import Location
 from .hours import Hour
-from .emails import Email
+from .emails import ContactEmail

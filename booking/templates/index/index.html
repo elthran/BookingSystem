@@ -2,14 +2,14 @@
 {% block content %}
 <div class="index-navbar">
     <div class="index-nav-left">
-        <li class="home"><a href="{{ url_for('home') }}">Home</a></li>
-        <li class="tutorials"><a href="{{ url_for('features') }}">Features</a></li>
-        <li class="news"><a href="{{ url_for('about') }}">About Us</a></li>
-        <li class="contact"><a href="{{ url_for('contact') }}">Contact</a></li>
+        <li class="home"><a href="{{ url_for('home') }}" {% if request.url_rule|string == '/' %}class="selected-text"{% endif %}>Home</a></li>
+        <li class="tutorials"><a href="{{ url_for('features') }}" {% if request.url_rule|string == '/features' %}class="selected-text"{% endif %}>Features</a></li>
+        <li class="news"><a href="{{ url_for('about') }}" {% if request.url_rule|string == '/about' %}class="selected-text"{% endif %}>About Us</a></li>
+        <li class="contact"><a href="{{ url_for('contact') }}" {% if request.url_rule|string == '/contact' %}class="selected-text"{% endif %}>Contact</a></li>
     </div>
     <div class="index-nav-right">
-        <li class="news"><a href="{{ url_for('login') }}">Login</a></li>
-        <li class="contact"><a href="{{ url_for('register_user') }}">Sign Up</a></li>
+        <li class="news"><a href="{{ url_for('login') }}" {% if request.url_rule|string == '/login/' %}class="selected-button"{% endif %}>Login</a></li>
+        <li class="contact"><a href="{{ url_for('register_user') }}" {% if request.url_rule|string == '/register/user/' %}class="selected-button"{% endif %}>Sign Up</a></li>
     </div>
 </div>
 <div style="clear:both;"></div><br><br><br>

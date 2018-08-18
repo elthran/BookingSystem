@@ -1,18 +1,24 @@
 {% extends "index/index.html" %}
 {% block content2 %}
 
-<div class="index-body">
+<div class="index-body" style="text-align: center;">
     <h1>Get in touch with us</h1>
+    <br>Thank you for using JaChang! Please complete the form below, so we can provide quick and efficient service.
+    <br><br>If this is an urgent matter, please contact Customer Support:
+    <p style="font-weight:bold;">
+        <br>Call: 1-234-567-8900
+        <br><br>Monday-Friday 8:00 AM - 9:00 PM PST
+    </p>
     <br><br>
     <form method="POST" accept-charset="UTF-8" role="form">
   <!-- LoginForm -->
-  {{ form.csrf_token }}
-  {{ render_field(form.first_name, placeholder="First Name", autofocus="") }}
-  {{ render_field(form.last_name, placeholder="Last Name") }}
-        {{ render_field(form.email, placeholder="Email Address") }}
-   {{ render_field(form.phone, placeholder="Phone Number") }}
-        {{ render_field(form.message, placeholder="Message") }}
-  <br><br><button type="submit">Submit</button>
+        {{ form.csrf_token }}
+        {{ render_field(form.first_name, placeholder="First Name", autofocus="") }}
+        <br>{{ render_field(form.last_name, placeholder="Last Name") }}
+        <br>{{ render_field(form.email, placeholder="Email Address") }}
+        <br>{{ render_field(form.phone, placeholder="Phone Number") }}
+        <br>{{ render_field(form.message, placeholder="Message") }}
+      <br><br><button type="submit">Submit</button>
 </form>
 </div>
 

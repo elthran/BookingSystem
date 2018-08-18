@@ -41,47 +41,40 @@
     font-size: 16px;
 }
 
-.index-navbar {
-    border-bottom: 1px solid #888;
-    height: 45px;
+/* Start of real */
+.index-navbar {     /* The main page navigation bar */
+    border-bottom: 1px dotted #888;
+    height: 50px;
 }
 
-/* Start of real */
-.index-navbar li {
+.index-navbar li {     /* The main page navigation bar */
      font-family: 'Oswald', sans-serif;
      font-size: 1.2em;
-     line-height: 40px;
      display: inline-block;
-     margin: 4px;
+     margin: 4px 15px 4px 15px;
+     line-height: 50px;     /* Needs to be equal to the 'height' of the index-navbar to vertically align */
 }
 
-.index-navbar ul {
-    list-style: none;
-  background-color: #444;
-  text-align: center;
-  padding: 0;
-  margin: 0;
- }
-
-.index-nav-left {
+.index-nav-left {     /* The main page navigation bar */
     margin-left: 125px;
     float: left;
 }
 
-.index-nav-right {
-    margin-right: 75px;
+.index-nav-right {    /* The login/signup boxes */
+    margin-right: 150px;
     float: right;
 }
 
-.index-nav-left a {
-    text-decoration: none;
+.index-nav-left a {     /* The main page navigation bar */
+    text-decoration: none;     /* Removes underline from links */
 }
 
-.index-nav-right a {
-    text-decoration: none;
-    background: orange;
-    color: white;
-    padding: 5px;
+.index-nav-right a {    /* The login/signup boxes */
+    text-decoration: none;     /* Removes underline from links */
+    background: green;   /* Changes background color of boxes */
+    color: white;   /* Changes text color of boxes */
+    padding: 5px 10px 5px 10px;   /* Changes size of boxes */
+    border-radius: 5px;    /* Rounds the corners of the boxes */
 }
 
 .index-body {
@@ -94,4 +87,14 @@
 
 .index-body h2 {
     font-size: 25px;
+}
+
+.selected-text {
+    color:blue;
+    font-weight: bold;
+}
+
+a.selected-button {
+    background: orange;
+    font-weight: bold;
 }
