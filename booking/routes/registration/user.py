@@ -30,7 +30,7 @@ def register_user(business_id=1, business_referral=""):
 
             subject = "Welcome to JaChang!"
             msg = Message(recipients=[form.email.data], subject=subject)
-            msg.html = "To activate your account, please click this link: %r" % (current_user.get_verification_link())
+            msg.html = "<p>To activate your account, please click this link: %r</p>" % (current_user.get_verification_link())
             mail.send(msg)
             flash("Activation link sent.", "notice")
 
