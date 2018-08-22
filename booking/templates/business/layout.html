@@ -4,8 +4,7 @@
 {% set location_id = 1 %}
 
 {% if not current_user.is_anonymous and not current_user.is_verified %}
-<h1>*Your account is not yet verified. Click <a href="{{ current_user.get_verification_link() }}">here</a> to verify
-    your account*</h1>
+<h1>*Your account is not yet verified. Check your email for a verification link.*</h1>
 {% endif %}
 
 <div style="border:dotted;width:300px;min-height:300px;margin-top:35px;float:left;margin-right:50px;">

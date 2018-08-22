@@ -7,7 +7,6 @@ from booking.models.forms.contact import ContactForm
 from booking.models.bases import db
 import smtplib # For emailing
 from booking import mail
-
 from flask_mail import Message
 
 @app.route('/contact', methods=['GET', 'POST'])
