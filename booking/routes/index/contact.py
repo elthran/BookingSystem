@@ -2,10 +2,7 @@
 from booking import app
 # Import flask dependencies
 from flask import render_template, flash, request
-from booking.models import ContactEmail
 from booking.models.forms.contact import ContactForm
-from booking.models.bases import db
-import smtplib # For emailing
 from booking import mail
 from flask_mail import Message
 

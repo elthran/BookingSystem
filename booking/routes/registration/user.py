@@ -7,7 +7,6 @@ from flask_login import login_user
 # Import models
 from booking.models.forms.user import UserForm
 from booking.models.users import User
-from booking.models.emails import VerifyEmail
 # Import database
 from booking.models.bases import db
 from booking import mail
