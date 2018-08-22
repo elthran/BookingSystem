@@ -10,6 +10,7 @@ setup(
         'flask-sqlalchemy',
         'flask-wtf',
         'flask-login',
+        'flask_mail',
         'werkzeug',
         'wtforms',
         'Pillow',
