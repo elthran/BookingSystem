@@ -1,6 +1,6 @@
 from booking.models.bases import Base, db
 from werkzeug import generate_password_hash, check_password_hash
-from flask import url_for
+from flask import url_for, request
 from booking.models.locations import Location
 from datetime import time
 
@@ -66,11 +66,13 @@ class User(Base):
         return str(self.id) + "-" + self.name
 
     def get_verification_link(self):
-        return url_for('verification', id=self.id, verification_link=self.generate_verification_link())
+        return request.url_root[:-1] + url_for('verification', id=self.id, verification_link=self.generate_verification_link())
 
     def check_verification_link(self, link):
-        if link == (str(self.id) + "-" + self.name):
+        if link == request.url_root[:-1] + (str(self.id) + "-" + self.name):
+            print("verified")
             return True
+        print("verification failed")
         return False
 
     def get_availability_by_day(self, day):

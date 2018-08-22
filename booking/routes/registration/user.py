@@ -7,8 +7,10 @@ from flask_login import login_user
 # Import models
 from booking.models.forms.user import UserForm
 from booking.models.users import User
+from booking.models.emails import VerifyEmail
 # Import database
 from booking.models.bases import db
+import smtplib # For emailing
 
 @app.route('/register/user/', methods=['GET', 'POST'])
 @app.route('/register/user/<int:business_id>/<string:business_referral>/', methods=['GET', 'POST'])
@@ -24,6 +26,24 @@ def register_user(business_id=1, business_referral=""):
             db.session.add(user)
             db.session.commit()
             login_user(user)
+
+            gmail_user = 'jachang4@gmail.com'
+            gmail_password = 'Melissa4'
+            sent_from = gmail_user
+            to = [user.email]
+            email_text = "Verify with:" + str(user.get_verification_link())
+            print(email_text)
+            print(to)
+            try:
+                server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+                server.ehlo()
+                server.login(gmail_user, gmail_password)
+                server.sendmail(sent_from, to, email_text)
+                server.quit()
+                print("Email sent")
+            except:
+                print('Email not sent...')
+
             if owner:
                 return redirect(url_for('register_business'))
             else:

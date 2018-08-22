@@ -13,6 +13,9 @@ from flask_wtf.csrf import CSRFProtect
 # Import JSON
 from flask_json import FlaskJSON
 
+# Import mailing
+from flask_mail import Mail
+
 # Imports settings from the private security file
 import private_config
 
@@ -41,6 +44,19 @@ csrf.init_app(app)
 
 # Enables JSON
 json = FlaskJSON(app)
+
+# Enables mailing
+app.config.update(dict(
+    DEBUG = True,
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 587,
+    MAIL_USE_TLS = True,
+    MAIL_USE_SSL = False,
+    MAIL_USERNAME = 'jachang4@gmail.com',
+    MAIL_PASSWORD = 'Melissa4',
+    MAIL_DEFAULT_SENDER = 'jachang4@gmail.com'
+))
+mail = Mail(app)
 
 
 # Sample HTTP error handling
@@ -88,7 +104,7 @@ import booking.routes.business.json_tests
 
 # Build the database:
 # This will create the database file using SQLAlchemy
-# db.drop_all()  # no longer needed, try `python3 run.py -d`
+#db.drop_all()  # no longer needed, try `python3 run.py -d`
 db.create_all()
 
 # This will handle user requests

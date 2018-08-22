@@ -3,8 +3,8 @@
 
 <div class="index-body" style="text-align: center;">
     <h1>Get in touch with us</h1>
-    <br>Thank you for using JaChang! Please complete the form below, so we can provide quick and efficient service.
-    <br><br>If this is an urgent matter, please contact Customer Support:
+    <p>Thank you for using JaChang! Please complete the form below, so we can provide quick and efficient service.
+        <br><br>If this is an urgent matter, please contact Customer Support:</p>
     <p style="font-weight:bold;">
         <br>Call: 1-234-567-8900
         <br><br>Monday-Friday 8:00 AM - 9:00 PM PST
@@ -18,6 +18,19 @@
         <br>{{ render_field(form.email, placeholder="Email Address") }}
         <br>{{ render_field(form.phone, placeholder="Phone Number") }}
         <br>{{ render_field(form.message, placeholder="Message") }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    {% for category, message in messages %}
+    <div class='flash-{{ category }}'>
+        <li class="flash-{{ category }}">{{ message }}</li>
+    </div>
+    {% endfor %}
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
       <br><br><button type="submit">Submit</button>
 </form>
 </div>

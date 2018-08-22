@@ -48,7 +48,7 @@
 }
 
 .index-navbar li {     /* The main page navigation bar */
-     font-family: 'Oswald', sans-serif;
+     font-family: Verdana, Geneva, sans-serif;
      font-size: 1.2em;
      display: inline-block;
      margin: 4px 15px 4px 15px;
@@ -81,10 +81,6 @@
     margin-left: 50px;
 }
 
-.index-body h1 {
-    font-size: 35px;
-}
-
 .index-body h2 {
     font-size: 25px;
 }
@@ -97,4 +93,16 @@
 a.selected-button {
     background: orange;
     font-weight: bold;
+}
+
+h1 {
+    font-family: ProximaNovaThThin, arial, sans-serif;
+    font-size: 81px;
+    text-transform: uppercase;
+    color: #555555;
+    font-weight: 400;
+}
+
+p {
+    font-family: Verdana, Geneva, sans-serif;
 }
