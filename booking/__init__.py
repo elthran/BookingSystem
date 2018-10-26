@@ -47,14 +47,14 @@ json = FlaskJSON(app)
 
 # Enables mailing
 app.config.update(dict(
-    DEBUG = True,
-    MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = 587,
-    MAIL_USE_TLS = True,
-    MAIL_USE_SSL = False,
-    MAIL_USERNAME = private_config.MAIL_USERNAME,
-    MAIL_PASSWORD = private_config.MAIL_PASSWORD,
-    MAIL_DEFAULT_SENDER = 'This seems to do nothing'
+    DEBUG=True,
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=587,
+    MAIL_USE_TLS=True,
+    MAIL_USE_SSL=False,
+    MAIL_USERNAME=private_config.MAIL_USERNAME,
+    MAIL_PASSWORD=private_config.MAIL_PASSWORD,
+    MAIL_DEFAULT_SENDER='This seems to do nothing'
 ))
 mail = Mail(app)
 
@@ -102,9 +102,10 @@ import booking.routes.business.edit_client
 import booking.routes.business.json_tests
 
 
-# Build the database:
+# Build the tables in database, if the database exists.
+# Otherwise build using mysql: CREATE DATABASE IF NOT EXISTS booking CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 # This will create the database file using SQLAlchemy
-#db.drop_all()  # no longer needed, try `python3 run.py -d`
+db.drop_all()  # no longer needed, try `python3 run.py -d`
 db.create_all()
 
 # This will handle user requests

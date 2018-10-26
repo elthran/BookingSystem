@@ -6,3 +6,4 @@ from .services import Service
 from .locations import Location
 from .hours import Hour
 from .emails import ContactEmail
+from .analytics import AuthenticationEvent

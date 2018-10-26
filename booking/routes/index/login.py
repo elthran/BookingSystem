@@ -3,11 +3,15 @@ from flask import request, render_template, flash, redirect, url_for
 # Import session handling
 from flask_login import login_user
 # Import the app itself
-from booking import app
+from booking import app, db
 # Import models
 from booking.models import User
 # Import forms
+from booking.models.analytics import AuthenticationEvent
 from booking.models.forms.login import LoginForm
+
+from booking.models.bases import db
+
 
 # Set the route and accepted methods
 @app.route('/login/', methods=['GET', 'POST'])
@@ -19,8 +23,10 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
+            login_event = AuthenticationEvent(user_id=user.id, activity="login")
+            db.session.add(login_event)
+            db.session.commit()
             flash('Welcome %s' % user.name, 'notice')
             return redirect(url_for('business_calendar', year=2018, month=6, day=0))
         flash('Wrong email or password', 'error')
-
     return render_template("index/login.html", form=form)

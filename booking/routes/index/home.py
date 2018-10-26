@@ -21,9 +21,12 @@ def setup_account():
     return url_for("page you see after you log in")
 """
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    if Business.query.all() == []:
+    # This creates the first business if the database is empty.
+    # It's only used while the site is in testing.
+    if not Business.query.all():
         business = Business("Temporary")
         db.session.add(business)
         db.session.commit()
@@ -38,13 +41,4 @@ def home():
         db.session.commit()
     if current_user.is_authenticated:
         return redirect(url_for('business_calendar'))
-    users = User.query.all()
-    businesses = Business.query.all()
-    print("Printing all users:")
-    for user in users:
-        print("Printing user::", user)
-    print("Printing all businesses:")
-    for business in businesses:
-        print("Printing business::", business)
     return render_template("index/home.html")
-

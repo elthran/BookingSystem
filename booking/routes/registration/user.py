@@ -5,6 +5,7 @@ from flask import redirect, url_for, render_template, request, flash
 # Import session handling
 from flask_login import login_user
 # Import models
+from booking.models import AuthenticationEvent
 from booking.models.forms.user import UserForm
 from booking.models.users import User
 # Import database
@@ -27,6 +28,9 @@ def register_user(business_id=1, business_referral=""):
             db.session.add(user)
             db.session.commit()
             login_user(user)
+            event = AuthenticationEvent(user_id=user.id)
+            db.session.add(event)
+            db.session.commit()
 
             subject = "Welcome to JaChang!"
             msg = Message(recipients=[form.email.data], subject=subject)
