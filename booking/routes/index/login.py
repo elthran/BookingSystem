@@ -7,7 +7,7 @@ from booking import app, db
 # Import models
 from booking.models import User
 # Import forms
-from booking.models.analytics import AuthenticationEvent
+from booking.models.analytics import AuthenticationEvent, UnvalidatedEvent
 from booking.models.forms.login import LoginForm
 
 from booking.models.bases import db
@@ -22,11 +22,16 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
-            login_user(user)
-            login_event = AuthenticationEvent(user_id=user.id, activity="login")
-            db.session.add(login_event)
-            db.session.commit()
-            flash('Welcome %s' % user.name, 'notice')
-            return redirect(url_for('business_calendar', year=2018, month=6, day=0))
-        flash('Wrong email or password', 'error')
+            if user.is_verified:
+                login_user(user)
+                login_event = AuthenticationEvent(user_id=user.id, activity="login")
+                if login_event.validity:
+                    db.session.add(login_event)
+                else:
+                    invalid_event = UnvalidatedEvent(table="authentication")
+                    db.session.add(invalid_event)
+                db.session.commit()
+                return redirect(url_for('business_calendar', year=2018, month=6, day=0))
+            else:
+                return render_template("registration/verification.html", form=form, new=False)
     return render_template("index/login.html", form=form)

@@ -4,3 +4,4 @@ __pycache__/
 booking.egg-info
 private_*
 .pytest_cache
+venv/

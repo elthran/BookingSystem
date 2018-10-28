@@ -1,11 +1,25 @@
 from booking.models.bases import Base, db
 from flask import request, url_for
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Business(Base):
     # Name of the business
     name = db.Column(db.String(128), nullable=False)
+    # Name of the business
+    country = db.Column(db.String(64))
+    # Name of the business
+    currency = db.Column(db.String(32))
+    # Name of the business
+    province = db.Column(db.String(64))
+    # Name of the business
+    city = db.Column(db.String(64))
+    # Name of the business
+    address = db.Column(db.String(64))
+    # Name of the business
+    verified = db.Column(db.Boolean)
+    # Name of the business
+    subscription_days_remaining = db.Column(db.Integer)
     # Referral code
     referral = db.Column(db.String(128), unique=True)
     # List of all admins ids of the business
@@ -23,11 +37,24 @@ class Business(Base):
     # List of every location
     locations = db.relationship('Location', backref='business')
 
-    def __init__(self, name):
+    def __init__(self, name, country, currency, province, city, address):
         self.name = name
+        self.country = country
+        self.currency = currency
+        self.province = province
+        self.city = city
+        self.address = address
         self.owner_ids = ""
         self.employee_ids = ""
         self.set_referral_id()
+        self.verified = False
+        self.subscription_days_remaining = 30
+        self._subscription_end_date = None
+
+    def get_subscription_end_date(self):
+        if self.subscription_days_remaining == 0:
+            return None
+        return datetime.now().date() + timedelta(days=self.subscription_days_remaining)
 
     # Custom property setter
     def set_referral_id(self):

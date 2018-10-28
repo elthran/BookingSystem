@@ -70,9 +70,7 @@ class User(Base):
 
     def check_verification_link(self, link):
         if link == request.url_root[:-1] + (str(self.id) + "-" + self.name):
-            print("verified")
             return True
-        print("verification failed")
         return False
 
     def get_availability_by_day(self, day):

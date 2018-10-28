@@ -2,10 +2,15 @@
 {% block content %}
 
 {% set location_id = 1 %}
+{% set business = current_user.business %}
 
-{% if not current_user.is_anonymous and not current_user.is_verified %}
-<h1>*Your account is not yet verified. Check your email for a verification link.*</h1>
-{% endif %}
+<h2>
+    {% if business.subscription_days_remaining %}
+    *This business will expire on {{ business.get_subscription_end_date() }}*
+    {% else %}
+    *THis business has expired*
+    {% endif %}
+</h2>
 
 <div style="border:dotted;width:300px;min-height:300px;margin-top:35px;float:left;margin-right:50px;">
     <ul>
@@ -24,7 +29,7 @@
             Today's Appointments:
         </li>
         <br>
-        {% for appointment in current_user.business.get_todays_appointments() %}
+        {% for appointment in business.get_todays_appointments() %}
         <li style="font-weight:bold;">{{ appointment.date.time() }}-{{ appointment.get_end_time() }}</li>
         <li style="margin-left:15px;">
             {{ appointment.service }}

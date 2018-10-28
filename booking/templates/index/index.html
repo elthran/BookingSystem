@@ -44,7 +44,7 @@
     </div>
     <div class="index-nav-right">
         <li class="news"><a href="{{ url_for('login') }}" {% if request.url_rule|string == '/login/' %}class="selected-button"{% endif %}>Login</a></li>
-        <li class="contact"><a href="{{ url_for('register_user') }}" {% if request.url_rule|string == '/register/user/' %}class="selected-button"{% endif %}>Sign Up</a></li>
+        <li class="contact"><a href="{{ url_for('register_business') }}" {% if request.url_rule|string == '/register/business/' %}class="selected-button"{% endif %}>Sign Up</a></li>
     </div>
 </div>
 <div style="clear:both;"></div><br><br><br>

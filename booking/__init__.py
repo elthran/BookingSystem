@@ -101,13 +101,6 @@ import booking.routes.business.edit_client
 
 import booking.routes.business.json_tests
 
-
-# Build the tables in database, if the database exists.
-# Otherwise build using mysql: CREATE DATABASE IF NOT EXISTS booking CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-# This will create the database file using SQLAlchemy
-db.drop_all()  # no longer needed, try `python3 run.py -d`
-db.create_all()
-
 # This will handle user requests
 from flask_login import LoginManager
 

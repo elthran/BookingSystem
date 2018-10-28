@@ -1,36 +1,50 @@
 # Import the app itself
-from booking import app
+from flask_mail import Message
+
+from booking import app, mail
 # Import flask dependencies
 from flask import redirect, url_for, render_template, request
-# Import session handling
-from flask_login import login_user, current_user
 # Import models
 from booking.models.forms.business import BusinessForm
 from booking.models.businesses import Business
-from booking.models.locations import Location
-from booking.models.clients import Client
+from booking.models.users import User
 # Import database
 from booking.models.bases import db
+
+# These should be pulled from the metadata file in /static
+countries = ["Canada"]
+currencies = ["CAD", "USD"]
+provinces = ["BC", "AB"]
+cities = ["Vancouver", "Edmonton"]
 
 
 @app.route('/register/business/', methods=['GET', 'POST'])
 def register_business():
     form = BusinessForm(request.form)
-    if form.validate_on_submit():
-        business = Business(form.name.data)
+    form.country.choices = [(i, j) for i, j in enumerate(countries)]
+    form.currency.choices = [(i, j) for i, j in enumerate(currencies)]
+    form.province.choices = [(i, j) for i, j in enumerate(provinces)]
+    form.city.choices = [(i, j) for i, j in enumerate(cities)]
+    if form.validate_on_submit() and User.query.filter_by(email=form.email.data).first() is None:
+        business = Business(form.name.data,
+                            countries[form.country.data],
+                            form.currency.data,
+                            form.province.data,
+                            form.city.data,
+                            form.address.data)
         db.session.add(business)
         db.session.commit()
-        if form.location.data == None:
-            form.location.data = business.name
-        location = Location(business.id, form.location.data, form.address.data, form.town.data)
-        db.session.add(location)
+
+        user = User(form.username.data, form.email.data, form.password.data, business.id, is_owner=True)
+        db.session.add(user)
         db.session.commit()
-        client = Client("anonymous@hidden.com", business.id, "Anonymous")
-        db.session.add(client)
-        db.session.commit()
-        current_user.business_id = business.id
-        location_id = Location.query.filter_by(business_id=business.id).first().id
-        current_user.location_id = location_id
-        db.session.commit()
-        return redirect(url_for('business_calendar'))
+
+        subject = "Welcome to JaChang!"
+        msg = Message(recipients=[form.email.data], subject=subject)
+        msg.html = "<p>To activate your account, please click this link: %r</p>" % (
+            user.get_verification_link())
+        mail.send(msg)
+
+        return render_template("registration/verification.html", form=form)
+
     return render_template("registration/business.html", form=form)

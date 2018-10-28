@@ -1,13 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
-Here you can set up your new business!<br><br>
+<h2>Your business will be set up in less than 5 minutes!<h2><br>
 <form method="POST" action="." accept-charset="UTF-8" role="form">
   <!-- LoginForm -->
   {{ form.csrf_token }}
-  {{ render_field(form.name, placeholder="Your Business' Name", autofocus="") }}
-  {{ render_field(form.location, placeholder="Your location") }}
-  {{ render_field(form.address, placeholder="Your address") }}
-  {{ render_field(form.town, placeholder="Your city") }}
+  <ul>
+    <h3>Step 1: Required business information</h3>
+    <li>Business Name: {{ render_field(form.name, placeholder="Your Business' Name", autofocus="") }}</li>
+    <li>Country: {{ render_field(form.country) }}</li>
+    <li>Currency: {{ render_field(form.currency) }}</li>
+    <li>Province: {{ render_field(form.province) }}</li>
+    <li>City: {{ render_field(form.city) }}</li>
+    <li>Street Address: {{ render_field(form.address, placeholder="Your address") }}</li>
+  </ul>
+<br><br><br>
+  <ul>
+    <h3>Step 2: Set up a private account to manage your business</h3>
+    <li>First Name: {{ render_field(form.username, placeholder="Your Name") }}</li>
+    <li>Email Address: {{ render_field(form.email) }}</li>
+    <li>Password: {{ render_field(form.password) }}</li>
+    <li>Repeat Password: {{ render_field(form.confirmation) }}</li>
+  </ul>
+
+
+
   <br><br><button type="submit" name="submit">Submit</button>
 </form>
 {% endblock %}

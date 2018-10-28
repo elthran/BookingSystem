@@ -24,7 +24,7 @@ def register_user(business_id=1, business_referral=""):
     form = UserForm(request.form)
     if form.validate_on_submit():
         if User.query.filter_by(email=form.email.data).first() is None:
-            user = User(form.name.data, form.email.data, form.password.data, business_id, owner)
+            user = User(form.name.data, form.email.data, form.password.data, business_id, False)
             db.session.add(user)
             db.session.commit()
             login_user(user)
@@ -38,10 +38,5 @@ def register_user(business_id=1, business_referral=""):
             mail.send(msg)
             flash("Activation link sent.", "notice")
 
-            if owner:
-                return redirect(url_for('register_business'))
-            else:
-                return redirect(url_for('business_calendar'))
-        else:
-            flash("User already exists with that email.", "error")
+            return redirect(url_for('business_calendar'))
     return render_template("index/sign_up.html", form=form, owner=owner)

@@ -63,8 +63,9 @@ class TransactionEvent(AnalyticEvent):
 
 class UnvalidatedEvent(AnalyticEvent):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, table="unknown", *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.table = table
 
     @property
     def validate(self):
