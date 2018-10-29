@@ -96,6 +96,8 @@ import booking.routes.business.edit_service
 import booking.routes.business.employee
 import booking.routes.business.payment
 import booking.routes.business.service
+import booking.routes.business.employees
+import booking.routes.business.locations
 
 import booking.routes.business.edit_client
 
@@ -109,6 +111,12 @@ from booking.models.users import User
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
+
+# Build the tables in database, if the database exists.
+# Otherwise build using mysql: CREATE DATABASE IF NOT EXISTS booking CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+# This will create the database file using SQLAlchemy
+#db.drop_all()  # no longer needed, try `python3 run.py -d`
+#db.create_all()
 
 
 @login_manager.user_loader

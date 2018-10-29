@@ -15,6 +15,8 @@
 <div style="border:dotted;width:300px;min-height:300px;margin-top:35px;float:left;margin-right:50px;">
     <ul>
         <li><a href="{{ url_for('business_calendar') }}">Calendar</a></li>
+        <li><a href="{{ url_for('locations', business_id=business.id) }}">Locations</a></li>
+        <li><a href="{{ url_for('employees', business_id=business.id, location_id=location_id) }}">Employees</a></li>
         <li><a href="{{ url_for('clients', business_id=current_user.business.id) }}">Clients</a></li>
         <li><a href="{{ url_for('business_activity', location_id=location_id) }}">Activity</a></li>
         <li><a href="{{ url_for('business_booking', location_id=location_id) }}">Book New Appointment</a></li>

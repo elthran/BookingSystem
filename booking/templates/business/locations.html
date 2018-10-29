@@ -1,0 +1,31 @@
+{% extends "business/layout.html" %}
+{% block content2 %}
+
+{% set business = current_user.business %}
+
+<h1>General Business Info</h1>
+<h2>Country: {{ business.country }}</h2>
+<h2>Province: {{ business.province }}</h2>
+<h2>City: {{ business.city }}</h2>
+<h2>Address: {{ business.address }}</h2>
+<h2>Email: {{ business.email }}</h2>
+<h2>Phone: {{ business.phone }}</h2>
+<h2>Curency: {{ business.currency }}</h2>
+
+<h1>Locations</h1>
+<ul>
+{% for location in locations %}
+    <li>Name: {{ location.name }} ...edit</li>
+    <li>Address: {{ location.address }} ({{ location.city }})</li>
+    <li>Postal Code: {{ location.postalcode }}</li>
+    <li>Number of Employees: {{ location.get_employee_count() }}</li>
+    <li>Email: {% if location.email %}{{ business.email }}{% else %}{{ location.email }}{% endif %}</li>
+    <li>Phone: {{ location.phone }}</li>
+    <li><a class="edit-button" href="{{ url_for('edit_location', location_id=location.id) }}">Edit</a></li>
+{% endfor %}
+    {% if current_user.is_owner %}
+    <li>Create new location <button disabled="True">Create new</button></li>
+{% endif %}
+</ul>
+
+{% endblock %}

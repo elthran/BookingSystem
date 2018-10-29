@@ -16,22 +16,32 @@ class Location(Base):
     name = db.Column(db.String(128))
 
     # Your location information
-    address = db.Column(db.String(128))
-    town = db.Column(db.String(128))
-    province = db.Column(db.String(128))
     country = db.Column(db.String(128))
+    province = db.Column(db.String(128))
+    city = db.Column(db.String(128))
+    address = db.Column(db.String(128))
+
     timezone = db.Column(db.String(128))
     postalcode = db.Column(db.String(128))
 
-    def __init__(self, business_id, name="Burnaby", address=None, town=None):
+    email = db.Column(db.String(64))
+    phone = db.Column(db.String(64))
+
+    def __init__(self, business_id, name="Burnaby", email=None, phone=None):
         self.business_id = business_id
         self.name = name
-        self.address = address
-        self.town = town
-        self.province = None
         self.country = None
+        self.province = None
+        self.city = None
+        self.address = None
         self.timezone = None
         self.postalcode = None
+
+        self.mail = email
+        self.phone = phone
+
+    def get_employee_count(self):
+        return len(self.users)
 
     def get_hours_by_day(self, day):
         return [hour for hour in self.hours if hour.day == day]

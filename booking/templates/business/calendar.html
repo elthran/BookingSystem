@@ -46,13 +46,6 @@
         </li>
         {% endfor %}
     {% endif %}
-    <br><br>Employees of this location:
-    <ul>
-        {% for employee in current_user.business.get_employees() %}
-        <li style="font-weight:bold;">
-            {% if employee.is_owner %}(Owner){% else %}(Employee){% endif %} Name: <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">{{ employee.name }}</a></li>
-        {% endfor %}
-    </ul>
     <br><br>Locations:
     <ul>
         {% for location in current_user.business.locations %}
@@ -75,7 +68,6 @@
 
 <div style="clear:both;"></div>
 <br><br><br>To have a client book an appoint, send them link <a href="{{ current_user.business.get_client_link() }}">this</a> link.
-<br><br><br>To have an employee register an account with your business, send them <a href="{{ current_user.business.get_employee_link() }}">this</a> link.
 <div style="clear:both;"></div>
 {# <!--
 <br>For testing purposes:<br>

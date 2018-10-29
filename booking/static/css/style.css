@@ -106,3 +106,8 @@ h1 {
 p {
     font-family: Verdana, Geneva, sans-serif;
 }
+
+.employee_thumbnail {
+    width: 75px;
+    height: 75px;
+}
