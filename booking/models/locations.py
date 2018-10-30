@@ -1,12 +1,11 @@
 from booking.models.bases import Base, db
+from booking.models.mappings import Mapping
 
 
 class Location(Base):
     # Needs to list all services offered here
 
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
-
-    users = db.relationship('User', backref='location')
 
     # Availabilities that the location has. This is tied to an employee
     availabilities = db.relationship('Availability', backref='location')
@@ -40,11 +39,15 @@ class Location(Base):
         self.mail = email
         self.phone = phone
 
-    def get_employee_count(self):
-        return len(self.users)
-
     def get_hours_by_day(self, day):
         return [hour for hour in self.hours if hour.day == day]
 
+    def get_user_ids(self):
+        return [mapping.id for mapping in
+                Mapping.query.filter_by(business_id=self.business_id).filter_by(location_id=self.id).all()]
+
+    def get_employee_count(self):
+        return len(self.get_user_ids())
+
     def __repr__(self):
-        return '<Location (%r)>' % (self.id)
+        return '<Location (%r)>' % self.id

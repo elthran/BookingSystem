@@ -2,7 +2,6 @@ from booking.models.bases import db
 
 
 class AnalyticEvent(db.Model):
-
     __abstract__ = True
 
     id = db.Column(db.Integer, primary_key=True)
@@ -22,7 +21,6 @@ class AnalyticEvent(db.Model):
 
 
 class AuthenticationEvent(AnalyticEvent):
-
     session_length = db.Column(db.Integer)
 
     def __init__(self, *args, **kwargs):
@@ -39,9 +37,8 @@ class AuthenticationEvent(AnalyticEvent):
 
 
 class TransactionEvent(AnalyticEvent):
-
     currency = db.Column(db.String(16))
-    currency = db.Column(db.Integer)
+    amount = db.Column(db.Integer)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

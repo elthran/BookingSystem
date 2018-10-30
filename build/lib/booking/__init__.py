@@ -116,8 +116,8 @@ login_manager.login_view = "login"
 # Build the tables in database, if the database exists.
 # Otherwise build using mysql: CREATE DATABASE IF NOT EXISTS booking CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 # This will create the database file using SQLAlchemy
-#  db.drop_all()  # no longer needed, try `python3 run.py -d`
-#  db.create_all()
+# db.drop_all()  # no longer needed, try `python3 run.py -d`
+# db.create_all()
 
 
 @login_manager.user_loader

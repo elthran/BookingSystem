@@ -11,6 +11,7 @@ from booking.functions.uploads import allowed_file, new_file_name, resize_image
 import os
 from PIL import Image
 
+
 @login_required
 @app.route('/business/client/<int:business_id>/<int:client_id>/', methods=['GET', 'POST'])
 def client_profile(business_id, client_id):
@@ -28,10 +29,10 @@ def client_profile(business_id, client_id):
             flash("Browser can't find file.", "error")
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            upload = Image.open(file)   # Opens the uploaded file
-            upload = resize_image(upload)   # Resizes the uploaded file
+            upload = Image.open(file)  # Opens the uploaded file
+            upload = resize_image(upload)  # Resizes the uploaded file
             filename = new_file_name(client, ".png")
-            upload.save(filename, "PNG") # Saves the uploaded file
+            upload.save(filename, "PNG")  # Saves the uploaded file
             flash("File uploaded successfully", "notice")
     client_uploads = []
     for filename in os.listdir('booking/static/uploads'):

@@ -8,6 +8,8 @@ from flask_login import login_required, current_user
 from calendar import monthcalendar
 from datetime import datetime
 from booking.models.calendars import CustomCalendar
+
+
 # from booking.models.locations import Location
 
 

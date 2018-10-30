@@ -1,6 +1,7 @@
 {% extends "business/layout.html" %}
 {% block content2 %}
 {% for location in current_user.business.locations %}
+LOCATION:
 {% if location.name == location_name %}<b>{{ location.name }}</b>{% else %}{{ location.name }}{% endif %}
 {% endfor %}
 <ul>
@@ -9,17 +10,18 @@
     <li>
         Name:
         <a href="{{ url_for('employee_profile', business_id=current_user.business.id, employee_id=employee.id) }}">
-        {{ employee.name }}
+            {{ employee.name }}
         </a>
         {% if employee.is_owner %}<b>Owner</b>
         {% elif employee.is_manager %}<b>Manager</b>
         {% endif %}
-        <img class="employee_thumbnail" src="/static/images/404.jpg" />
+        <img class="employee_thumbnail" src="/static/images/404.jpg"/>
     </li>
     {% endfor %}
     ---------------------------------------
 </ul>
 <br>
-To add a new employee, type their email address here. A one-time employee link will be sent. __________ <button disabled="True">Send</button>
+To add a new employee, type their email address here. A one-time employee link will be sent. __________
+<button disabled="True">Send</button>
 <a href="{{ current_user.business.get_employee_link() }}">this</a>
 {% endblock %}

@@ -6,6 +6,7 @@ from booking.models.forms.validators import check_currency_format
 
 class MockField:
     """Replicate enough of a field object for testing."""
+
     def __init__(self, data):
         self.data = data
 

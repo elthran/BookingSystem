@@ -6,7 +6,7 @@ class Client(Base):
     name = db.Column(db.String(128))  # First and Last Name
     phone = db.Column(db.String(128))
     contact_method = db.Column(db.String(128))
-    consent_form = db.Column(db.Boolean) # Unused
+    consent_form = db.Column(db.Boolean)  # Unused
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
 
     # List of every appointment

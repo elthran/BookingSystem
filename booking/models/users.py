@@ -3,6 +3,7 @@ from werkzeug import generate_password_hash, check_password_hash
 from flask import url_for, request
 from booking.models.locations import Location
 from datetime import time
+from booking.models.mappings import Mapping
 
 
 class User(Base):
@@ -13,8 +14,6 @@ class User(Base):
     phone = db.Column(db.Integer)
     # Business associated with the user
     business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
-    # Location default for user
-    location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     # Appointments associated with the user
     appointments = db.relationship('Appointment', backref='user')
     # Availabilities that the employee has
@@ -46,6 +45,10 @@ class User(Base):
     def __repr__(self):
         return '<User %r (%r)>' % (self.email, self.id)
 
+    def get_location_ids(self):
+        return [mapping.location_id for mapping in
+                Mapping.query.filter_by(business_id=self.business_id).filter_by(user_id=self.id).all()]
+
     # Custom property reminder
     @property
     def password(self):
@@ -66,7 +69,8 @@ class User(Base):
         return str(self.id) + "-" + self.name
 
     def get_verification_link(self):
-        return request.url_root[:-1] + url_for('verification', id=self.id, verification_link=self.generate_verification_link())
+        return request.url_root[:-1] + url_for('verification', user_id=self.id,
+                                               verification_link=self.generate_verification_link())
 
     def check_verification_link(self, link):
         if link == request.url_root[:-1] + (str(self.id) + "-" + self.name):
@@ -90,7 +94,8 @@ class User(Base):
             availabilities = self.availabilities
         return sorted(availabilities, key=lambda x: (x.day, x.start))
 
-    def verify_time_value(self, hour, minute):
+    @staticmethod
+    def verify_time_value(hour, minute):
         """
         This function lets you pass in hours greater than 23 and minutes 60 or above.
         """
@@ -126,10 +131,10 @@ class User(Base):
         """
         if condition == "close":
             pass
-        all_hours = [i for i in range (28)]
-        if self.availabilities == []:
+        all_hours = [i for i in range(28)]
+        if not self.availabilities:
             # Need to return this first or it will crash when it cant iterate through an empty list
-            return [(i,str(i)+":00") for i in range(23)]
+            return [(i, str(i) + ":00") for i in range(23)]
         busy_hours = [i[0] for i in self.working_hours_by_day(day)]
         available_hours = [i for i in all_hours if i not in busy_hours]
         options = []
@@ -137,9 +142,7 @@ class User(Base):
             if condition == "open":
                 hour, minute = self.verify_time_value(i, 0)
             else:
-                hour,minute = self.verify_time_value(i + 1,0)
+                hour, minute = self.verify_time_value(i + 1, 0)
             hour = time(hour, minute).hour
-            options.append((hour,str(hour)+":00"))
+            options.append((hour, str(hour) + ":00"))
         return options
-
-

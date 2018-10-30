@@ -5,14 +5,16 @@
 <form method="POST" action="." accept-charset="UTF-8" role="form" style="margin-left:50px;">
     {{ form.csrf_token }}
     {{ render_field(form.keywords, placeholder="Search for client", autofocus="") }}
-<button type="submit" name="submit">Search</button>
+    <button type="submit" name="submit">Search</button>
 </form>
 
 <div style="border:dotted;width:auto;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
     <ul style="float:left;">
         {% for client in clients %}
         <li style="font-weight:bold;">
-            {{ client.name }} <a class="edit-button" href="{{ url_for('client_profile', business_id=current_user.business.id, client_id=client.id) }}">View Client</a>
+            {{ client.name }} <a class="edit-button"
+                                 href="{{ url_for('client_profile', business_id=current_user.business.id, client_id=client.id) }}">View
+            Client</a>
         </li>
         <li>
             {{ client.phone }}

@@ -10,6 +10,7 @@ from booking.models.availabilities import Availability
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/business/delete_employee_availability/<int:availability_id>', methods=['GET', 'POST'])
 def delete_employee_availability(availability_id):
     if availability_id == 0:

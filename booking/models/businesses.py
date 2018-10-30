@@ -1,3 +1,5 @@
+import random
+
 from booking.models.bases import Base, db
 from flask import request, url_for
 from datetime import datetime, timedelta
@@ -58,7 +60,8 @@ class Business(Base):
 
     # Custom property setter
     def set_referral_id(self):
-        self.referral = "ABCD" + self.name # I will make this create a unique and random referral string later using a function
+        self.referral = random.choice(["A", "B", "C", "D"]) + self.name + str(random.randint(1, 1000))
+        # I will make this create a unique and random referral string later using a function
 
     def check_referral(self, referral):
         return True
@@ -78,7 +81,8 @@ class Business(Base):
 
     def get_todays_appointments(self):
         """
-        Checks the date of each appointment (ignoring the time) and checks if it's today's date. Might bug out if the user is in a different timezone?
+        Checks the date of each appointment (ignoring the time) and checks if it's today's date.
+        Might bug out if the user is in a different timezone?
         @klondikemarlen please check if this is timezone compatible
         """
         return [appointment for appointment in self.appointments if appointment.date.date() == datetime.now().date()]
@@ -88,11 +92,13 @@ class Business(Base):
         You can choose a date and it returns all apointments for the business on that date
         This function is really messy
         """
+
         def correct_size(thing):
             if len(str(thing)) >= 2:
                 return str(thing)
             else:
                 return "0" + str(thing)
+
         date_check = correct_size(year) + "-" + correct_size(month) + "-" + correct_size(day)
 
         """

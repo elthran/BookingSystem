@@ -3,21 +3,24 @@
 
 Set your business' availability
 <form method="POST" action="." accept-charset="UTF-8" role="form">
-  <!-- LoginForm -->
-  {{ form.csrf_token }}
-  Closed Monday: {{ render_field(form.monday_closed) }}
-  {% if monday_closed %}
-    Monday from {{ render_field(form.monday_start, autofocus="", disabled=True) }} to {{ render_field(form.monday_end, disabled=True) }}
-  {% else %}
+    <!-- LoginForm -->
+    {{ form.csrf_token }}
+    Closed Monday: {{ render_field(form.monday_closed) }}
+    {% if monday_closed %}
+    Monday from {{ render_field(form.monday_start, autofocus="", disabled=True) }} to {{ render_field(form.monday_end,
+    disabled=True) }}
+    {% else %}
     Monday from {{ render_field(form.monday_start, autofocus="") }} to {{ render_field(form.monday_end) }}
-  {% endif %}
-  Closed Tuesday: {{ render_field(form.tuesday_closed) }}
-  {% if tuesday_closed %}
-    Monday from {{ render_field(form.tuesday_start, autofocus="", disabled=True) }} to {{ render_field(form.tuesday_end, disabled=True) }}
-  {% else %}
+    {% endif %}
+    Closed Tuesday: {{ render_field(form.tuesday_closed) }}
+    {% if tuesday_closed %}
+    Monday from {{ render_field(form.tuesday_start, autofocus="", disabled=True) }} to {{ render_field(form.tuesday_end,
+    disabled=True) }}
+    {% else %}
     Monday from {{ render_field(form.tuesday_start, autofocus="") }} to {{ render_field(form.tuesday_end) }}
-  {% endif %}
-<br><button type="submit" name="submit">Submit</button>
+    {% endif %}
+    <br>
+    <button type="submit" name="submit">Submit</button>
 </form>
 <br>
 <a href="{{ url_for('business_service') }}">Return</a> to services list.
@@ -31,6 +34,8 @@ Set your business' availability
         document.getElementById('tuesday_start').disabled = !!this.checked;
         document.getElementById('tuesday_end').disabled = !!this.checked;
     };
+
+
 </script>
 
 {% endblock %}

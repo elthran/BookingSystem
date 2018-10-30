@@ -11,6 +11,7 @@ from booking.models.locations import Location
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/business/edit_service/<int:service_id>/', methods=['GET', 'POST'])
 def edit_service(service_id):
     form = ServiceForm(request.form)

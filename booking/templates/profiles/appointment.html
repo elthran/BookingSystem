@@ -5,8 +5,12 @@
     <li>Client: {{ appointment.client_id }}</li>
     <li>Length: {{ appointment.length }} minutes</li>
     <li>Time: {{ appointment.date.year }}/{{ appointment.date.month }}/{{ appointment.date.day }} from
-        {{ appointment.date.hour }}:{{ appointment.date.minute }}-{{ appointment.end.hour }}:{{ appointment.end.minute }}</li>
-    <li>Practitioner: {% if appointment.practitioner_id %}{{ appointment.practitioner_id.name }}{% else %}None{% endif %}</li>
+        {{ appointment.date.hour }}:{{ appointment.date.minute }}-{{ appointment.end.hour }}:{{ appointment.end.minute
+        }}
+    </li>
+    <li>Practitioner: {% if appointment.practitioner_id %}{{ appointment.practitioner_id.name }}{% else %}None{% endif
+        %}
+    </li>
 </ul>
 <br>
 <a href="{{ url_for('business_calendar') }}">Return</a> to business

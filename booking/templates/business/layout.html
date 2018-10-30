@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 
-{% set location_id = 1 %}
 {% set business = current_user.business %}
+{% set location_id = current_user.get_location_ids()[0] %}
+PRINTING:
+{% for location in current_user.get_location_ids() %}
+{{ location }}
+{% endfor %}
 
 <h2>
     {% if business.subscription_days_remaining %}
@@ -50,11 +54,6 @@
         <br>
         <li style="font-weight:bold;">Your store's current opening hours:</li>
         <ul>
-        {% for hour in current_user.location.hours %}
-        <li>
-            {{ hour.display(loop.index, hour.closed) }}
-        </li>
-        {% endfor %}
         </ul>
     </ul>
 </div>

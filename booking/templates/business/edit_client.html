@@ -2,21 +2,22 @@
 {% block content2 %}
 <p style="text-align:center;font-weight:bold;">Client profile:</p>
 <form method="POST" action="." accept-charset="UTF-8" role="form">
-<ul>
-    {{ form.csrf_token }}
-    <li>Name: {{ render_field(form.name, value=client.name, placeholder="Client Name", autofocus="") }}</li>
-    <li>Email: {{ render_field(form.email, value=client.email, placeholder="Email Address") }}</li>
-    <li>Phone Number: {{ render_field(form.phone, value=client.phone, placeholder="Phone Number") }}</li>
-    <li>Contact Method: {{ client.contact_method }}</li>
-    <li>Client ID: {{ client.id }}</li>
-    {% for upload in client_uploads %}
-    <li>Consent Form: <img src="{{ upload }}" style="border:dotted;" /></li>
-    {% endfor %}
-</ul>
-    <br><br><button type="submit" name="submit">Update Client Information</button>
+    <ul>
+        {{ form.csrf_token }}
+        <li>Name: {{ render_field(form.name, value=client.name, placeholder="Client Name", autofocus="") }}</li>
+        <li>Email: {{ render_field(form.email, value=client.email, placeholder="Email Address") }}</li>
+        <li>Phone Number: {{ render_field(form.phone, value=client.phone, placeholder="Phone Number") }}</li>
+        <li>Contact Method: {{ client.contact_method }}</li>
+        <li>Client ID: {{ client.id }}</li>
+        {% for upload in client_uploads %}
+        <li>Consent Form: <img src="{{ upload }}" style="border:dotted;"/></li>
+        {% endfor %}
+    </ul>
+    <br><br>
+    <button type="submit" name="submit">Update Client Information</button>
 </form>
 <form method="POST" enctype=multipart/form-data role="form">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <input type=file name=file>
     <input type=submit value=Upload>
 </form>

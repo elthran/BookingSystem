@@ -16,6 +16,7 @@ setup(
         'Pillow',
         'pandas',
         'fuzzywuzzy',
-        'python-Levenshtein'
+        'python-Levenshtein',
+        'pytest'
     ],
 )

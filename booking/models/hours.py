@@ -3,7 +3,8 @@ from booking.models.bases import Base, db
 
 class Hour(Base):
     """
-    Here you can set the opening hours of any location. So you could set location 5 to be open from 9am-3pm on Monday and 1pm-6pm on Friday.
+    Here you can set the opening hours of any location.
+    So you could set location 5 to be open from 9am-3pm on Monday and 1pm-6pm on Friday.
     Each interval of time would be its own object.
     """
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
@@ -12,7 +13,7 @@ class Hour(Base):
     start = db.Column(db.Integer)  # What hour your availability starts
     length = db.Column(db.Integer)  # How many minutes you are available for
 
-    closed = db.Column(db.Boolean) # If your store is closed that day
+    closed = db.Column(db.Boolean)  # If your store is closed that day
 
     def __init__(self, location_id, day, start_time, length, closed=False):
         self.location_id = location_id

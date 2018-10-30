@@ -10,6 +10,7 @@ from booking.models.availabilities import Availability
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/business/edit_employee_availability/', methods=['GET', 'POST'])
 def edit_employee_availability():
     form = AvailabilityForm(request.form)
@@ -21,16 +22,18 @@ def edit_employee_availability():
 
     if form.validate_on_submit():
         print(form.end.data, form.start.data)
-        length = (form.end.data - form.start.data) * 60 # Finds how many minutes it is open for
+        length = (form.end.data - form.start.data) * 60  # Finds how many minutes it is open for
         if length <= 0:
             flash("Can't add a negative time", "error")
             return redirect(url_for('edit_employee_availability'))
-        availability = Availability(current_user.location.id, current_user.id, form.day.data, form.start.data, 0, length)
+        availability = Availability(current_user.location.id, current_user.id, form.day.data, form.start.data, 0,
+                                    length)
         db.session.add(availability)
         db.session.commit()
         flash("Availability updated", "notice")
         return redirect(url_for('edit_employee_availability'))
     return render_template("business/edit_employee_availability.html", form=form)
+
 
 @app.route('/business/edit_employee_availability/opening', methods=['POST'])
 def edit_employee_availability_open():

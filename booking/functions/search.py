@@ -1,4 +1,4 @@
-#http://blog.keyrus.co.uk/fuzzy_matching_101_part_i.html
+# http://blog.keyrus.co.uk/fuzzy_matching_101_part_i.html
 import pandas as pd
 from fuzzywuzzy import process, fuzz
 
@@ -44,7 +44,9 @@ def search_clients(keywords, business_id, limit=5):
     cleaned_input = clean_data(keywords)
 
     # search_data = pd.DataFrame(data, columns=data.keys())
-    client_data = pd.read_sql(sql="SELECT id, name, email, phone, business_id FROM client where business_id={} and email != 'anonymous@hidden.com';".format(business_id), con=db.engine, index_col='id')
+    client_data = pd.read_sql(
+        sql="SELECT id, name, email, phone, business_id FROM client where business_id={} and email != 'anonymous@hidden.com';".format(
+            business_id), con=db.engine, index_col='id')
     client_data = searchable_data(client_data, ['name', 'email', 'phone'])
 
     matching_results = fuzzy_match(cleaned_input, client_data.loc[:, "searchable_data"], fuzz.token_set_ratio, limit)

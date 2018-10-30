@@ -11,6 +11,7 @@ from booking.models.users import User
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/register/client/', methods=['GET', 'POST'])
 @app.route('/register/client/<int:business_id>/<string:business_referral>/', methods=['GET', 'POST'])
 def register_client(business_id=1, business_referral=""):
@@ -26,4 +27,3 @@ def register_client(business_id=1, business_referral=""):
         else:
             flash("Client already exists with that email.", "error")
     return render_template("registration/client.html", form=form)
-

@@ -4,22 +4,25 @@
 {% for user in current_user.location.users %}
 {{ user.name }}
 <ul>
-  Available at:
-  {% for availability in user.sorted_availabilities() %}
-  <li>{{ availability }} <a href="{{ url_for('delete_employee_availability', availability_id=availability.id) }}">(delete)</a></li>
-  testing {{ availability.time }}
-  {% else %}
-  No availability set
-  {% endfor %}
-  <li><a href="{{ url_for('delete_employee_availability', availability_id=0) }}">(delete ALL availabilities for {{ user.name }})</a></li>
+    Available at:
+    {% for availability in user.sorted_availabilities() %}
+    <li>{{ availability }} <a href="{{ url_for('delete_employee_availability', availability_id=availability.id) }}">(delete)</a>
+    </li>
+    testing {{ availability.time }}
+    {% else %}
+    No availability set
+    {% endfor %}
+    <li><a href="{{ url_for('delete_employee_availability', availability_id=0) }}">(delete ALL availabilities for {{
+        user.name }})</a></li>
 </ul>
 <br>
 <form method="POST" action="." accept-charset="UTF-8" role="form">
-  <!-- LoginForm -->
-  {{ form.csrf_token }}
-  Day: {{ render_field(form.day) }}
-  Time {{ render_field(form.start, autofocus="") }} to {{ render_field(form.end) }}
-<br><button type="submit" name="submit">Submit</button>
+    <!-- LoginForm -->
+    {{ form.csrf_token }}
+    Day: {{ render_field(form.day) }}
+    Time {{ render_field(form.start, autofocus="") }} to {{ render_field(form.end) }}
+    <br>
+    <button type="submit" name="submit">Submit</button>
 </form>
 {% endfor %}
 
@@ -53,6 +56,8 @@
   console.log(response.closing_time);
   time.value = response.closing_time;
   }
+
+
 
 </script>
 

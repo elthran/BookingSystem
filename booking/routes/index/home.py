@@ -24,8 +24,8 @@ def setup_account():
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-        # This creates the first business if the database is empty.
-        # It's only used while the site is in testing.
+    # This creates the first business if the database is empty.
+    # It's only used while the site is in testing.
     if not Business.query.all():
         print("Database is empty. Adding a dummy account.")
         business = Business("Temporary", "taiwann", "ntd", "kelung", "taipei", "#2254 west 7th.")

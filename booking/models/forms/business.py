@@ -1,5 +1,5 @@
 # Import Form and RecaptchaField (optional)
-from flask_wtf import FlaskForm # , RecaptchaField
+from flask_wtf import FlaskForm  # , RecaptchaField
 
 # Import Form elements such as TextField and BooleanField (optional)
 from wtforms import StringField, PasswordField, SelectField  # BooleanField
@@ -22,7 +22,7 @@ class BusinessForm(FlaskForm):
     address = StringField('Address')
 
     username = StringField('Name',
-                       [DataRequired(message='You must enter your name.')])
+                           [DataRequired(message='You must enter your name.')])
     email = StringField('Email Address',
                         [Email(message='Not a valid email address.'),
                          DataRequired(message='You must enter an email address.')])
@@ -31,4 +31,3 @@ class BusinessForm(FlaskForm):
                               Length(min=4),
                               EqualTo('confirmation', message='Passwords must match.')])
     confirmation = PasswordField('Repeat password')
-

@@ -14,6 +14,7 @@ from booking import mail
 from flask_mail import Message
 from flask_login import current_user
 
+
 @app.route('/register/user/', methods=['GET', 'POST'])
 @app.route('/register/user/<int:business_id>/<string:business_referral>/', methods=['GET', 'POST'])
 def register_user(business_id=1, business_referral=""):
@@ -34,7 +35,8 @@ def register_user(business_id=1, business_referral=""):
 
             subject = "Welcome to JaChang!"
             msg = Message(recipients=[form.email.data], subject=subject)
-            msg.html = "<p>To activate your account, please click this link: %r</p>" % (current_user.get_verification_link())
+            msg.html = "<p>To activate your account, please click this link: %r</p>" % (
+                current_user.get_verification_link())
             mail.send(msg)
             flash("Activation link sent.", "notice")
 

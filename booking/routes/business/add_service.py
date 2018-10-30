@@ -11,6 +11,7 @@ from booking.models.locations import Location
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/business/add_service/', methods=['GET', 'POST'])
 def add_service():
     form = ServiceForm(request.form)

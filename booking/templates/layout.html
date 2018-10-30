@@ -9,10 +9,10 @@
 </head>
 <body>
 {% if current_user and current_user.is_authenticated %}
-    <h3 style="font-weight:bold;font-size:25px;">
-        <span>Business: {{ current_user.business.name }}</span>
-        <span style="float:right;">Logged in as: {{ current_user.name }}</span>
-    </h3><br><br>
+<h3 style="font-weight:bold;font-size:25px;">
+    <span>Business: {{ current_user.business.name }}</span>
+    <span style="float:right;">Logged in as: {{ current_user.name }}</span>
+</h3><br><br>
 {% endif %}
 {# <!-- Below is flask error code handling --> #}
 {% macro render_field(field, placeholder=None) %}

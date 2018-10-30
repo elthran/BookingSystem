@@ -1,13 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if new %}
-    <h2>
-        <p>You have created your business! A verification link has just been email to you. Click the link in the email and your
+<h2>
+    <p>You have created your business! A verification link has just been email to you. Click the link in the email and
+        your
         business setup will be completed and you will be taken to your new business page! Thanks for choosing Jachang.
-        </p>
-    <h2>
-        {% else %}
-        <p>Your account is awaiting verification. Please check your email for a verification link and click on the link.
-            Make sure to check your spam folder. <a href="{{ url_for('home') }}">Return home</a></p>
-        {% endif %}
-        {% endblock %}
+    </p>
+</h2>
+{% else %}
+<p>Your account is awaiting verification. Please check your email for a verification link and click on the link.
+    Make sure to check your spam folder. <a href="{{ url_for('home') }}">Return home</a></p>
+{% endif %}
+{% endblock %}

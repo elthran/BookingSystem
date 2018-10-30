@@ -13,10 +13,10 @@ from wtforms.validators import DataRequired, Email
 
 class CustomerBooking(FlaskForm):
     email = StringField('Email Address',
-                      [Email(message='Not a valid email address.'),
-                       DataRequired(message='You must enter an email address.')])
+                        [Email(message='Not a valid email address.'),
+                         DataRequired(message='You must enter an email address.')])
     name = StringField('Name',
-                      [DataRequired(message='You must enter an email address.')])
+                       [DataRequired(message='You must enter an email address.')])
     phone = StringField('Phone')
     service = SelectField('Services', coerce=int)
 

@@ -3,11 +3,10 @@
 
 Here is your activity, starting with the most recent:<br><br>
 <ul>
-{% for appointment in current_user.business.appointments[::-1] %}
+    {% for appointment in current_user.business.appointments[::-1] %}
     <li>{{ appointment }} {{ appointment.service }}</li>
-    <br>
-{% else %}
-No activity
+    {% else %}
+    No activity
     <li>{% endfor %}</li>
 </ul>
 

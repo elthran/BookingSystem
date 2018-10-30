@@ -11,7 +11,8 @@ Manually book an appointment
     {{ render_field(form.email, placeholder="Client Email Address") }}
     {{ render_field(form.phone, placeholder="Client Phone Number") }}
     {{ render_field(form.service, placeholder="Services") }}
-    <br><br><button type="submit">Book appointment</button>
+    <br><br>
+    <button type="submit">Book appointment</button>
 </form>
 
 <script type="text/javascript">
@@ -20,6 +21,8 @@ Manually book an appointment
         document.getElementById('email').disabled = !!this.checked;
         document.getElementById('phone').disabled = !!this.checked;
     };
+
+
 </script>
 
 {% endblock %}

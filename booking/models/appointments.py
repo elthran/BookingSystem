@@ -30,7 +30,7 @@ class Appointment(Base):
         self.paid = False
 
     def get_end_time(self):
-        return (self.date + timedelta(minutes = self.service.length)).time()
+        return (self.date + timedelta(minutes=self.service.length)).time()
 
     def __repr__(self):
         return '<Appointment (%r) is on %r/%r/%r at %r:%r>' % (

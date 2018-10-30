@@ -19,7 +19,10 @@
         {% for row in calendar_month %}
         <tr>
             {% for day in row %}
-            <td>{% if day != 0 %}<a href="{{ url_for('business_calendar', location_id=location_id, year=year, month=month, day=day) }}">{{ day }}</a>{% else %}-{% endif %}</td>
+            <td>{% if day != 0 %}<a
+                    href="{{ url_for('business_calendar', location_id=location_id, year=year, month=month, day=day) }}">{{
+                day }}</a>{% else %}-{% endif %}
+            </td>
             {% endfor %}
         </tr>
         {% endfor %}
@@ -29,6 +32,7 @@
 <div style="border:dotted;width:300px;height:auto;margin-left:35px;margin-top:35px;float:left;padding:15px;">
     {% if day == 0 %}Choose a day to adjust availability.
     {% else %}Your availability on <span style="font-weight:bold;">{{ day }}/{{ month }}/{{ year }}</span>, is...
+    <ul>
         {% for appointment in current_user.business.get_appointments_by_day(year, month, day) %}
         <li style="font-weight:bold;">{{ appointment.date.time() }}-{{ appointment.get_end_time() }}</li>
         <li style="margin-left:15px;">
@@ -45,20 +49,22 @@
             No appointments scheduled for today
         </li>
         {% endfor %}
+    </ul>
     {% endif %}
     <br><br>Locations:
     <ul>
         {% for location in current_user.business.locations %}
         {% if location.id == location_id %}
-            <li style="font-weight:bold;">
-        {% else %}
-            <li>
-        {% endif %}
-        <a href="{{ url_for('business_calendar', location_id=location.id, year=2018, month=6, day=20) }}">{{ location.name }}</a>
-        {% if current_user.is_owner %}
-        <a class="edit-button" href="{{ url_for('edit_location', location_id=location.id) }}">Edit</a>
-        {% endif %}
-    </li>
+        <li style="font-weight:bold;">
+            {% else %}
+        <li>
+            {% endif %}
+            <a href="{{ url_for('business_calendar', location_id=location.id, year=2018, month=6, day=20) }}">{{
+                location.name }}</a>
+            {% if current_user.is_owner %}
+            <a class="edit-button" href="{{ url_for('edit_location', location_id=location.id) }}">Edit</a>
+            {% endif %}
+        </li>
         {% else %}
         None
         {% endfor %}

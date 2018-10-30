@@ -28,21 +28,25 @@ def business_booking(location_id):
         # @klndikemarlen
         client = None
         if form.anonymous.data:
-            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(email="anonymous@hidden.com").first()
+            client = Client.query.filter_by(business_id=current_user.business.id).filter_by(
+                email="anonymous@hidden.com").first()
         else:
             if form.email.data:
-                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(email=form.email.data).first()
+                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(
+                    email=form.email.data).first()
                 if client:
                     flash("Client found matching that email address", "notice")
-            if form.phone.data and client == None:
-                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(phone=form.phone.data).first()
+            if form.phone.data and client is None:
+                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(
+                    phone=form.phone.data).first()
                 if client:
                     flash("Client found matching that phone number", "notice")
-            if form.name.data and client == None:
-                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(name=form.name.data).first()
+            if form.name.data and client is None:
+                client = Client.query.filter_by(business_id=current_user.business.id).filter_by(
+                    name=form.name.data).first()
                 if client:
                     flash("Client found matching that name", "notice")
-            if client == None:
+            if client is None:
                 flash("No client found. Creating new client", "notice")
                 client = Client(form.email.data, current_user.business.id, form.name.data, form.phone.data)
                 db.session.add(client)

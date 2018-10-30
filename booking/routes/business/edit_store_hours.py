@@ -11,12 +11,14 @@ from booking.models.locations import Location
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/business/edit_store_hours/', methods=['GET', 'POST'])
 def edit_store_hours():
     location = Location.query.get(current_user.location_id)
     if location.hours:
         """
-        This returns the first in the list for each day because there could be multiple times in one day. This obviously needs to be improved.
+        This returns the first in the list for each day because there could be multiple times in one day. 
+        This obviously needs to be improved.
         """
         for hour in location.hours:
             if hour.day == 1:
@@ -35,10 +37,10 @@ def edit_store_hours():
         tuesday_end = 12
         tuesday_closed = False
     form = HourForm(request.form,
-                            monday_closed=monday_closed, monday_start=monday_start, monday_end=monday_end,
-                            tuesday_closed=tuesday_closed, tuesday_start=tuesday_start, tuesday_end=tuesday_end)
-    form.monday_start.choices = [(i, str(i)+":00") for i in range(1,13)]
-    form.monday_end.choices = [(i, str(i)+":00") for i in range(1,13)]
+                    monday_closed=monday_closed, monday_start=monday_start, monday_end=monday_end,
+                    tuesday_closed=tuesday_closed, tuesday_start=tuesday_start, tuesday_end=tuesday_end)
+    form.monday_start.choices = [(i, str(i) + ":00") for i in range(1, 13)]
+    form.monday_end.choices = [(i, str(i) + ":00") for i in range(1, 13)]
     form.tuesday_start.choices = [(i, str(i) + ":00") for i in range(1, 13)]
     form.tuesday_end.choices = [(i, str(i) + ":00") for i in range(1, 13)]
     if form.validate_on_submit():

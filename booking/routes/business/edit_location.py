@@ -11,6 +11,7 @@ from booking.models.locations import Location
 # Import database
 from booking.models.bases import db
 
+
 @app.route('/business/edit_location/<int:location_id>', methods=['GET', 'POST'])
 def edit_location(location_id):
     return render_template("business/edit_location.html", location_id=location_id)

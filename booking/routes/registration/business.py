@@ -5,8 +5,10 @@ from booking import app, mail
 # Import flask dependencies
 from flask import redirect, url_for, render_template, request
 # Import models
+from booking.models import Location
 from booking.models.forms.business import BusinessForm
 from booking.models.businesses import Business
+from booking.models.mappings import Mapping
 from booking.models.users import User
 # Import database
 from booking.models.bases import db
@@ -38,6 +40,18 @@ def register_business():
         user = User(form.username.data, form.email.data, form.password.data, business.id, is_owner=True)
         db.session.add(user)
         db.session.commit()
+
+        location = Location(business_id=business.id, name=business.city)
+        db.session.add(location)
+        db.session.commit()
+
+        mapping = Mapping(business_id=business.id, location_id=location.id, user_id=user.id)
+        db.session.add(mapping)
+        db.session.commit()
+
+        print("All employees:",
+              Mapping.query.filter_by(business_id=business.id).filter_by(location_id=location.id).all())
+        print("All locations:", Mapping.query.filter_by(business_id=business.id).filter_by(user_id=user.id).all())
 
         subject = "Welcome to JaChang!"
         msg = Message(recipients=[form.email.data], subject=subject)

@@ -17,11 +17,11 @@
         </ul>
     <li>Client ID: {{ client.id }}</li>
     {% for upload in client_uploads %}
-    <li>Consent Form: <img src="{{ upload }}" style="border:dotted;" /></li>
+    <li>Consent Form: <img src="{{ upload }}" style="border:dotted;"/></li>
     {% endfor %}
 </ul>
 <form method="POST" enctype=multipart/form-data role="form">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <input type=file name=file>
     <input type=submit value=Upload>
 </form>

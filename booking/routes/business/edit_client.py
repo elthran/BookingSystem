@@ -11,7 +11,6 @@ from booking.models.forms.client import EditClientForm
 from booking.models.bases import db
 
 
-
 @app.route('/business/edit_client/', methods=['GET', 'POST'])
 @app.route('/business/edit_client/<int:client_id>/', methods=['GET', 'POST'])
 @login_required
